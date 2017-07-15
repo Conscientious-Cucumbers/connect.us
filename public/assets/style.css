@@ -1,0 +1,73 @@
+body { 
+  background: +linear-gradient (top, #111 0%, #222 100%);
+  padding-top:80px; 
+}
+
+h6 {
+  color: #888;
+}
+
+.right {
+  float: right;
+}
+
+.fa-search {
+  font-size: 20px;
+}
+
+.fa-frown-o {
+  font-size: 100px;
+}
+
+.navbar-brand:hover {
+  cursor: pointer;
+}
+
+.fa-globe {
+  font-size: 20px;
+}
+
+.home-container {
+  display: flex;
+  text-align: center;
+  flex-direction: row;
+  align-content: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.home-col {
+  flex: 1 1 auto;
+  align-self: flex-start;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+.home-panel-middle {
+  flex: 1 1 auto;
+  align-self: flex-start;
+  margin-right: 5px;
+
+}
+
+.panel, .well {
+  background-color: rgb(250, 250, 250);
+  text-align: center;
+}
+
+.jumbotron {
+  background-color: white;
+  border: 1px solid #bbb;
+}
+
+.status-post {
+
+  width: 500px;
+  text-align: left;
+}
+
+.contact-info-hr {
+  width: 500px;
+  margin: 0px;
+  padding: 0px;
+}
