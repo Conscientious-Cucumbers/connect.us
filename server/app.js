@@ -24,4 +24,7 @@ app.use('/', routes.auth);
 app.use('/api', routes.api);
 app.use('/api/profiles', routes.profiles);
 
-module.exports = app;
+const server = require('http').Server(app);
+middleware.socketIO(server);
+
+module.exports = server;
