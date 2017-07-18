@@ -2,12 +2,13 @@ import React from 'react';
 import browserHistory from 'react-router';
 import { 
   BrowserRouter as Router,
-  Route} from 'react-router-dom';
-import NavBar from './NavBar.jsx'
+  Route, Switch } from 'react-router-dom';
+import NavBar from '../containers/NavBar.jsx';
 import Home from './Home.jsx';
 import Profile from '../containers/Profile.jsx';
 import Settings from './Settings.jsx';
-import About from './About.jsx'
+import About from './About.jsx';
+import { Grid, Row, Col } from 'react-bootstrap';
 
 // <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -19,12 +20,14 @@ const App = () => (
         <NavBar />
       </div>
       <div className='body-container'>
-        <Route exact path="/" component={() => <Home />}/>
-        <Route path="/settings" component={() => <Settings />}/>
-        <Route path="/about" component={() => <About />}/>
-        <Route path="/profile/:username" component={({match}) => {
-            return <Profile username={match.params.username}/>;
-        }}/>
+        <Switch>
+          <Route exact path="/" component={() => <Home />}/>
+          <Route path="/settings" component={() => <Settings />}/>
+          <Route path="/about" component={() => <About />}/>
+          <Route path="/:username" component={({match}) => {
+              return <Profile username={match.params.username}/>;
+          }}/>
+        </Switch>
       </div>
     </div>
   </Router>

@@ -56,7 +56,7 @@ export const status = {
       },
   text: "Some text goes here",
   like_count: 100
-}
+};
 
 export const newsItem = {
   id: 1,
@@ -67,7 +67,6 @@ export const newsItem = {
   media: "https://i.redditmedia.com/oh99Kk-Ig7ckoN0kSiqFcD6DatIDi7BdXOVdJsoUhhg.jpg?s=3d46df782ae02b08eaf4962cfb4e55b7"
 };
 
-
-export const newsFeed = new Array(20).fill(1).map(() => newsItem);
+export const NewsFeedData = new Array(20).fill(1).map(() => newsItem);
 
 export const StatusFeedData = new Array(20).fill(1).map(() => status);
