@@ -15,14 +15,13 @@ class Header extends React.Component {
   render() {
     return (
       <div>
-        <Row>
-          <Col md={2}>
-            <img src={this.props.user.profile_picture} width="300px"/>
-          </Col>
-          <Col md={6}>
-            <h2>{this.props.user.display_name}</h2>
-          </Col>
-        </Row>
+          <img 
+            className="profile-picture"
+            src={this.props.user.profile_picture || "http://www.bsmc.net.au/wp-content/uploads/No-image-available.jpg"} />
+          <h2 className="profile-name">
+            {this.props.user.display_name}
+          </h2>
+        <br />
       </div>
     );
   }

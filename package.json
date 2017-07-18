@@ -50,7 +50,8 @@
     "redux": "^3.7.2",
     "redux-promise": "^0.5.3",
     "redux-thunk": "^2.2.0",
-    "sessions": "0.0.2-7"
+    "sessions": "0.0.2-7",
+    "socket.io-client": "^2.0.3"
   },
   "devDependencies": {
     "babel-loader": "^7.0.0",
