@@ -26,7 +26,24 @@ module.exports.getAll = (req, res) => {
 // };
 
 module.exports.getOne = (req, res) => {
-  models.Profile.where({ id: req.params.id }).fetch()
+  models.Profile.where({ id_user: req.params.id_user }).fetch()
+    .then(statuses => {
+      if (!statuses) {
+        throw statuses;
+      }
+      res.status(200).send(statuses);
+    })
+    .error(err => {
+      res.status(500).send(err);
+    })
+    .catch(() => {
+      res.sendStatus(404);
+    });
+};
+
+
+module.exports.getUserStatuses = (req, res) => {
+  models.Status.where({ id: req.params.id }).fetch()
     .then(profile => {
       if (!profile) {
         throw profile;
@@ -40,6 +57,40 @@ module.exports.getOne = (req, res) => {
       res.sendStatus(404);
     });
 };
+
+
+module.exports.getStatusLikes = (req, res) => {
+  models.StatusLikes.where({ id_status: req.params.id_status, id_user: req.params.id_user}).fetch()
+    .then(likes => {
+      if (!likes) {
+        throw likes;
+      }
+      res.status(200).send(likes);
+    })
+    .error(err => {
+      res.status(500).send(err);
+    })
+    .catch(() => {
+      res.sendStatus(404);
+    });
+};
+
+
+
+module.exports.postStatus = (req, res) => {
+  models.Profile.forge({ username: req.body.username, password: req.body.password })
+    .save()
+    .then(result => {
+      res.status(201).send(result.omit('password'));
+    })
+    .catch(err => {
+      if (err.constraint === 'users_username_unique') {
+        return res.status(403);
+      }
+      res.status(500).send(err);
+    });
+};
+
 
 module.exports.update = (req, res) => {
   models.Profile.where({ id: req.params.id }).fetch()

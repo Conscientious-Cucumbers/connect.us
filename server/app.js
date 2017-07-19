@@ -22,6 +22,13 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 app.use('/', routes.auth);
 app.use('/api', routes.api);
+app.use('/user', routes.users);
 app.use('/api/profiles', routes.profiles);
 
-module.exports = app;
+app.use(middleware.auth.verify, (req, res) => res.render('index'));
+
+const server = require('http').Server(app);
+middleware.socketIO(server);
+
+module.exports = server;
+// has to be at the very end
