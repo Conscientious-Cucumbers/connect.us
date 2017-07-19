@@ -22,6 +22,7 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 app.use('/', routes.auth);
 app.use('/api', routes.api);
+app.use('/user', routes.users);
 app.use('/api/profiles', routes.profiles);
 
 const server = require('http').Server(app);

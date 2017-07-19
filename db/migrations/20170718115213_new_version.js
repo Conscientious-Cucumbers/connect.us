@@ -23,7 +23,7 @@ exports.up = function (knex, Promise) {
     knex.schema.createTableIfNotExists('statuses', function(table) {
       table.increments('id').unsigned().primary();
       table.string('text', 500).notNullable();
-      table.integer('id_user', 20).notNullable();
+      table.string('id_user', 500).notNullable();
     }),
     knex.schema.createTableIfNotExists('follows', function(table) {
       table.increments('id').unsigned().primary();
@@ -32,24 +32,24 @@ exports.up = function (knex, Promise) {
     }),
     knex.schema.createTableIfNotExists('status_likes', function(table) {
       table.increments('id').unsigned().primary();
-      table.integer('id_user', 20).notNullable();
-      table.integer('id_status', 20).notNullable();
+      table.integer('id_user', 8).notNullable();
+      table.integer('id_status', 8).notNullable();
 
     }),
     knex.schema.createTableIfNotExists('news_likes', function(table) {
       table.increments('id').unsigned().primary();
-      table.integer('id_user', 20).notNullable();
-      table.integer('id_news', 20).notNullable();
+      table.integer('id_user', 8).notNullable();
+      table.integer('id_news', 8).notNullable();
 
     }),
     knex.schema.createTableIfNotExists('news_items', function(table) {
       table.increments('id').unsigned().primary();
       table.string('source', 100).notNullable();
-      table.string('title', 300).nullable();
-      table.string('thumbnail', 300).nullable();
-      table.string('text', 500).nullable();
-      table.string('media', 300).nullable();
-      table.string('date', 50).notNullable();
+      table.string('title', 100).nullable();
+      table.string('thumbnail', 100).nullable();
+      table.string('type', 10).nullable();
+      table.string('media', 100).nullable();
+      table.integer('id_news', 8).notNullable();
     })
   ]);
 };
