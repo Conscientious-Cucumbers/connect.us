@@ -34,11 +34,9 @@ var NavBar = (props) => (
           <i className="fa fa-home" aria-hidden="true"></i>
           </NavItem>
         </LinkContainer>
-        <LinkContainer to={`/${props.user ? props.user.username : null}#`}>
-          <NavItem eventKey={1}>
-          <i className="fa fa-user" aria-hidden="true"></i>
-          </NavItem>
-        </LinkContainer>
+        <NavItem eventKey={1} href={`/${props.user ? props.user.username : null}`}>
+        <i className="fa fa-user" aria-hidden="true"></i>
+        </NavItem>
         <NavDropdown eventKey={3} 
           title={<i className="fa fa-globe" aria-hidden="true"></i>} 
           id="notifications-nav-dropdown" 
