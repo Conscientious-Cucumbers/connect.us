@@ -1,7 +1,7 @@
 import { UserData } from '../sampleData';
 
 
-export const user = (state = UserData, action) => {
+export const user = (state = null, action) => {
   switch(action.type) {
     case 'SET_CURRENT_USER':
       return action.payload;

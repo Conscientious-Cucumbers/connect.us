@@ -19,7 +19,7 @@ class Header extends React.Component {
             className="profile-picture"
             src={this.props.user.profile_picture || "http://www.bsmc.net.au/wp-content/uploads/No-image-available.jpg"} />
           <h2 className="profile-name">
-            {this.props.user.display_name}
+            {this.props.user.display_name || `${this.props.user.first} ${this.props.user.last}`}
           </h2>
         <br />
       </div>

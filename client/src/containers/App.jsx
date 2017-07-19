@@ -9,10 +9,9 @@ import Profile from './Profile.jsx';
 import Settings from '../components/Settings.jsx';
 import About from '../components/About.jsx';
 import { Grid, Row, Col } from 'react-bootstrap';
-import io from 'socket.io-client';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import actions from '../actions/';
+import actions from '../actions';
 import axios from 'axios';
 
 // <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -20,44 +19,10 @@ import axios from 'axios';
 class App extends React.Component {
   constructor (props) {
     super(props);
-    this.initSocket();
   }
 
   componentDidMount () {
-    return this.getCurrentUser()
-    .then(() => {
-      this.addEventListeners();
-    })
-    .then(() => {
-      this.initializeFeed();
-    });
-  }
-
-  getCurrentUser () {
-    return axios.get('/user/info')
-    .then((res) => {
-      console.log(res.data);
-      this.props.setCurrentUser(res.data);
-    })
-    .catch((err) => {
-      console.error('Error loading profile: ', err);
-    });
-  }
-
-  initSocket () {
-    this.socket = io();
-  }
-
-  addEventListeners () {
-    this.socket.on('news', (data) => this.props.refreshNews(data));
-    this.socket.on('res user info', (data) => this.props.setActiveProfile(data));
-    // this.socket.on('res news likes');
-    // this.socket.on('res status likes');
-    this.socket.on('res statuses', (data) => this.props.setStatusFeed(data));
-  }
-
-  initializeFeed () {
-    this.socket.emit('get news');
+    this.props.getCurrentUser();
   }
 
   render () {
@@ -74,7 +39,6 @@ class App extends React.Component {
               <Route path="/settings" component={() => <Settings />}/>
               <Route path="/about" component={() => <About />}/>
               <Route path="/:username" component={({match}) => {
-                  this.socket.emit('get user info', { username: match.params.username });
                   return <Profile username={match.params.username}/>;
               }}/>
             </Switch>
@@ -93,10 +57,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    refreshNews: actions.refreshNews,
-    setActiveProfile: actions.setActiveProfile,
-    setStatusFeed: actions.setStatusFeed,
-    setCurrentUser: actions.setCurrentUser
+    getActiveProfile: actions.getActiveProfile,
+    getCurrentUser: actions.getCurrentUser
   }, dispatch);
 };
 

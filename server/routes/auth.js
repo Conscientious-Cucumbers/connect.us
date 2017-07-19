@@ -72,7 +72,4 @@ router.get('/user/info', (req, res) => {
   res.send(req.user);
 });
 
-// has to be at the very end
-router.use(middleware.auth.verify, (req, res) => res.render('index'));
-
 module.exports = router;

@@ -25,7 +25,10 @@ app.use('/api', routes.api);
 app.use('/user', routes.users);
 app.use('/api/profiles', routes.profiles);
 
+app.use(middleware.auth.verify, (req, res) => res.render('index'));
+
 const server = require('http').Server(app);
 middleware.socketIO(server);
 
 module.exports = server;
+// has to be at the very end
