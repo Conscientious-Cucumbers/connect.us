@@ -22,11 +22,11 @@ var NavBar = (props) => (
     </Navbar.Header>
     <Navbar.Collapse>
       <Navbar.Form pullLeft>
-        <FormGroup>
-          <FormControl type="text" placeholder="Search for user" />
-        </FormGroup>
-        {' '}
-        <Button className="fa fa-search" type="submit"></Button>
+          <FormGroup>
+            <FormControl type="text" placeholder="Search for user" />
+          </FormGroup>
+          {' '}
+          <Button className="fa fa-search" type="submit"></Button>
       </Navbar.Form>
       <Nav pullRight>
         <LinkContainer to="/#">

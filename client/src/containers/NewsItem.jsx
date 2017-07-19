@@ -26,7 +26,7 @@ class NewsItem extends React.Component {
             {this.props.newsItem.title}
           </div>
           <div className="news-item-description">
-            {this.props.newsItem.text.split('').slice(0, 100).join('')+'...' || 'No description available'}
+            {this.props.newsItem.text && this.props.newsItem.text.split('').slice(0, 100).join('') + '...' || 'No description available'}
           </div>
           <div className="news-item-source">
             Source: {this.props.newsItem.source}
@@ -70,8 +70,8 @@ class NewsItem extends React.Component {
         {this.itemPreview()}
         {this.itemModal()}
       </Panel>
-    )
+    );
   }
-};
+}
 
 export default NewsItem;
