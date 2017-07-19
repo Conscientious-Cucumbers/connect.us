@@ -14,13 +14,13 @@ class AboutUser extends React.Component {
         <h6>CONTACT INFORMATION</h6>
         <hr className="contact-info-hr"/>
         <h7><b>Username</b></h7>
-        <p>{this.props.user.username}</p>
+        <p>{this.props.active.username}</p>
         <h7><b>Email</b></h7>
-        <p>{this.props.user.email}</p>
+        <p>{this.props.active.email}</p>
         <h7><b>First Name</b></h7>
-        <p>{this.props.user.first_name}</p>
+        <p>{this.props.active.first}</p>
         <h7><b>Last Name</b></h7>
-        <p>{this.props.user.last_name}</p>
+        <p>{this.props.active.last}</p>
       </div>
     );
   }
@@ -28,7 +28,7 @@ class AboutUser extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user
+    active: state.activeProfile
   };
 }
 

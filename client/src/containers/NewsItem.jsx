@@ -26,7 +26,7 @@ class NewsItem extends React.Component {
             {this.props.newsItem.title}
           </div>
           <div className="news-item-description">
-            {this.props.newsItem.description || 'No description available'}
+            {this.props.newsItem.text.split('').slice(0, 100).join('')+'...' || 'No description available'}
           </div>
           <div className="news-item-source">
             Source: {this.props.newsItem.source}
@@ -52,7 +52,7 @@ class NewsItem extends React.Component {
         <br />
         <div className="news-modal-description">
           <b>Description:{' '}</b> 
-          {this.props.newsItem.description || 'No description available'}
+          {this.props.newsItem.text || 'No description available'}
         </div>
       </Modal.Body>
       <Modal.Footer>

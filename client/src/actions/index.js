@@ -1,11 +1,12 @@
 import { getActiveProfile,
          getCurrentUser } from './userActions';
-import { news } from './newsActions';
+import { getNewsFeed } from './newsActions';
 import { status } from './statusActions';
 
 const actions = {
   getActiveProfile,
-  getCurrentUser
+  getCurrentUser,
+  getNewsFeed
 };
 
 export default actions;

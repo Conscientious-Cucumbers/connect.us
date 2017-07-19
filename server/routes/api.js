@@ -4,14 +4,14 @@ const router = express.Router();
 const axios = require('axios');
 
 
-var news = {
-  title: null,
-  text: null,
-  thumbnail: null,
-  media: null,
-  date: null,
-  source: null
-};
+// var news = {
+//   title: null,
+//   text: null,
+//   thumbnail: null,
+//   media: null,
+//   date: null,
+//   source: null
+// };
 var apiResult;
 var googleNews;
 
@@ -24,16 +24,23 @@ router.route('/news')
           apiResult = result_google.data.articles;
           googleNews = [];
 
-          for (var i = 0; i < apiResult.length; i++){
+          for (var i = 0; i < apiResult.length; i++) {
 
-            news.title = apiResult[i].title;
-            news.text = apiResult[i].description;
-            news.thumbnail = apiResult[i].urlToImage;
-            news.media = apiResult[i].urlToImage;
-            news.date = apiResult[i].publishedAt;
-            news.source = 'Google News';
+            // news.title = apiResult[i].title;
+            // news.text = apiResult[i].description;
+            // news.thumbnail = apiResult[i].urlToImage;
+            // news.media = apiResult[i].urlToImage;
+            // news.date = apiResult[i].publishedAt;
+            // news.source = 'Google News';
 
-            googleNews.push(news);
+            googleNews.push({
+              title: apiResult[i].title,
+              text: apiResult[i].description,
+              thumbnail: apiResult[i].urlToImage,
+              media: apiResult[i].urlToImage,
+              date: apiResult[i].publishedAt,
+              source: 'Google News'
+            });
           };
           res.status(200).send(googleNews);
 

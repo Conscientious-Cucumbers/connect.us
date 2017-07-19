@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Panel } from 'react-bootstrap';
 import NewsItem from './NewsItem.jsx';
+import Loading from '../components/Loading.jsx';
 
 const NewsFeed = (props) => (
   <div>
@@ -10,9 +11,7 @@ const NewsFeed = (props) => (
       return <NewsItem key={index} newsItem={newsItem} />;
     }))
       : 
-      <div className="loading">
-        <i className="fa fa-spin fa-spinner" aria-hidden="true"></i>
-      </div>}
+      <Loading />}
   </div>
 );
 

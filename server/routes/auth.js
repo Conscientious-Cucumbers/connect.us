@@ -67,9 +67,4 @@ router.get('/auth/twitter/callback', middleware.passport.authenticate('twitter',
   failureRedirect: '/login'
 }));
 
-router.get('/user/info', (req, res) => {
-  req.user.username = req.user.email.split('@')[0];
-  res.send(req.user);
-});
-
 module.exports = router;

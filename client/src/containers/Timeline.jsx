@@ -3,13 +3,22 @@ import { PanelGroup, Row } from 'react-bootstrap';
 import Status from './Status.jsx';
 import { connect } from 'react-redux';
 import StatusTextArea from './StatusTextArea.jsx';
+import Loading from '../components/Loading.jsx';
 
 class Timeline extends React.Component {
 
+  constructor(props) {
+    super(props);
+  }
+
   render () {
+    if (!this.props.user) {
+      return <Loading />;
+    }
+
     return (
       <PanelGroup>
-        {this.props.profileRoute === this.props.username
+        {this.props.profileRoute === this.props.user.username
           ?
         <StatusTextArea />
           :
@@ -22,12 +31,13 @@ class Timeline extends React.Component {
         })}
       </PanelGroup>
     );
+    
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    username: state.user.username,
+    user: state.user,
     statusFeed: state.statusFeed
   };
 };

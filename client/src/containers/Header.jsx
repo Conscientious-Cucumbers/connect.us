@@ -4,7 +4,8 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Row, Col } from 'react-bootstrap';
-
+import actions from '../actions';
+import { bindActionCreators } from 'redux';
 
 class Header extends React.Component {
 
@@ -17,9 +18,9 @@ class Header extends React.Component {
       <div>
           <img 
             className="profile-picture"
-            src={this.props.user.profile_picture || "http://www.bsmc.net.au/wp-content/uploads/No-image-available.jpg"} />
+            src={this.props.active.profile_picture || "http://www.bsmc.net.au/wp-content/uploads/No-image-available.jpg"} />
           <h2 className="profile-name">
-            {this.props.user.display_name || `${this.props.user.first} ${this.props.user.last}`}
+            {this.props.active.display || `${this.props.active.first} ${this.props.active.last}`}
           </h2>
         <br />
       </div>
@@ -29,7 +30,7 @@ class Header extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user
+    active: state.activeProfile
   };
 };
 

@@ -4,10 +4,19 @@ const Queries = require('../controllers').Queries;
 
 
 //GET
+
+router.route('/info')
+  .get((req, res) => {
+    req.user.username = req.user.email.split('@')[0];
+    res.send(req.user);
+  });
+
 router.route('/:username/info')
   .get((req, res) => {
     console.log(":username/info: ", req.params);
-    res.send(req.params);
+    req.user.username = req.user.email.split('@')[0];
+
+    res.send(req.params.username === req.user.username ? req.user : {});
   });
 
 router.route('/:username/newslike')

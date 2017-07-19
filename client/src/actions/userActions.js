@@ -7,7 +7,6 @@ const setActiveProfile = (userInfo) => {
     };
 };
 
-
 const setCurrentUser = (user) => {
   return {
     type: 'SET_CURRENT_USER',

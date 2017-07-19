@@ -23,6 +23,7 @@ class App extends React.Component {
 
   componentDidMount () {
     this.props.getCurrentUser();
+    this.props.getNewsFeed();
   }
 
   render () {
@@ -57,8 +58,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    getActiveProfile: actions.getActiveProfile,
-    getCurrentUser: actions.getCurrentUser
+    getCurrentUser: actions.getCurrentUser,
+    getNewsFeed: actions.getNewsFeed
   }, dispatch);
 };
 
