@@ -1,17 +1,27 @@
 import React from 'react';
 import { Panel, Row, Col, Modal, Button } from 'react-bootstrap';
+import LikeButton from '../components/LikeButton.jsx';
 
 class NewsItem extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      isOpen: false
+      isOpen: false,
+      isLiked: false
     };
   }
 
   toggleModal (state) {
     this.setState({
       isOpen: state
+    });
+  }
+
+  toggleLike () {
+    this.setState((prevState) => {
+      return {
+        isLiked: !prevState.isLiked
+      };
     });
   }
 
@@ -23,16 +33,26 @@ class NewsItem extends React.Component {
         </div>
         <div className="news-item-info">
           <div className="news-item-title" onClick={() => this.toggleModal(true)}>
-            {this.props.newsItem.title}
+            {this.props.newsItem.title.length < 80 ? this.props.newsItem.title : this.props.newsItem.title.split('').slice(0, 80).join('') + '...'}
           </div>
           <div className="news-item-description">
-            {this.props.newsItem.text && this.props.newsItem.text.split('').slice(0, 100).join('') + '...' || 'No description available'}
+            {this.props.newsItem.text 
+              && (this.props.newsItem.text.length < 100 ? this.props.newsItem.text : this.props.newsItem.text.split('').slice(0, 100).join('') + '...') 
+              || 'No description available'}
           </div>
           <div className="news-item-source">
             Source: {this.props.newsItem.source}
           </div>
         </div>
       </div>
+    );
+  }
+
+  panelFooter () {
+    return (
+      <span onClick={() => this.toggleLike()}>
+        <LikeButton isLiked={this.state.isLiked}/>
+      </span>
     );
   }
 
@@ -66,7 +86,7 @@ class NewsItem extends React.Component {
 
   render () {
     return (
-      <Panel>
+      <Panel footer={this.panelFooter()}>
         {this.itemPreview()}
         {this.itemModal()}
       </Panel>
