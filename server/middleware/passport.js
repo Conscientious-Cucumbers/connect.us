@@ -107,34 +107,35 @@ passport.use('local-login', new LocalStrategy({
       });
   }));
 
-// passport.use('google', new GoogleStrategy({
-//   clientID: config.Google.clientID,
-//   clientSecret: config.Google.clientSecret,
-//   callbackURL: config.Google.callbackURL
-// },
-//   (accessToken, refreshToken, profile, done) => getOrCreateOAuthProfile('google', profile, done))
-// );
+passport.use('google', new GoogleStrategy({
+  clientID: config.Google.clientID,
+  clientSecret: config.Google.clientSecret,
+  callbackURL: config.Google.callbackURL
+},
+  (accessToken, refreshToken, profile, done) => getOrCreateOAuthProfile('google', profile, done))
+);
 
 passport.use('facebook', new FacebookStrategy({
   clientID: config.Facebook.clientID,
   clientSecret: config.Facebook.clientSecret,
   callbackURL: config.Facebook.callbackURL,
-  profileFields: ['id', 'emails', 'name']
+  profileFields: ['id', 'emails', 'name', 'profileUrl', 'picture.type(large)']
 },
   (accessToken, refreshToken, profile, done) => getOrCreateOAuthProfile('facebook', profile, done))
 );
 
 // REQUIRES PERMISSIONS FROM TWITTER TO OBTAIN USER EMAIL ADDRESSES
-// passport.use('twitter', new TwitterStrategy({
-//   consumerKey: config.Twitter.consumerKey,
-//   consumerSecret: config.Twitter.consumerSecret,
-//   callbackURL: config.Twitter.callbackURL,
-//   userProfileURL: 'https://api.twitter.com/1.1/account/verify_credentials.json?include_email=true'
-// },
-//   (accessToken, refreshToken, profile, done) => getOrCreateOAuthProfile('twitter', profile, done))
-// );
+passport.use('twitter', new TwitterStrategy({
+  consumerKey: config.Twitter.consumerKey,
+  consumerSecret: config.Twitter.consumerSecret,
+  callbackURL: config.Twitter.callbackURL,
+  userProfileURL: 'https://api.twitter.com/1.1/account/verify_credentials.json?include_email=true'
+},
+  (accessToken, refreshToken, profile, done) => getOrCreateOAuthProfile('twitter', profile, done))
+);
 
 const getOrCreateOAuthProfile = (type, oauthProfile, done) => {
+  console.log('picture url: ', oauthProfile.photos[0].value);
   return models.Auth.where({ type, oauth_id: oauthProfile.id }).fetch({
     withRelated: ['profile']
   })
@@ -164,6 +165,7 @@ const getOrCreateOAuthProfile = (type, oauthProfile, done) => {
         return profile.save(profileInfo, { method: 'update' });
       }
       // otherwise create new profile
+      console.log('saving profile');
       return models.Profile.forge(profileInfo).save();
     })
     .tap(profile => {
