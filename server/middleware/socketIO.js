@@ -23,61 +23,61 @@ module.exports = (server) => {
 
     //************** GET REQUESTS *******************
 
-    socket.on('get news', () => {
+    // socket.on('get news', () => {
 
-      //check if it does exist in the database (by tittle) !!!
+    //   //check if it does exist in the database (by tittle) !!!
 
-      axios.get("https://newsapi.org/v1/articles?source=google-news&sortBy=top&apiKey=f97f9989c5f94e93ba130be4b6c2f09a")
-        .then(function(result_google) {    
-          console.log("****** How many news fetched: ", result_google.data.articles.length);
+    //   axios.get("https://newsapi.org/v1/articles?source=google-news&sortBy=top&apiKey=f97f9989c5f94e93ba130be4b6c2f09a")
+    //     .then(function(result_google) {    
+    //       console.log("****** How many news fetched: ", result_google.data.articles.length);
 
-          apiResult = result_google.data.articles;
-          socketResponse = [];
+    //       apiResult = result_google.data.articles;
+    //       socketResponse = [];
 
-          for (var i = 0; i < apiResult.length; i++){
+    //       for (var i = 0; i < apiResult.length; i++){
 
-            news.title = apiResult[i].title;
-            news.text = apiResult[i].description;
-            news.thumbnail = apiResult[i].urlToImage;
-            news.media = apiResult[i].urlToImage;
-            news.date = apiResult[i].publishedAt;
-            news.source = 'Google News';
+    //         news.title = apiResult[i].title;
+    //         news.text = apiResult[i].description;
+    //         news.thumbnail = apiResult[i].urlToImage;
+    //         news.media = apiResult[i].urlToImage;
+    //         news.date = apiResult[i].publishedAt;
+    //         news.source = 'Google News';
 
-            socketResponse.push(news);
-          }
-          // console.log(socketResponse[0]);
-          socket.emit('news',
-            {
-              google_news : socketResponse
-            }
-          );
+    //         socketResponse.push(news);
+    //       }
+    //       console.log(socketResponse[0]);
+    //       socket.emit('news',
+    //         {
+    //           google_news : socketResponse
+    //         }
+    //       );
 
-          // axios.get("https://www.reddit.com/r/news.json")
-          //   .then(function(result_reddit) {    
-          //     console.log("****** How many funny fetched: ", result_reddit.data.data.children.length);
-          //   })
-          //   .catch(e => console.log('reddit error', e));
+    //       // axios.get("https://www.reddit.com/r/news.json")
+    //       //   .then(function(result_reddit) {    
+    //       //     console.log("****** How many funny fetched: ", result_reddit.data.data.children.length);
+    //       //   })
+    //       //   .catch(e => console.log('reddit error', e));
 
 
-        })
-        .catch(e => console.log('google error', e));
+    //     })
+    //     .catch(e => console.log('google error', e));
 
-    });
+    // });
 
-    socket.on('get user info', () => {
-      // var info = {name: 'Saikal'};
-      // models.StatusLikes.where({ id_status: req.params.id_status, id_user: req.params.id_user}).fetch()
-      models.Profile.where({ id: 2}).fetch()
-      .then(likes => {
-        if (!likes) {
-          throw likes;
-        }
-        socket.emit('res user info', likes);
+    // socket.on('get user info', () => {
+    //   // var info = {name: 'Saikal'};
+    //   // models.StatusLikes.where({ id_status: req.params.id_status, id_user: req.params.id_user}).fetch()
+    //   models.Profile.where({ id: 2}).fetch()
+    //   .then(likes => {
+    //     if (!likes) {
+    //       throw likes;
+    //     }
+    //     socket.emit('res user info', likes);
 
-        // res.status(200).send(likes);
-      });
-      // socket.emit('res user info', info);
-    });
+    //     // res.status(200).send(likes);
+    //   });
+    //   // socket.emit('res user info', info);
+    // });
 
     socket.on('get news likes', () => {
 
@@ -97,9 +97,9 @@ module.exports = (server) => {
     socket.on('status like', () => {
 
     });
-    socket.on('news like', data => {
-      console.log("********* data from news like: ", data);
-    });
+    // socket.on('news like', data => {
+    //   console.log("********* data from news like: ", data);
+    // });
     socket.on('create status', () => {
 
     });
