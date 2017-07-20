@@ -4,14 +4,6 @@ const router = express.Router();
 const axios = require('axios');
 
 
-// var news = {
-//   title: null,
-//   text: null,
-//   thumbnail: null,
-//   media: null,
-//   date: null,
-//   source: null
-// };
 var apiResult;
 var googleNews;
 
@@ -26,21 +18,17 @@ router.route('/news')
 
           for (var i = 0; i < apiResult.length; i++) {
 
-            // news.title = apiResult[i].title;
-            // news.text = apiResult[i].description;
-            // news.thumbnail = apiResult[i].urlToImage;
-            // news.media = apiResult[i].urlToImage;
-            // news.date = apiResult[i].publishedAt;
-            // news.source = 'Google News';
+            var news = {};
 
-            googleNews.push({
-              title: apiResult[i].title,
-              text: apiResult[i].description,
-              thumbnail: apiResult[i].urlToImage,
-              media: apiResult[i].urlToImage,
-              date: apiResult[i].publishedAt,
-              source: 'Google News'
-            });
+            news.title = apiResult[i].title;
+            news.text = apiResult[i].description;
+            news.thumbnail = apiResult[i].urlToImage;
+            news.media = apiResult[i].urlToImage;
+            news.date = apiResult[i].publishedAt;
+            news.source = 'Google News';
+
+            googleNews.push(news);
+
           };
           res.status(200).send(googleNews);
 
@@ -57,7 +45,6 @@ router.route('/news')
         .catch(e => console.log('google error', e));
   })
   .post((req, res) => {
-    console.log('in the correct route');
     res.status(201).send({ data: 'Posted!' });
   });
 
