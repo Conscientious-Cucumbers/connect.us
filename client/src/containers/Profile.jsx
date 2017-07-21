@@ -50,11 +50,11 @@ class Profile extends React.Component {
               <br />
               <AboutUser />
             </Tab>
-            <Tab eventKey={3} title="News">
+            <Tab eventKey={3} title="Liked News">
               <br />
               <NewsLikes />
             </Tab>
-            <Tab eventKey={4} title="Liked posts">
+            <Tab eventKey={4} title="Liked Status">
               <br />
               <StatusLikes />
             </Tab>

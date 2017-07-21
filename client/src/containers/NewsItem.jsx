@@ -28,11 +28,13 @@ class NewsItem extends React.Component {
 
   toggleLike () {
     this.props.postNewsLike(this.props.newsItem);
-    this.setState((prevState) => {
-      return {
-        isLiked: !prevState.isLiked
-      };
-    });
+    if (!this.props.isNewsLike) {
+      this.setState((prevState) => {
+        return {
+          isLiked: !prevState.isLiked
+        };
+      });
+    }
   }
 
   itemPreview () {
