@@ -3,7 +3,7 @@ import ProfileNotExists from '../components/ProfileNotExists.jsx';
 import { Tabs, Tab } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import Header from './header.jsx';
+import Header from './Header.jsx';
 import Timeline from './Timeline.jsx';
 import AboutUser from './AboutUser.jsx';
 import NewsLikes from './NewsLikes.jsx';
