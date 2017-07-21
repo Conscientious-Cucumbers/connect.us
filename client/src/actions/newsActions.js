@@ -13,6 +13,42 @@ export const getNewsFeed = () => (dispatch, getState) => {
     return dispatch(setNewsFeed(result.data));
   })
   .catch((error) => {
-    console.error('Failed to fetch news: ', error);
+    console.error('Failed to fetch news');
+    console.log(error);
+  });
+};
+
+const setNewsLikes = (likes) => {
+  return {
+    type: 'RECEIVE_NEWS_LIKED',
+    payload: likes
+  };
+};
+
+export const getNewsLikes = (username) => (dispatch, getState) => {
+  axios.get(`/user/${username}/newslike`)
+  .then((result) => {
+    console.log('news: ', result.data);
+    result.data.map(item => {
+      item.liked = true;
+    });
+    dispatch(setNewsLikes(result.data));
+  })
+  .catch((err) => {
+    console.error('Error fetching news likes');
+    console.log(err);
+  });
+};
+
+
+export const postNewsLike = (newsLike) => (dispatch, getState) => {
+  axios.post('/user/news/like', { newsLike })
+  .then((success) => {
+    console.log('succeeded ', success.data);
+    dispatch(getNewsLikes(getState().user.username));
+  })
+  .catch((err) => {
+    console.error('Error posting news likes');
+    console.log(err);
   });
 };

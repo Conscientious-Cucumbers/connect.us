@@ -13,17 +13,17 @@ class Home extends React.Component {
     return (
       <Grid>
         <Row className="home-container">
-          <Col md={3} lg={4} smHidden xsHidden>
+          <Col md={3} lg={3} smHidden xsHidden>
             <div className="home-panel">
               <h3>This is the Messenger</h3>
             </div>
           </Col>
-          <Col xs={12} sm={12} md={6} lg={4}>
+          <Col xs={12} sm={12} md={6} lg={6}>
             <div className="home-panel home-panel-middle" height={window.innerHeight - 500}>
               <NewsFeed />
             </div>
           </Col>
-          <Col md={3} lg={4} smHidden xsHidden>
+          <Col md={3} lg={3} smHidden xsHidden>
             <div className="home-panel">
               <h3>This is the recent activity</h3>
             </div>

@@ -10,3 +10,14 @@ export const newsFeed = (state = null, action) => {
   // return NewsFeedData;
   return state;
 };
+
+
+export const newsLikes = (state = null, action) => {
+  switch (action.type) {
+    case 'RECEIVE_NEWS_LIKED':
+      return action.payload;
+      break;
+  }
+
+  return state;
+}

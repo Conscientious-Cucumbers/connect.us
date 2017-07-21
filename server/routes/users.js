@@ -34,7 +34,7 @@ router.route('/status/like')
 
 
 router.route('/news/like')
-  .post(Queries.addNewsLiked);
+  .post(Queries.toggleNewsLiked);
 
 
 router.route('/status')

@@ -4,33 +4,43 @@ const models = require('../../db/models');
 
 //////////// POST ///////////////
 
-module.exports.addNewsLiked = (req, res) => {
-  console.log("******** addNewsLiked request body: ", req.body);
-  console.log('Logged in user: ', req.user);
-  models.NewsItem.forge({ 
-      source: req.body.newsLike.source, 
-      title: req.body.newsLike.title,
-      thumbnail: req.body.newsLike.thumbnail,
-      text: req.body.newsLike.text,
-      media: req.body.newsLike.media,
-      date: req.body.newsLike.date
-    })
-    .save()
-    .then(result => {
-
-      models.NewsLike.forge({
-        id_user: req.user.id,
-        id_news: result.attributes.id
-      })
-      .save()
-      .then(() => res.status(201).send('Saved News Liked'));
-    })
-    .catch(err => {
-      res.status(500).send(err);
-    });
+module.exports.toggleNewsLiked = (req, res) => {
+  // check if news exists
+  models.NewsItem.findOne({url: req.body.newsLike.url})
+  .then((result) => removeNewsLiked(result.attributes, req.user))
+  .catch(() => addNewsLiked(req.body.newsLike, req.user))
+  .then(() => res.status(201).send('Toggled News Liked'));
 };
 
+const addNewsLiked = (newsItem, user) => {
+  // console.log("******** addNewsLiked request body: ", req.body);
+  // console.log('Logged in user: ', req.user);
+  return models.NewsItem.findOrCreate(newsItem)
+  .then(result => {
+    models.NewsLike.findOrCreate({
+      id_user: user.id,
+      id_news: result.id
+    });
+  });
+};
 
+const removeNewsLiked = (newsItem, user) => {
+  return models.NewsLike.findOne({ 
+    id_news: newsItem.id,
+    id_user: user.id
+  })
+  .then((newsLike) => {
+    if (newsLike.attributes) {
+      newsLike.destroy();
+      // add destroy to newsItem if length is 1
+    } else {
+      throw newsLike.attributes;
+    }
+  })
+  .catch(() => {
+    addNewsLiked(newsItem, user)
+  });
+};
 
 module.exports.addStatusLiked = (req, res) => {
   console.log("******** addStatusLiked request body: ", req.body);
