@@ -135,7 +135,7 @@ passport.use('twitter', new TwitterStrategy({
 );
 
 const getOrCreateOAuthProfile = (type, oauthProfile, done) => {
-  console.log('picture url: ', oauthProfile.photos[0].value);
+  // console.log('picture url: ', oauthProfile.photos[0].value);
   return models.Auth.where({ type, oauth_id: oauthProfile.id }).fetch({
     withRelated: ['profile']
   })

@@ -6,9 +6,10 @@ import { bindActionCreators } from 'redux';
 import Header from './header.jsx';
 import Timeline from './Timeline.jsx';
 import AboutUser from './AboutUser.jsx';
-import Likes from './Likes.jsx';
+import NewsLikes from './NewsLikes.jsx';
 import actions from '../actions';
 import Loading from '../components/Loading.jsx';
+import StatusLikes from './StatusLikes.jsx';
 
 class Profile extends React.Component {
 
@@ -18,6 +19,7 @@ class Profile extends React.Component {
 
   componentDidMount () {
     this.props.getActiveProfile(this.props.username);
+    this.props.getNewsLikes(this.props.username);
   }
 
   profileExists () {
@@ -48,9 +50,13 @@ class Profile extends React.Component {
               <br />
               <AboutUser />
             </Tab>
-            <Tab eventKey={3} title="Likes">
+            <Tab eventKey={3} title="News">
               <br />
-              <Likes />
+              <NewsLikes />
+            </Tab>
+            <Tab eventKey={4} title="Liked posts">
+              <br />
+              <StatusLikes />
             </Tab>
           </Tabs>
         </div>
@@ -80,10 +86,13 @@ const mapStateToProps = (state) => {
   };
 };
 
+
+
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     getActiveProfile: actions.getActiveProfile,
-    getCurrentUser: actions.getCurrentUser
+    getCurrentUser: actions.getCurrentUser,
+    getNewsLikes: actions.getNewsLikes
   }, dispatch);
 };
 

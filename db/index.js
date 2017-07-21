@@ -6,6 +6,7 @@ const db = require('bookshelf')(knex);
 // //debugger;
 // console.log('these are my impts', dbmodels)
 db.plugin('registry');
+db.plugin(require('bookshelf-modelbase').pluggable);
 
 // getUserInfo = function(user) {
 //   //console.log(db.Model)

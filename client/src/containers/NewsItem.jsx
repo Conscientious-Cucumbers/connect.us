@@ -1,6 +1,9 @@
 import React from 'react';
 import { Panel, Row, Col, Modal, Button } from 'react-bootstrap';
 import LikeButton from '../components/LikeButton.jsx';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import actions from '../actions';
 
 class NewsItem extends React.Component {
   constructor (props) {
@@ -11,13 +14,20 @@ class NewsItem extends React.Component {
     };
   }
 
-  toggleModal (state) {
+  componentDidMount () {
     this.setState({
-      isOpen: state
+      isLiked: this.props.newsItem.liked
+    });
+  }
+
+  toggleModal (modalState) {
+    this.setState({
+      isOpen: modalState
     });
   }
 
   toggleLike () {
+    this.props.postNewsLike(this.props.newsItem);
     this.setState((prevState) => {
       return {
         isLiked: !prevState.isLiked
@@ -94,4 +104,10 @@ class NewsItem extends React.Component {
   }
 }
 
-export default NewsItem;
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+    postNewsLike: actions.postNewsLike
+  }, dispatch);
+};
+
+export default connect(null, mapDispatchToProps)(NewsItem);
