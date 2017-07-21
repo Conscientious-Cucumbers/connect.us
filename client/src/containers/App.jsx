@@ -12,7 +12,6 @@ import { Grid, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import actions from '../actions';
-import axios from 'axios';
 
 // <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -23,7 +22,6 @@ class App extends React.Component {
 
   componentDidMount () {
     this.props.getCurrentUser();
-    this.props.getNewsFeed();
   }
 
   render () {
@@ -59,8 +57,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    getCurrentUser: actions.getCurrentUser,
-    getNewsFeed: actions.getNewsFeed
+    getCurrentUser: actions.getCurrentUser
   }, dispatch);
 };
 

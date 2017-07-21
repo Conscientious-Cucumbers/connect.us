@@ -6,16 +6,43 @@ const models = require('../../db/models');
 
 module.exports.toggleNewsLiked = (req, res) => {
   // check if news exists
-  models.NewsItem.findOne({url: req.body.newsLike.url})
-  .then((result) => removeNewsLiked(result.attributes, req.user))
-  .catch(() => addNewsLiked(req.body.newsLike, req.user))
-  .then(() => res.status(201).send('Toggled News Liked'));
+  const newsItem = req.body.newsLike;
+  var newsId;
+  models.NewsItem.where({url: newsItem.url}).fetch()
+  .then((result) => {
+    if (result) {
+      throw result;
+    } else {
+      return newsItem;
+    }
+  })
+  .then((newsItem) => {
+    throw models.NewsItem.forge(newsItem).save();
+  })
+  .catch((newsLike) => {
+    newsId = newsLike.attributes.id;
+    return models.NewsLike.where({
+      id_user: req.user.id,
+      id_news: newsId
+    }).fetch();
+  })
+  .then((result) => {
+    if (result) {
+      return result.destroy();
+    } else {
+      return models.NewsLike.forge({
+        id_user: req.user.id,
+        id_news: newsId
+      }).save();
+    }
+  })
+  .then(() => res.status(201).send('Toggled News Liked'))
 };
 
 const addNewsLiked = (newsItem, user) => {
   // console.log("******** addNewsLiked request body: ", req.body);
   // console.log('Logged in user: ', req.user);
-  return models.NewsItem.findOrCreate(newsItem)
+  return models.NewsItem.where(newsItem)
   .then(result => {
     models.NewsLike.findOrCreate({
       id_user: user.id,
@@ -25,16 +52,16 @@ const addNewsLiked = (newsItem, user) => {
 };
 
 const removeNewsLiked = (newsItem, user) => {
-  return models.NewsLike.findOne({ 
+  return models.NewsLike.where({ 
     id_news: newsItem.id,
     id_user: user.id
-  })
+  }).fetch()
   .then((newsLike) => {
-    if (newsLike.attributes) {
+    if (newsLike) {
       newsLike.destroy();
       // add destroy to newsItem if length is 1
     } else {
-      throw newsLike.attributes;
+      throw newsLike;
     }
   })
   .catch(() => {

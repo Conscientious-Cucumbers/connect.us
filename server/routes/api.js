@@ -35,7 +35,7 @@ router.route('/news')
           };
 
           Promise.map(googleNews, (newsItem) => {
-            return models.NewsItem.findOne({url: newsItem.url})
+            return models.NewsItem.where({url: newsItem.url}).fetch()
             .then((result) => {
               if (result.attributes) {
                 return models.NewsLike.where({id_news: result.attributes.id}).fetchAll();
