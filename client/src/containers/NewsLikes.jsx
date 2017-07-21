@@ -6,6 +6,13 @@ import NewsItem from './NewsItem.jsx';
 
 class NewsLikes extends React.Component {
 
+  constructor (props) {
+    super(props);
+    this.state = {
+      isNewsLike: true
+    };
+  }
+
   render () {
     return (
       <PanelGroup>
@@ -13,7 +20,7 @@ class NewsLikes extends React.Component {
           this.props.newsLikes 
           ?
           this.props.newsLikes.map((item, index) => {
-            return <NewsItem key={index} newsItem={item}/>;
+            return <NewsItem isNewsLike={this.state.isNewsLike} key={index} newsItem={item}/>;
           }) 
           :
           <Loading />
