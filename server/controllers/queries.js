@@ -45,6 +45,7 @@ module.exports.toggleNewsLiked = (req, res) => {
   .then(() => res.status(201).send('Toggled News Liked'))
 };
 
+
 module.exports.addStatusLiked = (req, res) => {
   console.log("******** addStatusLiked request body: ", req.body);
 
