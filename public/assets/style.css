@@ -1,0 +1,201 @@
+body { 
+  background-color: #eee;
+  padding-top:80px; 
+}
+
+h6 {
+  color: #888;
+}
+
+.right {
+  float: right;
+}
+
+.fa-search {
+  font-size: 20px;
+}
+
+.fa-frown-o {
+  font-size: 100px;
+}
+
+.navbar-brand:hover {
+  cursor: pointer;
+}
+
+.fa-heart, .fa-heart-o {
+  font-size: 16px;
+  color: red;
+}
+
+.fa-globe, .fa-user, .fa-home {
+  font-size: 20px;
+}
+
+.home-container {
+  overflow: hidden;
+}
+
+.home-panel {
+  border: none;
+}
+
+::-webkit-scrollbar { 
+    display: none; 
+}
+
+.home-panel-middle {
+  overflow: overlay !important;
+  height: 700px;
+}
+
+.jumbotron {
+  background-color: white;
+  border: 1px solid #bbb;
+}
+
+.status-post {
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+  text-align: left;
+}
+
+.status-textarea {
+  background-color: #fff;
+}
+
+.contact-info-hr {
+  width: 500px;
+  margin: 0px;
+  padding: 0px;
+}
+
+.news-item {
+  display: flex;
+  flex-direction: row;
+  align-content: flex-start;
+  align-items: flex-start;
+  max-height: 80px;
+}
+
+.news-item-created {
+
+}
+
+.news-item-info {
+  display: flex;
+  flex: 5 1 auto;
+  flex-direction: column;
+  justify-content: space-around;
+  overflow: hidden;
+  margin-left: 10px;
+  max-height: 80px;
+  height: auto;
+}
+
+.news-item-source {
+  flex: 5 1 auto;
+  color: #aaa;
+  font-size: 9px
+}
+
+.news-item-description {
+  font-style: italic;
+  flex: 1 1 auto;
+  font-size: 10px;
+}
+
+.news-item-title {
+  flex: 1 1 auto;
+  font-weight: bold;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.news-item-media {
+  align-self: flex-end;
+}
+
+.news-item-media img {
+  cursor: pointer;
+  max-height: 80px;
+  height: auto;
+}
+
+.news-item-title:hover {
+  color: #116;
+}
+
+.news-modal-body {
+  overflow: overlay !important;
+}
+
+.news-modal-media img {
+  border: 2px solid white;
+  height: 500px;
+  display: block;
+  margin: 0 auto;
+  
+}
+
+.news-modal-description: {
+
+}
+
+.profile-tab {
+  text-align: center;
+  position: center;
+}
+
+.profile-picture {
+  border-radius: 50%;
+  display: block;
+  margin: 0 auto;
+  width: 30%;
+  border: 3px solid;
+}
+
+.profile-name {
+  text-align: center;
+}
+
+.nav-tabs > li, .nav-pills > li {
+    float:none;
+    display:inline-block;
+    *display:inline; /* ie7 fix */
+     zoom:1; /* hasLayout ie7 trigger */
+}
+
+.nav-tabs, .nav-pills {
+    text-align:center;
+}
+
+.about-user {
+  text-align: center;
+}
+
+.loading {
+  font-size: 25px !important;
+  position: fixed; /* or absolute */
+  top: 50%;
+  left: 50%;
+  text-align: center;
+}
+
+.panel-body {
+  padding-bottom: 0px;
+}
+
+.panel-footer {
+  background-color: white;
+}
+
+.like-button, .like-button:hover, .like-button:active, .like-button:focus {
+  float: right;
+  border: none;
+  padding: 5px;
+  background-color: white;
+  outline: none;
+}
+

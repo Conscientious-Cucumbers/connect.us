@@ -2,16 +2,10 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
+const Promise = require('bluebird');
+const models = require('../../db/models');
 
 
-var news = {
-  title: null,
-  text: null,
-  thumbnail: null,
-  media: null,
-  date: null,
-  source: null
-};
 var apiResult;
 var googleNews;
 
@@ -24,19 +18,46 @@ router.route('/news')
           apiResult = result_google.data.articles;
           googleNews = [];
 
-          for (var i = 0; i < apiResult.length; i++){
+          for (var i = 0; i < apiResult.length; i++) {
+
+            var news = {};
 
             news.title = apiResult[i].title;
             news.text = apiResult[i].description;
             news.thumbnail = apiResult[i].urlToImage;
             news.media = apiResult[i].urlToImage;
             news.date = apiResult[i].publishedAt;
+            news.url = apiResult[i].url;
             news.source = 'Google News';
 
             googleNews.push(news);
-          };
-          res.status(200).send(googleNews);
 
+          };
+
+          Promise.map(googleNews, (newsItem) => {
+            return models.NewsItem.findOne({url: newsItem.url})
+            .then((result) => {
+              if (result.attributes) {
+                return models.NewsLike.where({id_news: result.attributes.id}).fetchAll();
+              }
+              throw newsItem;
+            })
+            .then((result) => {
+              result = result.models.map((item) => item.attributes)
+                      .filter((item) => item.id_user === req.user.id);
+              // console.log('filtered item: ', result);
+              if (result.length) {
+                newsItem.liked = true;
+              }
+              throw null;
+            })
+            .catch(() => {
+              return newsItem;
+            });
+          })
+          .then((googleNews) => {
+            res.send(googleNews);
+          })
           // console.log(googleNews[0]);
 
           // axios.get("https://www.reddit.com/r/news.json")
@@ -45,12 +66,10 @@ router.route('/news')
           //   })
           //   .catch(e => console.log('reddit error', e));
 
-
-        })
         .catch(e => console.log('google error', e));
+      })
   })
   .post((req, res) => {
-    console.log('in the correct route');
     res.status(201).send({ data: 'Posted!' });
   });
 

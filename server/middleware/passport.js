@@ -119,7 +119,7 @@ passport.use('facebook', new FacebookStrategy({
   clientID: config.Facebook.clientID,
   clientSecret: config.Facebook.clientSecret,
   callbackURL: config.Facebook.callbackURL,
-  profileFields: ['id', 'emails', 'name']
+  profileFields: ['id', 'emails', 'name', 'profileUrl', 'picture.type(large)']
 },
   (accessToken, refreshToken, profile, done) => getOrCreateOAuthProfile('facebook', profile, done))
 );
@@ -135,6 +135,7 @@ passport.use('twitter', new TwitterStrategy({
 );
 
 const getOrCreateOAuthProfile = (type, oauthProfile, done) => {
+  // console.log('picture url: ', oauthProfile.photos[0].value);
   return models.Auth.where({ type, oauth_id: oauthProfile.id }).fetch({
     withRelated: ['profile']
   })
@@ -164,6 +165,7 @@ const getOrCreateOAuthProfile = (type, oauthProfile, done) => {
         return profile.save(profileInfo, { method: 'update' });
       }
       // otherwise create new profile
+      console.log('saving profile');
       return models.Profile.forge(profileInfo).save();
     })
     .tap(profile => {
