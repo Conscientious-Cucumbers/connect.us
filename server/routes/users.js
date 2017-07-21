@@ -26,6 +26,11 @@ router.route('/:username/statuslike')
 router.route('/:username/status')
   .get(Queries.getStatuses);
 
+router.route('/:username/follows')
+  .get(Queries.getFollows);
+
+router.route('/:username/followers')
+  .get(Queries.getFollowers);
 
 ///////////  POST  ////////////
 
