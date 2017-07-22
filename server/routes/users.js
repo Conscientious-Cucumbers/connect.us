@@ -35,7 +35,7 @@ router.route('/:username/followers')
 ///////////  POST  ////////////
 
 router.route('/status/like')
-  .post(Queries.addStatusLiked);
+  .post(Queries.toggleStatusLiked);
 
 
 router.route('/news/like')
