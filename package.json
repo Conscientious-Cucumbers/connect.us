@@ -5,7 +5,8 @@
     "postinstall": "curl -s https://raw.githubusercontent.com/reactorcore/pomander/master/bin/install | bash",
     "start": "nodemon server",
     "test": "NODE_ENV=test grunt test",
-    "build": "webpack --watch"
+    "build": "webpack --watch",
+    "server-build": "webpack"
   },
   "author": "Hack Reactor",
   "license": "MIT",
