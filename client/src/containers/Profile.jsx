@@ -10,6 +10,8 @@ import NewsLikes from './NewsLikes.jsx';
 import actions from '../actions';
 import Loading from '../components/Loading.jsx';
 import StatusLikes from './StatusLikes.jsx';
+import Followers from './Followers.jsx';
+import Following from './Following.jsx';
 
 class Profile extends React.Component {
 
@@ -57,6 +59,14 @@ class Profile extends React.Component {
             <Tab eventKey={4} title="Liked Status">
               <br />
               <StatusLikes />
+            </Tab>
+            <Tab eventKey={5} title="Followers">
+              <br />
+              <Followers />
+            </Tab>
+            <Tab eventKey={6} title="Following">
+              <br />
+              <Following />
             </Tab>
           </Tabs>
         </div>
