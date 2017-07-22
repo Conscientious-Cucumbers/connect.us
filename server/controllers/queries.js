@@ -17,10 +17,16 @@ module.exports.toggleNewsLiked = (req, res) => {
     }
   })
   .then((newsItem) => {
-    throw models.NewsItem.forge(newsItem).save();
+    return models.NewsItem.forge(newsItem).save();
+  })
+  .then(() => {
+    return models.NewsItem.where({url: newsItem.url}).fetch()
+  })
+  .then((result) => {
+    throw result;
   })
   .catch((newsLike) => {
-    newsId = newsLike.attributes.id;
+    newsId = newsLike.get('id');
     return models.NewsLike.where({
       id_user: req.user.id,
       id_news: newsId
@@ -37,36 +43,6 @@ module.exports.toggleNewsLiked = (req, res) => {
     }
   })
   .then(() => res.status(201).send('Toggled News Liked'))
-};
-
-const addNewsLiked = (newsItem, user) => {
-  // console.log("******** addNewsLiked request body: ", req.body);
-  // console.log('Logged in user: ', req.user);
-  return models.NewsItem.where(newsItem)
-  .then(result => {
-    models.NewsLike.findOrCreate({
-      id_user: user.id,
-      id_news: result.id
-    });
-  });
-};
-
-const removeNewsLiked = (newsItem, user) => {
-  return models.NewsLike.where({ 
-    id_news: newsItem.id,
-    id_user: user.id
-  }).fetch()
-  .then((newsLike) => {
-    if (newsLike) {
-      newsLike.destroy();
-      // add destroy to newsItem if length is 1
-    } else {
-      throw newsLike;
-    }
-  })
-  .catch(() => {
-    addNewsLiked(newsItem, user)
-  });
 };
 
 module.exports.addStatusLiked = (req, res) => {
