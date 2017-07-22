@@ -1,5 +1,6 @@
 import { getActiveProfile,
-         getCurrentUser } from './userActions';
+         getCurrentUser,
+         finishSignup } from './userActions';
 import { getNewsFeed, getNewsLikes, postNewsLike } from './newsActions';
 import { status } from './statusActions';
 
@@ -8,7 +9,8 @@ const actions = {
   getCurrentUser,
   getNewsFeed,
   getNewsLikes,
-  postNewsLike
+  postNewsLike,
+  finishSignup
 };
 
 export default actions;
