@@ -32,6 +32,16 @@ module.exports.toggleNewsLiked = (req, res) => {
       id_news: newsId
     }).fetch();
   })
+  .then((result) => {
+    if (result) {
+      return result.destroy();
+    } else {
+      return models.NewsLike.forge({
+        id_user: req.user.id,
+        id_news: newsId
+      }).save();
+    }
+  })
   .then(() => res.status(201).send('Toggled News Liked'));
 };
 
