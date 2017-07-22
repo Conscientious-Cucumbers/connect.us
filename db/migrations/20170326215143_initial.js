@@ -8,7 +8,7 @@ exports.up = function (knex, Promise) {
       table.string('display', 100).nullable();
       table.string('email', 100).nullable().unique();
       table.string('phone', 100).nullable();
-      table.string('profile_picture', 100).nullable();
+      table.string('profile_picture', 500).nullable();
       table.string('username', 100).nullable().unique();
       table.timestamps(true, true);
     }),

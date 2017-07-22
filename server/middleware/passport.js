@@ -135,7 +135,7 @@ passport.use('twitter', new TwitterStrategy({
 );
 
 const getOrCreateOAuthProfile = (type, oauthProfile, done) => {
-  // console.log('picture url: ', oauthProfile.photos[0].value);
+  console.log('picture url: ', typeof(oauthProfile.photos[0].value));
   return models.Auth.where({ type, oauth_id: oauthProfile.id }).fetch({
     withRelated: ['profile']
   })
@@ -157,11 +157,13 @@ const getOrCreateOAuthProfile = (type, oauthProfile, done) => {
         first: oauthProfile.name.givenName,
         last: oauthProfile.name.familyName,
         display: oauthProfile.displayName || `${oauthProfile.name.givenName} ${oauthProfile.name.familyName}`,
-        email: oauthProfile.emails[0].value
+        email: oauthProfile.emails[0].value,
+        profile_picture: oauthProfile.photos[0].value
       };
 
       if (profile) {
         //update profile with info from oauth
+
         return profile.save(profileInfo, { method: 'update' });
       }
       // otherwise create new profile

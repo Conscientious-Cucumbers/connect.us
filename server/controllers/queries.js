@@ -45,18 +45,25 @@ module.exports.toggleNewsLiked = (req, res) => {
   .then(() => res.status(201).send('Toggled News Liked'));
 };
 
-module.exports.addStatusLiked = (req, res) => {
-  console.log("******** addStatusLiked request body: ", req.body);
-
-  models.StatusLike.forge({ 
-      id_status: req.body.id_status, 
-      id_user: req.user.id
+module.exports.toggleStatusLiked = (req, res) => {
+  console.log("******** ToggledStatusLiked request body: ", req.body);
+  return models.StatusLike.where({id_status: req.body.id_status, id_user: req.user.id}).fetch()
+    .then((result) => {
+      if(result){
+        return result.destroy()
+          .then(() => res.status(201).send('Unliked Status'));
+      } else {
+        models.StatusLike.forge({ 
+            id_status: req.body.id_status, 
+            id_user: req.user.id
+          })
+          .save()
+          .then(() => res.status(201).send('Liked Status'))
+          .catch(err => {
+            res.status(500).send(err);
+          });
+      }
     })
-    .save()
-    .then(() => res.status(201).send('Saved Status Liked'))
-    .catch(err => {
-      res.status(500).send(err);
-    });
 };
 
 
