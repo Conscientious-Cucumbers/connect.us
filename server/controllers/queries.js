@@ -20,7 +20,7 @@ module.exports.toggleNewsLiked = (req, res) => {
     return models.NewsItem.forge(newsItem).save();
   })
   .then(() => {
-    return models.NewsItem.where({url: newsItem.url}).fetch()
+    return models.NewsItem.where({url: newsItem.url}).fetch();
   })
   .then((result) => {
     throw result;

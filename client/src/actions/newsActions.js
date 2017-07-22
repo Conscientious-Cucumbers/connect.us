@@ -26,10 +26,9 @@ const setNewsLikes = (likes) => {
 };
 
 export const getNewsLikes = (username) => (dispatch, getState) => {
-  axios.get(`/user/${username}/newslike`)
+  axios.get(`/user/${username}/news/like`)
   .then((result) => {
-    console.log('news: ', result.data);
-    result.data.map(item => {
+    result.data.forEach(item => {
       item.liked = true;
     });
     dispatch(setNewsLikes(result.data));
@@ -44,7 +43,6 @@ export const getNewsLikes = (username) => (dispatch, getState) => {
 export const postNewsLike = (newsLike) => (dispatch, getState) => {
   axios.post('/user/news/like', { newsLike })
   .then((success) => {
-    console.log('succeeded ', success.data);
     dispatch(getNewsLikes(getState().user.username));
   })
   .catch((err) => {
