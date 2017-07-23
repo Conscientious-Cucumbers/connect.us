@@ -1,7 +1,8 @@
 import {combineReducers} from 'redux';
-import { user, activeProfile } from './userReducers';
+import { user, activeProfile, signupOpen } from './userReducers';
 import { statusFeed } from './statusReducers';
 import { newsFeed, newsLikes } from './newsReducer';
+import {} from './followReducers';
 
 
 const allReducers = combineReducers({
@@ -9,7 +10,8 @@ const allReducers = combineReducers({
     statusFeed: statusFeed,
     newsFeed: newsFeed,
     activeProfile: activeProfile,
-    newsLikes: newsLikes
+    newsLikes: newsLikes,
+    signupOpen: signupOpen
 });
 
 export default allReducers;

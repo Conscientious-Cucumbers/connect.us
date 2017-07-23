@@ -40,7 +40,7 @@ class NavBar extends React.Component {
           <Navbar.Form pullLeft>
             <form method="GET" action={`/${this.state.searchInput}`}>
               <FormGroup>
-                <FormControl onKeyDown={this.setSearchInput.bind(this)} type="text" placeholder="Search for user" />
+                <FormControl onChange={this.setSearchInput.bind(this)} type="text" placeholder="Search for user" />
               </FormGroup>
               {' '}
               <Button className="fa fa-search" type="submit"></Button>

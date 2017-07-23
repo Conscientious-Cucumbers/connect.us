@@ -6,54 +6,64 @@ const models = require('../../db/models');
 
 module.exports.toggleNewsLiked = (req, res) => {
   // check if news exists
-  models.NewsItem.findOne({url: req.body.newsLike.url})
-  .then((result) => removeNewsLiked(result.attributes, req.user))
-  .catch(() => addNewsLiked(req.body.newsLike, req.user))
+  const newsItem = req.body.newsLike;
+  var newsId;
+  models.NewsItem.where({url: newsItem.url}).fetch()
+  .then((result) => {
+    if (result) {
+      throw result;
+    } else {
+      return newsItem;
+    }
+  })
+  .then((newsItem) => {
+    return models.NewsItem.forge(newsItem).save();
+  })
+  .then(() => {
+    return models.NewsItem.where({url: newsItem.url}).fetch();
+  })
+  .then((result) => {
+    throw result;
+  })
+  .catch((newsLike) => {
+    newsId = newsLike.get('id');
+    return models.NewsLike.where({
+      id_user: req.user.id,
+      id_news: newsId
+    }).fetch();
+  })
+  .then((result) => {
+    if (result) {
+      return result.destroy();
+    } else {
+      return models.NewsLike.forge({
+        id_user: req.user.id,
+        id_news: newsId
+      }).save();
+    }
+  })
   .then(() => res.status(201).send('Toggled News Liked'));
 };
 
-const addNewsLiked = (newsItem, user) => {
-  // console.log("******** addNewsLiked request body: ", req.body);
-  // console.log('Logged in user: ', req.user);
-  return models.NewsItem.findOrCreate(newsItem)
-  .then(result => {
-    models.NewsLike.findOrCreate({
-      id_user: user.id,
-      id_news: result.id
-    });
-  });
-};
-
-const removeNewsLiked = (newsItem, user) => {
-  return models.NewsLike.findOne({ 
-    id_news: newsItem.id,
-    id_user: user.id
-  })
-  .then((newsLike) => {
-    if (newsLike.attributes) {
-      newsLike.destroy();
-      // add destroy to newsItem if length is 1
-    } else {
-      throw newsLike.attributes;
-    }
-  })
-  .catch(() => {
-    addNewsLiked(newsItem, user)
-  });
-};
-
-module.exports.addStatusLiked = (req, res) => {
-  console.log("******** addStatusLiked request body: ", req.body);
-
-  models.StatusLike.forge({ 
-      id_status: req.body.id_status, 
-      id_user: req.user.id
+module.exports.toggleStatusLiked = (req, res) => {
+  console.log("******** ToggledStatusLiked request body: ", req.body);
+  return models.StatusLike.where({id_status: req.body.id_status, id_user: req.user.id}).fetch()
+    .then((result) => {
+      if(result){
+        return result.destroy()
+          .then(() => res.status(201).send('Unliked Status'));
+      } else {
+        models.StatusLike.forge({ 
+            id_status: req.body.id_status, 
+            id_user: req.user.id
+          })
+          .save()
+          .then(() => res.status(201).send('Liked Status'))
+          .catch(err => {
+            res.status(500).send(err);
+          });
+      }
     })
-    .save()
-    .then(() => res.status(201).send('Saved Status Liked'))
-    .catch(err => {
-      res.status(500).send(err);
-    });
 };
 
 
@@ -68,7 +78,7 @@ module.exports.createStatus = (req, res) => {
     });
 };
 
-
+// Do I need to use FindorCreate method instead ???
 module.exports.follow = (req, res) => {
   models.Follow.forge({
       id_follower: req.user.id,
@@ -113,7 +123,6 @@ module.exports.getNewsLike = (req, res) => {
     });
 };
 
-//fix !!!
 module.exports.getStatusesLike = (req, res) => {
   models.Profile.where({ username: req.params.username }).fetch()
     .then(profile => {
@@ -145,7 +154,7 @@ module.exports.getStatusesLike = (req, res) => {
 
 
 module.exports.getStatuses = (req, res) => {
-models.Profile.where({ username: req.params.username }).fetch()
+  models.Profile.where({ username: req.params.username }).fetch()
     .then(profile => {
       console.log("****** getStatusLike profile: ", profile.attributes.id);
       return models.Status.where({id_user: profile.attributes.id}).fetchAll();
@@ -155,4 +164,24 @@ models.Profile.where({ username: req.params.username }).fetch()
     })
 };
 
+
+module.exports.getFollows = (req, res) => {
+  models.Profile.where({username: req.params.username}).fetch()
+    .then(profile => {
+      return models.Follow.where({id_follower: profile.attributes.id}).fetchAll();
+    })
+    .then(follows => {
+      res.status(200).send(follows);
+    })
+};
+
+module.exports.getFollowers = (req, res) => {
+  models.Profile.where({username: req.params.username}).fetch()
+    .then(profile => {
+      return models.Follow.where({id_followed: profile.attributes.id}).fetchAll();
+    })
+    .then(follows => {
+      res.status(200).send(follows);
+    })
+};
 

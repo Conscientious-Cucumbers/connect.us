@@ -8,7 +8,6 @@ const ProfileController = require('../controllers').Profiles;
 
 router.route('/info')
   .get((req, res) => {
-    req.user.username = req.user.email.split('@')[0];
     res.send(req.user);
   });
 
@@ -17,20 +16,25 @@ router.route('/info')
 router.route('/:username/info')
   .get(ProfileController.getInfo);
 
-router.route('/:username/newslike')
+router.route('/:username/news/like')
   .get(Queries.getNewsLike);
 
-router.route('/:username/statuslike')
+router.route('/:username/status/like')
   .get(Queries.getStatusesLike);
 
 router.route('/:username/status')
   .get(Queries.getStatuses);
 
+router.route('/:username/follows')
+  .get(Queries.getFollows);
+
+router.route('/:username/followers')
+  .get(Queries.getFollowers);
 
 ///////////  POST  ////////////
 
 router.route('/status/like')
-  .post(Queries.addStatusLiked);
+  .post(Queries.toggleStatusLiked);
 
 
 router.route('/news/like')

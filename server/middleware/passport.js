@@ -33,12 +33,13 @@ passport.use('local-signup', new LocalStrategy({
   passReqToCallback: true
 },
   (req, email, password, done) => {
+    var { first, last, username } = req.body;
     // check to see if there is any account with this email address
     return models.Profile.where({ email }).fetch()
       .then(profile => {
         // create a new profile if a profile does not exist
         if (!profile) {
-          return models.Profile.forge({ email }).save();
+          return models.Profile.forge({ email, first, last, username }).save();
         }
         // throw if any auth account already exists
         if (profile) {
@@ -63,7 +64,7 @@ passport.use('local-signup', new LocalStrategy({
         done(error, null);
       })
       .catch(() => {
-        done(null, false, req.flash('signupMessage', 'An account with this email address already exists.'));
+        done(null, false, req.flash('signupMessage', 'An account with this email address and/or username already exists.'));
       });
   }));
 
@@ -135,7 +136,7 @@ passport.use('twitter', new TwitterStrategy({
 );
 
 const getOrCreateOAuthProfile = (type, oauthProfile, done) => {
-  // console.log('picture url: ', oauthProfile.photos[0].value);
+  console.log('picture url: ', typeof(oauthProfile.photos[0].value));
   return models.Auth.where({ type, oauth_id: oauthProfile.id }).fetch({
     withRelated: ['profile']
   })
@@ -157,11 +158,13 @@ const getOrCreateOAuthProfile = (type, oauthProfile, done) => {
         first: oauthProfile.name.givenName,
         last: oauthProfile.name.familyName,
         display: oauthProfile.displayName || `${oauthProfile.name.givenName} ${oauthProfile.name.familyName}`,
-        email: oauthProfile.emails[0].value
+        email: oauthProfile.emails[0].value,
+        profile_picture: oauthProfile.photos[0].value
       };
 
       if (profile) {
         //update profile with info from oauth
+
         return profile.save(profileInfo, { method: 'update' });
       }
       // otherwise create new profile
