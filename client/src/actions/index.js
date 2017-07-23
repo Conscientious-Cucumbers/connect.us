@@ -3,7 +3,7 @@ import { getActiveProfile,
          finishSignup } from './userActions';
 import { getNewsFeed, getNewsLikes, postNewsLike } from './newsActions';
 import { status } from './statusActions';
-import {  } from './followActions';
+import {  } from './followActions'; //add name and add it in allReducers
 
 const actions = {
   getActiveProfile,
