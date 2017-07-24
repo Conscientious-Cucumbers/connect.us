@@ -57,9 +57,7 @@ const checkIfUserExists = (username) => (dispatch, getState) => {
   })
 };
 
-export const finishSignup = (e, formData) => (dispatch, getState) => {
-  e.preventDefault();
-  console.log(formData);
+export const finishSignup = (formData) => (dispatch, getState) => {
   return dispatch(checkIfUserExists(formData.username));
 };
 

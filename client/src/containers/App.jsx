@@ -35,6 +35,13 @@ class App extends React.Component {
   componentDidMount () {
     this.props.getCurrentUser();
   }
+
+  submitSignUp(e) {
+    e.preventDefault();
+    console.log('form values: ', this.state.formValues);
+    this.props.finishSignup(this.state.formValues);
+  }
+
   signUpModal () {
     return (
       <Modal
@@ -44,7 +51,7 @@ class App extends React.Component {
         <Modal.Header>
         <h3>Sign Up</h3>
         </Modal.Header>
-        <Form id="signupNewUserForm" onSubmit={(e) => this.props.finishSignup(e, this.state.formValues)}>
+        <Form id="signupNewUserForm" onSubmit={this.submitSignUp.bind(this)}>
           <Modal.Body>
               <FieldGroup 
               id="username"

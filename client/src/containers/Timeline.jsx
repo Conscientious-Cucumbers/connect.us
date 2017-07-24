@@ -12,7 +12,7 @@ class Timeline extends React.Component {
   }
 
   render () {
-    if (!this.props.user) {
+    if (!this.props.activeProfile || !this.props.user || !this.props.statusFeed) {
       return <Loading />;
     }
 
@@ -24,11 +24,13 @@ class Timeline extends React.Component {
           :
           null
         }
-        {this.props.statusFeed.map((status, index) => {
-          return (
-            <Status key={index} status={status}/>
-          ); 
-        })}
+        {
+          this.props.statusFeed.map((status, index) => {
+            return (
+              <Status key={index} status={status} isTimeline/>
+            ); 
+          })
+        }
       </PanelGroup>
     );
     
@@ -38,6 +40,7 @@ class Timeline extends React.Component {
 const mapStateToProps = (state) => {
   return {
     user: state.user,
+    activeProfile: state.activeProfile,
     statusFeed: state.statusFeed
   };
 };
