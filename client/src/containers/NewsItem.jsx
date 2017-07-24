@@ -72,14 +72,13 @@ class NewsItem extends React.Component {
     return (
       <Modal
         show={this.state.isOpen}
-        onHide={() => this.toggleModal(false)}
-        bsSize="sm">
+        onHide={() => this.toggleModal(false)}>
       <Modal.Header closeButton>
         <Modal.Title>{this.props.newsItem.title}</Modal.Title>
       </Modal.Header>
       <Modal.Body className="news-modal-body">
         <div className="news-modal-media">
-          <img src={this.props.newsItem.media} height="150%"/>
+          <img src={this.props.newsItem.media} width="100%"/>
         </div>
         <br />
         <div className="news-modal-description">

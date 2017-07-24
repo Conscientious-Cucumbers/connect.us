@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux';
 import { user, activeProfile, signupOpen } from './userReducers';
-import { statusFeed } from './statusReducers';
+import { statusFeed, statusLikes } from './statusReducers';
 import { newsFeed, newsLikes } from './newsReducer';
 import { following, followers } from './followReducers';  // DID add name and add it in allReducers
 
@@ -8,6 +8,7 @@ import { following, followers } from './followReducers';  // DID add name and ad
 const allReducers = combineReducers({
     user: user,
     statusFeed: statusFeed,
+    statusLikes: statusLikes,
     newsFeed: newsFeed,
     activeProfile: activeProfile,
     newsLikes: newsLikes,

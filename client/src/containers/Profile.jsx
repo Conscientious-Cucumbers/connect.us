@@ -22,8 +22,10 @@ class Profile extends React.Component {
   componentDidMount () {
     this.props.getActiveProfile(this.props.username);
     this.props.getNewsLikes(this.props.username);
-    this.props.getFollowing(this.props.username);   // Added!
+    this.props.getFollowing(this.props.username);
     this.props.getFollowers(this.props.username);
+    this.props.getStatusLikes(this.props.username);
+    this.props.getTimeline(this.props.username);
   }
 
   profileExists () {
@@ -106,8 +108,9 @@ const mapDispatchToProps = (dispatch) => {
     getCurrentUser: actions.getCurrentUser,
     getNewsLikes: actions.getNewsLikes,
     getFollowing: actions.getFollowing,    // Added!
-    getFollowers: actions.getFollowers
-
+    getFollowers: actions.getFollowers,
+    getTimeline: actions.getTimeline,
+    getStatusLikes: actions.getStatusLikes
   }, dispatch);
 };
 
