@@ -5,7 +5,6 @@ export const following = (state = null, action) => {
       return action.payload;
       break;
   }
-  console.log("CALLED! FOLLOWING, state: ", state);
 
   return state;
 };
@@ -17,7 +16,6 @@ export const followers = (state = null, action) => {
       return action.payload;
       break;
   }
-  console.log("CALLED! FOLLOWERS, state: ", state);
 
   return state;
 }
