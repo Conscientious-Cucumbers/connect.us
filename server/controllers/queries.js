@@ -1,4 +1,6 @@
 const models = require('../../db/models');
+const Promise = require('bluebird');
+
 
 
 
@@ -166,22 +168,37 @@ module.exports.getStatuses = (req, res) => {
 
 
 module.exports.getFollows = (req, res) => {
+  var allfollowing = [];
+
   models.Profile.where({username: req.params.username}).fetch()
     .then(profile => {
-      return models.Follow.where({id_follower: profile.attributes.id}).fetchAll();
-    })
-    .then(follows => {
-      res.status(200).send(follows);
-    })
+      return models.Follow.where({id_follower: profile.attributes.id}).fetchAll()
+        .then(follows => {
+
+          Promise.map(follows.models, (eachPerson) => {
+            return models.Profile.where({id: eachPerson.attributes.id_followed}).fetch()
+              .then((result) => {allfollowing.push(result.attributes)})
+          })
+          .then(() => res.status(200).send(allfollowing));
+
+        });
+    });
 };
 
 module.exports.getFollowers = (req, res) => {
+  var allfollowers = [];
   models.Profile.where({username: req.params.username}).fetch()
     .then(profile => {
-      return models.Follow.where({id_followed: profile.attributes.id}).fetchAll();
-    })
-    .then(follows => {
-      res.status(200).send(follows);
+      return models.Follow.where({id_followed: profile.attributes.id}).fetchAll()
+        .then(follows => {
+
+          Promise.map(follows.models, (eachPerson) => {
+            return models.Profile.where({id: eachPerson.attributes.id_follower}).fetch()
+              .then((result) => {allfollowers.push(result.attributes)})
+          })
+          .then(() => res.status(200).send(allfollowers));
+
+        })
     })
 };
 

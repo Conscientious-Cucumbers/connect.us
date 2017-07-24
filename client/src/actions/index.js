@@ -3,7 +3,7 @@ import { getActiveProfile,
          finishSignup } from './userActions';
 import { getNewsFeed, getNewsLikes, postNewsLike } from './newsActions';
 import { status } from './statusActions';
-import {  } from './followActions'; //add name and add it in allReducers
+import { getFollowing, getFollowers } from './followActions'; //DID add name and add it in allReducers
 
 const actions = {
   getActiveProfile,
@@ -11,7 +11,9 @@ const actions = {
   getNewsFeed,
   getNewsLikes,
   postNewsLike,
-  finishSignup
+  finishSignup,
+  getFollowing,
+  getFollowers
 };
 
 export default actions;
