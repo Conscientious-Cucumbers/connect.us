@@ -12,7 +12,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 let socket = io('http://localhost:3000');
-let socketIoMiddleware = createSocketIoMiddleware(socket, ["server/"]);
+let socketIoMiddleware = createSocketIoMiddleware(socket, ["socket/"]);
 
 injectTapEventPlugin();
 
