@@ -26,7 +26,7 @@ class Header extends React.Component {
             className="profile-picture"
             src={this.props.active.profile_picture || "http://www.bsmc.net.au/wp-content/uploads/No-image-available.jpg"} />
           <h2 className="profile-name">
-            {this.props.active.display || `${this.props.active.first} ${this.props.active.last}`}
+            {this.props.active.first && this.props.active.last && `${this.props.active.first} ${this.props.active.last}` || this.props.active.display}
           </h2>
           {!this.props.user || this.props.user.username === this.props.active.username
             ?
