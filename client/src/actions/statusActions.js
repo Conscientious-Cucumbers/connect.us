@@ -47,7 +47,7 @@ export const postStatus = (text) => (dispatch, getState) => {
 };
 
 export const postStatusLike = (id_status) => (dispatch, getState) => {
-  axios.post('/user/status/like', {id_status})
+  axios.post('/user/status/togglelike', {id_status})
 
   .then(() => {
     console.log('status like posted successfully');

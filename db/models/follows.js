@@ -6,7 +6,7 @@ const Follow = db.Model.extend({
     return this.hasOne('Profile');
   },
   followed: function() {
-    return this.hasOnes('Profile');
+    return this.hasOne('Profile');
   }
 });
 

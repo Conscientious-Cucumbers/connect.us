@@ -5,3 +5,6 @@ module.exports.NewsLike = require('./newsLikes');
 module.exports.Status = require('./statuses');
 module.exports.StatusLike = require('./statusLikes');
 module.exports.Follow = require('./follows');
+module.exports.NewsComments = require('./newsComments');
+module.exports.Notifications = require('./notifications');
+
