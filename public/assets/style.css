@@ -49,6 +49,14 @@ h6 {
   height: 700px;
 }
 
+.follow-button-wrapper {
+  text-align: center
+}
+
+.follow-button {
+  border: solid 1px #0079BF;
+}
+
 .jumbotron {
   background-color: white;
   border: 1px solid #bbb;

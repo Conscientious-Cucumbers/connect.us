@@ -8,6 +8,8 @@ exports.seed = function (knex, Promise) {
         first: 'System',
         last: 'Admin',
         display: 'Administrator',
+        phone: '6503338888', 
+        username: 'admin123',
         email: 'admin@domain.com'
       }).save())
     .error(err => {

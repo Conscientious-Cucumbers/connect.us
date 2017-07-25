@@ -131,7 +131,7 @@ module.exports.getNewsLike = (req, res) => {
       res.status(500).send('Error: ', err);
     })
     .catch(() => {
-      res.sendStatus(404);
+      res.send([]);
     });
 };
 
@@ -161,7 +161,7 @@ module.exports.getStatusesLike = (req, res) => {
       res.status(500).send('Error: ', err);
     })
     .catch(() => {
-      res.sendStatus(404);
+      res.send([]);
     });
 };
 

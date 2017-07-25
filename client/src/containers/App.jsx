@@ -38,7 +38,6 @@ class App extends React.Component {
 
   submitSignUp(e) {
     e.preventDefault();
-    console.log('form values: ', this.state.formValues);
     this.props.finishSignup(this.state.formValues);
   }
 
