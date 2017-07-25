@@ -16,11 +16,11 @@ module.exports = (server) => {
     // let id = socket.handshake.query.id;
     var id = null;
 
-    console.log('what happens on connect: ', socket.handshake);
-
     socket.on('action', (action) => {
       const payload = action.payload;
 
+      console.log('***** online users: ', online_users);
+      
       if (action.type === 'socket/connect') {
         var is_received = false;
         id = payload.id;
