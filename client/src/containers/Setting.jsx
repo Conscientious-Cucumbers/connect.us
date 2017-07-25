@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tabs, Tab, Navbar, FormGroup, FormControl, Button } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { LinkContainer } from 'react-router-bootstrap';
