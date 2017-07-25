@@ -14,59 +14,47 @@ module.exports = (server) => {
 
   socket.on('connection', socket => {
     // let id = socket.handshake.query.id;
-
+    var id = null;
     console.log('what happens on connect: ', socket.handshake);
 
     socket.on('action', (action) => {
       const payload = action.payload;
 
       if (action.type === 'socket/connect') {
-        let id = payload.id;
+        var is_received = false;
+        id = payload.id;
         !online_users[id] ? online_users[id] = [socket] : online_users[id].push(socket);
       };
 
-      if(action.type === 'socket/notify'){
+
+      if(action.type === 'socket/notify') {
         if (online_users[payload.followed_id]) {
-          online_users[payload.followed_id].forEach(socket => {
+          is_received = true;
+          online_users[payload.followed_id].forEach(socket => { //????
             socket.emit('action', {
               type: 'FOLLOW_NOTIFICATION',
               payload: payload.follower_id
             });
           });
-        } else {
-          console.log('not online');
-          // send back a notification to the same client
-          // and this sends the notification up to the notification db
         }
-      }
 
+        //Query:
+        models.Notifications.forge({
+            id_notifier: payload.follower_id,
+            id_notified: payload.followed_id,
+            type: 'FOLLOW_NOTIFICATION',
+            is_received: is_received
+          })
+          .save()
+          .catch(err => {console.log("Error: ", err)});
+      }
 
     });
 
 
-
-
-
-    socket.on('action', (action) => {
-
-      if(action.type === 'server/hello'){
-
-        console.log('Got hello payload!', action.payload);
-
-        socket.emit('action', {type:'message', payload:'good day!'});
-      }
-
-
+    socket.on('disconnect', socket => {
+      !online_users[id] && online_users[id].length <= 1 ? delete online_users[id] : online_users[id].splice(online_users[id].indexOf(socket), 1);
     });
-
-
-
-    // socket.on('get statuses', () => {
-    //   socket.emit('res statuses', statuses);
-    // });
-
-
-    socket.on('disconnect', socket => {});
 
   });
 };
