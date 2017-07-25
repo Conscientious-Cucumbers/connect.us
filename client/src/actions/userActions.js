@@ -56,6 +56,10 @@ const checkIfUserExists = (username) => (dispatch, getState) => {
   })
 };
 
+export const updateSettings = (info) => (dispatch, getState) => {
+  dispatch(updateUserInfo(Object.assign(getState().user, info)));
+};
+
 export const finishSignup = (formData) => (dispatch, getState) => {
   return dispatch(checkIfUserExists(formData.username));
 };
