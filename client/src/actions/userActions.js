@@ -32,8 +32,8 @@ const isSignUpRequired = (user) => (dispatch, getState) => {
   }
 };
 
-const updateUserInfo = (username) => (dispatch, getState) => {
-  axios.post('/user/info', Object.assign(getState().user, {username: username}))
+const updateUserInfo = (info) => (dispatch, getState) => {
+  axios.post('/user/info', info)
   .then(() => {
     dispatch(confirmFinishSignup());
     dispatch(getCurrentUser());
@@ -47,8 +47,9 @@ const checkIfUserExists = (username) => (dispatch, getState) => {
   return axios.get(`/user/${username}/info`)
   .then((result) => {
     if (!Object.keys(result.data).length) {
-      dispatch(setCurrentUser(Object.assign(getState().user, {username: username})));
-      dispatch(updateUserInfo(username));
+      const newInfo = Object.assign(getState().user, {username: username});
+      dispatch(setCurrentUser(newInfo));
+      dispatch(updateUserInfo(newInfo));
     } else {
       alert('Username exists!');
     }

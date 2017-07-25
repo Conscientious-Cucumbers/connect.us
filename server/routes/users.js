@@ -49,7 +49,7 @@ router.route('/info')
   .post(ProfileController.updateInfo);
 
 
-router.route('/toggle/togglefollow')
+router.route('/togglefollow')
   .post(Queries.toggleFollow);
 
 
