@@ -55,6 +55,7 @@ export const getFollowers = (username) => (dispatch, getState) => {
 
 
 export const toggleFollow = (id) => (dispatch, getState) => {
+  // dispatch a send notification action
   axios.post('/user/togglefollow', { id })
   .catch((err) => {
     console.log('Error toggling follow: ', err);
