@@ -15,6 +15,7 @@ module.exports = (server) => {
   socket.on('connection', socket => {
     // let id = socket.handshake.query.id;
     var id = null;
+
     console.log('what happens on connect: ', socket.handshake);
 
     socket.on('action', (action) => {
