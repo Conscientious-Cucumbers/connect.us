@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { socketNotify } from './socketActions';
 
 
 
@@ -55,6 +56,8 @@ export const getFollowers = (username) => (dispatch, getState) => {
 
 
 export const toggleFollow = (id) => (dispatch, getState) => {
+  // dispatch a send notification action
+  dispatch(socketNotify(getState().user.id, id));
   axios.post('/user/togglefollow', { id })
   .catch((err) => {
     console.log('Error toggling follow: ', err);

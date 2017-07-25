@@ -13,19 +13,31 @@ module.exports = (server) => {
 
 
   socket.on('connection', socket => {
-    let id = socket.handshake.query.id;
+    // let id = socket.handshake.query.id;
 
-
-  
-    console.log("Socket connected: " + socket.id);
+    console.log('what happens on connect: ', socket.handshake);
 
     socket.on('action', (action) => {
+      const payload = action.payload;
+
+      if (action.type === 'socket/connect') {
+        let id = payload.id;
+        !online_users[id] ? online_users[id] = [socket] : online_users[id].push(socket);
+      };
 
       if(action.type === 'socket/notify'){
-
-        console.log('Got hello payload!', action.payload);  //user_id
-
-        socket.emit('action', {type:'message', payload:'good day!'});
+        if (online_users[payload.followed_id]) {
+          online_users[payload.followed_id].forEach(socket => {
+            socket.emit('action', {
+              type: 'FOLLOW_NOTIFICATION',
+              payload: payload.follower_id
+            });
+          });
+        } else {
+          console.log('not online');
+          // send back a notification to the same client
+          // and this sends the notification up to the notification db
+        }
       }
 
 

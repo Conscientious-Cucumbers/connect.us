@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { connectSocket } from './socketActions';
 
 const setActiveProfile = (userInfo) => {
     return {
@@ -77,6 +78,7 @@ export const getActiveProfile = (username) => (dispatch, getState) => {
 export const getCurrentUser = () => (dispatch, getState) => {
   return axios.get(`/user/info`)
   .then((result) => {
+    dispatch(connectSocket(result.data.id));
     dispatch(isSignUpRequired(result.data));
     return dispatch(setCurrentUser(result.data));
   })
