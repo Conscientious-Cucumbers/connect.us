@@ -2,7 +2,7 @@ import { getActiveProfile,
          getCurrentUser,
          finishSignup } from './userActions';
 import { getNewsFeed, getNewsLikes, postNewsLike } from './newsActions';
-import { getFollowing, getFollowers } from './followActions';
+import { getFollowing, getFollowers, toggleFollow } from './followActions';
 import { getTimeline, getStatusLikes, postStatus, postStatusLike } from './statusActions';
 
 const actions = {
@@ -17,7 +17,8 @@ const actions = {
   getTimeline,
   getStatusLikes,
   postStatus,
-  postStatusLike
+  postStatusLike,
+  toggleFollow
 };
 
 export default actions;

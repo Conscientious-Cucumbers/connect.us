@@ -8,7 +8,6 @@ const setActiveProfile = (userInfo) => {
 };
 
 const setCurrentUser = (user) => {
-  console.log('user: ', user);
   return {
     type: 'SET_CURRENT_USER',
     payload: user
@@ -36,7 +35,6 @@ const isSignUpRequired = (user) => (dispatch, getState) => {
 const updateUserInfo = (username) => (dispatch, getState) => {
   axios.post('/user/info', Object.assign(getState().user, {username: username}))
   .then(() => {
-    console.log('successfully updated');
     dispatch(confirmFinishSignup());
     dispatch(getCurrentUser());
   })
@@ -64,7 +62,7 @@ export const finishSignup = (formData) => (dispatch, getState) => {
 export const getActiveProfile = (username) => (dispatch, getState) => {
   return axios.get(`/user/${username}/info`)
   .then((result) => {
-    return dispatch(setActiveProfile(result.data));
+    dispatch(setActiveProfile(result.data));
   })
   .catch((error) => {
     console.error('Error fetching active profile: ', error);

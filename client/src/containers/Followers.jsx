@@ -4,9 +4,10 @@ import { PanelGroup } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import Loading from '../components/Loading.jsx';
 import FollowEntry from './FollowEntry.jsx';
+import {List} from 'material-ui/List';
 
 const Followers = (props) => (
-<PanelGroup>
+  <List>
     {
       props.followers
       ?
@@ -16,7 +17,7 @@ const Followers = (props) => (
       :
       <Loading />
     }
-  </PanelGroup>
+  </List>
 );
 
 const mapStateToProps = (state) => {
