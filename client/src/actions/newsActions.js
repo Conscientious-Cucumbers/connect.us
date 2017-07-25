@@ -41,7 +41,7 @@ export const getNewsLikes = (username) => (dispatch, getState) => {
 
 
 export const postNewsLike = (newsLike) => (dispatch, getState) => {
-  axios.post('/user/news/like', { newsLike })
+  axios.post('/user/news/togglelike', { newsLike })
   .then((success) => {
     dispatch(getNewsLikes(getState().user.username));
   })

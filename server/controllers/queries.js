@@ -80,15 +80,25 @@ module.exports.createStatus = (req, res) => {
     });
 };
 
-// Do I need to use FindorCreate method instead ???
-module.exports.follow = (req, res) => {
-  models.Follow.forge({
-      id_follower: req.user.id,
-      id_followed: req.body.id
-    })
-    .save()
-    .then(() => {res.status(201).send('Added Follow')})
-    .catch(err => {res.status(500).send(err)
+module.exports.toggleFollow = (req, res) => {
+  console.log("******** ToggledFollowPOST request body: ", req.body);
+  return models.Follow.where({id_follower: req.user.id, id_followed: req.body.id}).fetch()
+    .then((result) => {
+      if(result){
+        return result.destroy()
+          .then(() => res.status(201).send('Unfollowing User'));
+      } else {
+
+        models.Follow.forge({
+            id_follower: req.user.id,
+            id_followed: req.body.id
+          })
+          .save()
+          .then(() => {res.status(201).send('Following User')})
+          .catch(err => {res.status(500).send(err)
+          });
+
+      }
     });
 };
 
@@ -125,6 +135,7 @@ module.exports.getNewsLike = (req, res) => {
     });
 };
 
+
 module.exports.getStatusesLike = (req, res) => {
   models.Profile.where({ username: req.params.username }).fetch()
     .then(profile => {
@@ -155,6 +166,7 @@ module.exports.getStatusesLike = (req, res) => {
 };
 
 
+
 module.exports.getStatuses = (req, res) => {
   models.Profile.where({ username: req.params.username }).fetch()
     .then(profile => {
@@ -165,6 +177,7 @@ module.exports.getStatuses = (req, res) => {
       res.status(200).send(statuses);
     })
 };
+
 
 
 module.exports.getFollows = (req, res) => {
@@ -184,6 +197,7 @@ module.exports.getFollows = (req, res) => {
         });
     });
 };
+
 
 module.exports.getFollowers = (req, res) => {
   var allfollowers = [];
