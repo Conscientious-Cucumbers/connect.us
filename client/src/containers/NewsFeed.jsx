@@ -3,17 +3,25 @@ import { connect } from 'react-redux';
 import { Panel, PanelGroup } from 'react-bootstrap';
 import NewsItem from './NewsItem.jsx';
 import Loading from '../components/Loading.jsx';
+import { GridList } from 'material-ui/GridList';
 
 const NewsFeed = (props) => (
-  <div>
-    <PanelGroup>
-      {!!props.newsFeed ?
+  <div className="news-feed-container">
+    <GridList
+      cols={1}
+      padding={1}
+      className="news-feed-list"
+    >
+    {
+      !!props.newsFeed 
+      ?
         props.newsFeed.map(((newsItem, index) => {
-        return <NewsItem key={index} newsItem={newsItem} />;
-      }))
-        : 
-        <Loading />}
-    </PanelGroup>
+          return <NewsItem key={index} newsItem={newsItem} />;
+        }))
+      : 
+        <Loading />
+    }
+    </GridList>
   </div>
 );
 

@@ -9,6 +9,8 @@ import { Navbar,
          FormControl,
          Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import { clearNotifications } from '../actions/notificationActions';
+import { bindActionCreators } from 'redux';
 
 class NavBar extends React.Component {
 
@@ -56,7 +58,7 @@ class NavBar extends React.Component {
             <i className="fa fa-user" aria-hidden="true"></i>
             </NavItem>
             <NavDropdown eventKey={3} 
-              title={<i className="fa fa-globe" aria-hidden="true"></i>} 
+              title={<i onClick={this.props.clearNotifications} className="fa fa-globe" aria-hidden="true"></i>} 
               id="notifications-nav-dropdown" 
               noCaret>
               <MenuItem eventKey={3.1}>This</MenuItem>
@@ -96,4 +98,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(NavBar);
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+    clearNotifications
+  }, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar);

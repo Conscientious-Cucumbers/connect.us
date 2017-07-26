@@ -32,21 +32,16 @@ h6 {
   font-size: 20px;
 }
 
-.home-container {
-  overflow: hidden;
-}
-
-.home-panel {
-  border: none;
-}
-
 ::-webkit-scrollbar { 
     display: none; 
 }
 
-.home-panel-middle {
-  overflow: overlay !important;
-  height: 700px;
+.follow-button-wrapper {
+  text-align: center
+}
+
+.follow-button {
+  border: solid 1px #0079BF;
 }
 
 .jumbotron {
@@ -71,16 +66,24 @@ h6 {
   padding: 0px;
 }
 
+.news-feed-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.news-feed-list {
+  width: 500;
+  height: 450;
+  overflow-y: auto;
+}
+
 .news-item {
   display: flex;
   flex-direction: row;
   align-content: flex-start;
   align-items: flex-start;
   max-height: 80px;
-}
-
-.news-item-created {
-
 }
 
 .news-item-info {
@@ -114,12 +117,8 @@ h6 {
 }
 
 .news-item-media {
-  align-self: flex-end;
-}
-
-.news-item-media img {
   cursor: pointer;
-  max-height: 80px;
+  max-width: 500px !important;
   height: auto;
 }
 
@@ -192,10 +191,10 @@ h6 {
 }
 
 .like-button, .like-button:hover, .like-button:active, .like-button:focus {
-  float: right;
+/*  float: right;*/
   border: none;
-  padding: 5px;
-  background-color: white;
+  /*padding: 5px;*/
+  background-color: rgba(0, 0, 0, 0);
   outline: none;
 }
 

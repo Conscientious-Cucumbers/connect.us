@@ -31,7 +31,6 @@ class NewsLikes extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log('news likes: ', state.newsLikes);
   return {
     newsLikes: state.newsLikes
   };

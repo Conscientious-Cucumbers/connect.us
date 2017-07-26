@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { connectSocket } from './socketActions';
+import { getNotifications } from './notificationActions';
 
 const setActiveProfile = (userInfo) => {
     return {
@@ -8,7 +10,6 @@ const setActiveProfile = (userInfo) => {
 };
 
 const setCurrentUser = (user) => {
-  console.log('user: ', user);
   return {
     type: 'SET_CURRENT_USER',
     payload: user
@@ -33,10 +34,9 @@ const isSignUpRequired = (user) => (dispatch, getState) => {
   }
 };
 
-const updateUserInfo = (username) => (dispatch, getState) => {
-  axios.post('/user/info', Object.assign(getState().user, {username: username}))
+const updateUserInfo = (info) => (dispatch, getState) => {
+  axios.post('/user/info', info)
   .then(() => {
-    console.log('successfully updated');
     dispatch(confirmFinishSignup());
     dispatch(getCurrentUser());
   })
@@ -49,12 +49,17 @@ const checkIfUserExists = (username) => (dispatch, getState) => {
   return axios.get(`/user/${username}/info`)
   .then((result) => {
     if (!Object.keys(result.data).length) {
-      dispatch(setCurrentUser(Object.assign(getState().user, {username: username})));
-      dispatch(updateUserInfo(username));
+      const newInfo = Object.assign(getState().user, {username: username});
+      dispatch(setCurrentUser(newInfo));
+      dispatch(updateUserInfo(newInfo));
     } else {
       alert('Username exists!');
     }
   })
+};
+
+export const updateSettings = (info) => (dispatch, getState) => {
+  dispatch(updateUserInfo(Object.assign(getState().user, info)));
 };
 
 export const finishSignup = (formData) => (dispatch, getState) => {
@@ -64,7 +69,7 @@ export const finishSignup = (formData) => (dispatch, getState) => {
 export const getActiveProfile = (username) => (dispatch, getState) => {
   return axios.get(`/user/${username}/info`)
   .then((result) => {
-    return dispatch(setActiveProfile(result.data));
+    dispatch(setActiveProfile(result.data));
   })
   .catch((error) => {
     console.error('Error fetching active profile: ', error);
@@ -74,6 +79,8 @@ export const getActiveProfile = (username) => (dispatch, getState) => {
 export const getCurrentUser = () => (dispatch, getState) => {
   return axios.get(`/user/info`)
   .then((result) => {
+    dispatch(connectSocket(result.data.id));
+    dispatch(getNotifications());
     dispatch(isSignUpRequired(result.data));
     return dispatch(setCurrentUser(result.data));
   })

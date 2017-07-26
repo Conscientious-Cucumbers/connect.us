@@ -33,11 +33,11 @@ router.route('/:username/followers')
 
 ///////////  POST  ////////////
 
-router.route('/status/like')
+router.route('/status/togglelike')
   .post(Queries.toggleStatusLiked);
 
 
-router.route('/news/like')
+router.route('/news/togglelike')
   .post(Queries.toggleNewsLiked);
 
 
@@ -49,8 +49,8 @@ router.route('/info')
   .post(ProfileController.updateInfo);
 
 
-router.route('/follow')
-  .post(Queries.follow);
+router.route('/togglefollow')
+  .post(Queries.toggleFollow);
 
 
 

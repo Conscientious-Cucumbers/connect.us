@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { socketNotify } from './socketActions';
 
 
 
@@ -12,7 +13,7 @@ const setFollowing = (following) => {
 export const getFollowing = (username) => (dispatch, getState) => {
   axios.get(`/user/${username}/follows`)
   .then((result) => {
-    console.log('********** get following: ', result.data);
+    // console.log('********** get following: ', result.data);
     dispatch(setFollowing(result.data));
   })
   .catch((err) => {
@@ -21,7 +22,16 @@ export const getFollowing = (username) => (dispatch, getState) => {
   });
 };
 
+const isFollowing = (followers, state) => {
+  const isFollowed = followers.reduce((wasFound, follower) => {
+    return wasFound || follower.username === state.user.username
+  }, false);
 
+  return {
+    type: 'IS_FOLLOWED',
+    payload: isFollowed
+  };
+};
 
 
 const setFollowers = (followers) => {
@@ -34,7 +44,8 @@ const setFollowers = (followers) => {
 export const getFollowers = (username) => (dispatch, getState) => {
   axios.get(`/user/${username}/followers`)
   .then((result) => {
-    console.log('********** get followers: ', result.data);
+    dispatch(isFollowing(result.data, getState()));
+    // console.log('********** get followers: ', result.data);
     dispatch(setFollowers(result.data));
   })
   .catch((err) => {
@@ -44,6 +55,16 @@ export const getFollowers = (username) => (dispatch, getState) => {
 };
 
 
-
+export const toggleFollow = (id) => (dispatch, getState) => {
+  // dispatch a send notification action
+  dispatch(socketNotify(getState().user.id, id));
+  axios.post('/user/togglefollow', { id })
+  .catch((err) => {
+    console.log('Error toggling follow: ', err);
+  })
+  .then(() => {
+    return dispatch(getFollowers(getState().activeProfile.username));
+  });
+};
 
 
