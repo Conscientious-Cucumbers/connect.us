@@ -1,5 +1,4 @@
 import React from 'react';
-import { Panel, Row, Col, Modal, Button } from 'react-bootstrap';
 import LikeButton from '../components/LikeButton.jsx';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -42,11 +41,12 @@ class NewsItem extends React.Component {
   itemPreview () {
     return (
       <GridTile
+          onTouchTap={() => this.toggleModal(true)}
           key={this.props.newsItem.thumbnail}
           title={this.props.newsItem.title}
           actionIcon={
             <span onClick={this.toggleLike.bind(this)}>
-            <LikeButton isLiked={this.state.isLiked} />
+              <LikeButton isLiked={this.state.isLiked} />
             </span>
           }
           actionPosition="left"

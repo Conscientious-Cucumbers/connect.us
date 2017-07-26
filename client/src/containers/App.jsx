@@ -34,6 +34,7 @@ class App extends React.Component {
 
   componentDidMount () {
     this.props.getCurrentUser();
+    this.props.getNotifications();
   }
 
   submitSignUp(e) {
@@ -107,6 +108,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     getCurrentUser: actions.getCurrentUser,
+    getNotifications: actions.getNotifications,
     finishSignup: actions.finishSignup
   }, dispatch);
 };

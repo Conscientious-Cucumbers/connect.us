@@ -11,6 +11,7 @@ import { Navbar,
 import { connect } from 'react-redux';
 import { clearNotifications } from '../actions/notificationActions';
 import { bindActionCreators } from 'redux';
+import Badge from 'material-ui/Badge';
 
 class NavBar extends React.Component {
 
@@ -25,6 +26,18 @@ class NavBar extends React.Component {
     this.setState({
       searchInput: e.target.value
     });
+  }
+
+  notifications () {
+    return (
+      <Badge
+        className="notifications-badge"
+        badgeStyle={{top: -9, right: -4, fontSize: 10, width: 18, height: 18}}
+        badgeContent={10}
+        secondary>
+        <i onClick={this.props.clearNotifications} className="fa fa-globe" aria-hidden="true"></i>
+      </Badge>
+    )
   }
 
   render () {
@@ -58,7 +71,7 @@ class NavBar extends React.Component {
             <i className="fa fa-user" aria-hidden="true"></i>
             </NavItem>
             <NavDropdown eventKey={3} 
-              title={<i onClick={this.props.clearNotifications} className="fa fa-globe" aria-hidden="true"></i>} 
+              title={this.notifications()} 
               id="notifications-nav-dropdown" 
               noCaret>
               <MenuItem eventKey={3.1}>This</MenuItem>
