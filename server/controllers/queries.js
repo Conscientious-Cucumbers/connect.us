@@ -103,14 +103,16 @@ module.exports.toggleFollow = (req, res) => {
 
 module.exports.clearNotifications = (req, res) => {
   models.Notifications.where({id_notifier: req.user.id}).fetchAll()
-    .then(result => {
-      if (!result){
-        throw result;
+    .then(results => {
+      if (!results){
+        throw results;
       } else {
-          result.save({is_received: true}, {method: 'update'});  //???
+        Promise.map(results.models, (eachResult) => {
+            return eachResult.save({is_received: true}, {method: 'update'});  //???
+          })
+          .then(() => res.sendStatus(201).send('Notifications Cleared!'))
       }
     })
-    .then(() => res.sendStatus(201).send('Notifications Cleared!'))
     .error(err => {
       res.status(500).send(err);
     })
@@ -236,7 +238,7 @@ module.exports.getFollowers = (req, res) => {
 
 module.exports.getNotifications = (req, res) => {
   var allNotifiers = [];
-  return models.Notifications.where({id_notifier: req.user.id, is_received: false}).fetchAll
+  return models.Notifications.where({id_notifier: req.user.id, is_received: false}).fetchAll()
   .then(notifications => {
     if(!notifications){
       throw notifications;
@@ -255,7 +257,7 @@ module.exports.getNotifications = (req, res) => {
     res.status(500).send('Error: ', err);
   })
   .catch(() => {
-    res.send([]);    // Do I need in it???
+    res.send([]);    // Do I need in this???
   });
 };
 
