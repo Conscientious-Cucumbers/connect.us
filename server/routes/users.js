@@ -31,6 +31,9 @@ router.route('/:username/follows')
 router.route('/:username/followers')
   .get(Queries.getFollowers);
 
+router.route('/notifications')
+  .get(Queries.getNotifications);
+
 ///////////  POST  ////////////
 
 router.route('/status/togglelike')
@@ -52,6 +55,8 @@ router.route('/info')
 router.route('/togglefollow')
   .post(Queries.toggleFollow);
 
+router.route('/notifications/clear')
+  .post(Queries.clearNotifications);
 
 
 module.exports = router;
