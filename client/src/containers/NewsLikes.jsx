@@ -1,8 +1,8 @@
 import React from 'react';
-import { PanelGroup } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import Loading from '../components/Loading.jsx';
 import NewsItem from './NewsItem.jsx';
+import { GridList } from 'material-ui/GridList';
 
 class NewsLikes extends React.Component {
 
@@ -15,17 +15,23 @@ class NewsLikes extends React.Component {
 
   render () {
     return (
-      <PanelGroup>
-        {
-          this.props.newsLikes 
-          ?
-          this.props.newsLikes.map((item, index) => {
-            return <NewsItem isNewsLike={this.state.isNewsLike} key={index} newsItem={item}/>;
-          }) 
-          :
-          <Loading />
-        }
-      </PanelGroup>
+      <div className="news-feed-container">
+        <GridList
+        cols={1}
+        padding={10}
+        className="news-feed-list"
+        >
+          {
+            this.props.newsLikes 
+            ?
+            this.props.newsLikes.map((item, index) => {
+              return <NewsItem isNewsLike={this.state.isNewsLike} key={index} newsItem={item}/>;
+            }) 
+            :
+            <Loading />
+          }
+        </GridList>
+      </div>
     );
   }
 }
