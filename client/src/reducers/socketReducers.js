@@ -8,5 +8,6 @@ export const getNotification = (state = null, action) => {
       break;
     default:
       return state;
+      break;
   }
 };

@@ -6,7 +6,7 @@ import {
 import NavBar from './NavBar.jsx';
 import Home from '../components/Home.jsx';
 import Profile from './Profile.jsx';
-import Settings from '../components/Settings.jsx';
+import Settings from './Settings.jsx';
 import About from '../components/About.jsx';
 import { Grid, Row, Col, Modal, Button, Form } from 'react-bootstrap';
 import FieldGroup from '../components/FieldGroup.jsx';
