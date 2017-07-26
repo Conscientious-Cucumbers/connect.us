@@ -35,14 +35,16 @@ class Setting extends React.Component {
   render () {
     return (
       <div>
-        <FieldGroup 
-                id={this.props.field}
-                type="text"
-                label={"Update your " + this.props.field}
-                name={this.props.field.split(' ')[0]}
-                placeholder={'New ' + this.props.field}
-                onChange={(e) => this.handleFormChange(e.target.name, e.target.value)}/>
-          <Button type="submit" onClick={this.postCurrentUserPath}>Update</Button>
+        <form onSubmit={this.postCurrentUserPath}>
+          <FieldGroup 
+                  id={this.props.field}
+                  type="text"
+                  label={"Update your " + this.props.field}
+                  name={this.props.field.split(' ')[0]}
+                  placeholder={'New ' + this.props.field}
+                  onChange={(e) => this.handleFormChange(e.target.name, e.target.value)}/>
+          <Button type="submit">Update</Button>
+        </form>
       </div>
     );
   }

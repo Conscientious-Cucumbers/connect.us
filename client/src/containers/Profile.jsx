@@ -45,8 +45,6 @@ class Profile extends React.Component {
   }
 
   handleTabChange (value) {
-    console.log('current index: ', this.state.slideIndex);
-    console.log('changing to value: ', value);
     this.setState({
       slideIndex: value
     });
@@ -133,7 +131,9 @@ class Profile extends React.Component {
         <div>
           <Header username={this.props.username} />
           <br />
-          {this.webView()}
+          <div>
+            {this.webView()}
+          </div>
         </div>
       );
     }

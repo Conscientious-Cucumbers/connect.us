@@ -38,7 +38,7 @@ const updateUserInfo = (info) => (dispatch, getState) => {
   axios.post('/user/info', info)
   .then(() => {
     dispatch(confirmFinishSignup());
-    dispatch(getCurrentUser());
+    // dispatch(getCurrentUser());
   })
   .catch(() => {
     console.log('error updating user info');
@@ -53,13 +53,17 @@ const checkIfUserExists = (username) => (dispatch, getState) => {
       dispatch(setCurrentUser(newInfo));
       dispatch(updateUserInfo(newInfo));
     } else {
-      alert('Username exists!');
+      alert('Username already exists!');
     }
   })
 };
 
 export const updateSettings = (info) => (dispatch, getState) => {
-  dispatch(updateUserInfo(Object.assign(getState().user, info)));
+  if (info.username) {
+    dispatch(checkIfUserExists(info.username));
+  } else {
+    dispatch(updateUserInfo(Object.assign(getState().user, info)));
+  }
 };
 
 export const finishSignup = (formData) => (dispatch, getState) => {
@@ -80,7 +84,6 @@ export const getCurrentUser = () => (dispatch, getState) => {
   return axios.get(`/user/info`)
   .then((result) => {
     dispatch(connectSocket(result.data.id));
-    dispatch(getNotifications());
     dispatch(isSignUpRequired(result.data));
     return dispatch(setCurrentUser(result.data));
   })
