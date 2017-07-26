@@ -244,9 +244,9 @@ module.exports.getNotifications = (req, res) => {
       throw notifications;
     } else {
       Promise.map(notifications.models, (eachPerson) => {
-          return models.Profile.where({id: eachPerson.attributes.id_follower}).fetch()
+          return models.Profile.where({id: eachPerson.get('id_follower')}).fetch()
             .then((result) => {
-              result.attributes.notificationType = 'FOLLOW_NOTIFICATION';   //Can I ???
+              result.set('notificationType', 'FOLLOW_NOTIFICATION');   //Can I ???
               allNotifiers.push(result.attributes);
             });
         })
