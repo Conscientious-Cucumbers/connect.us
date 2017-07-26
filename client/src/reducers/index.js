@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux';
 import { user, activeProfile, signupOpen } from './userReducers';
 import { statusFeed, statusLikes } from './statusReducers';
-import { newsFeed, newsLikes } from './newsReducer';
+import { newsFeed, newsLikes } from './newsReducers';
 import { following, followers, activeFollowed } from './followReducers';  // DID add name and add it in allReducers
 import { getNotification } from './socketReducers';
 

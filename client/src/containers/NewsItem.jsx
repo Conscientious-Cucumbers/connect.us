@@ -4,6 +4,8 @@ import LikeButton from '../components/LikeButton.jsx';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import actions from '../actions';
+import { GridTile } from 'material-ui/GridList';
+
 
 class NewsItem extends React.Component {
   constructor (props) {
@@ -39,24 +41,20 @@ class NewsItem extends React.Component {
 
   itemPreview () {
     return (
-      <div className="news-item">
-        <div className="news-item-media">
-          <img src={this.props.newsItem.thumbnail} onClick={() => this.toggleModal(true)}/>
-        </div>
-        <div className="news-item-info">
-          <div className="news-item-title" onClick={() => this.toggleModal(true)}>
-            {this.props.newsItem.title.length < 80 ? this.props.newsItem.title : this.props.newsItem.title.split('').slice(0, 80).join('') + '...'}
-          </div>
-          <div className="news-item-description">
-            {this.props.newsItem.text 
-              && (this.props.newsItem.text.length < 100 ? this.props.newsItem.text : this.props.newsItem.text.split('').slice(0, 100).join('') + '...') 
-              || 'No description available'}
-          </div>
-          <div className="news-item-source">
-            Source: {this.props.newsItem.source}
-          </div>
-        </div>
-      </div>
+      <GridTile
+          key={this.props.newsItem.thumbnail}
+          title={this.props.newsItem.title}
+          actionIcon={
+            <span onClick={this.toggleLike.bind(this)}>
+            <LikeButton isLiked={this.state.isLiked} />
+            </span>
+          }
+          actionPosition="left"
+          titlePosition="top"
+          titleBackground="linear-gradient(to bottom, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
+        >
+          <img className="news-item-media" src={this.props.newsItem.thumbnail} />
+      </GridTile>
     );
   }
 
@@ -96,12 +94,7 @@ class NewsItem extends React.Component {
   }
 
   render () {
-    return (
-      <Panel footer={this.panelFooter()}>
-        {this.itemPreview()}
-        {this.itemModal()}
-      </Panel>
-    );
+    return this.itemPreview();
   }
 }
 

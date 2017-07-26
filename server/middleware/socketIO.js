@@ -15,10 +15,11 @@ module.exports = (server) => {
   socket.on('connection', socket => {
     // let id = socket.handshake.query.id;
     var id = null;
-    console.log('what happens on connect: ', socket.handshake);
 
     socket.on('action', (action) => {
       const payload = action.payload;
+
+      console.log('***** online users: ', online_users);
 
       if (action.type === 'socket/connect') {
         var is_received = false;
@@ -30,7 +31,7 @@ module.exports = (server) => {
       if(action.type === 'socket/notify') {
         if (online_users[payload.followed_id]) {
           is_received = true;
-          online_users[payload.followed_id].forEach(socket => { //????
+          online_users[payload.followed_id].forEach(socket => {
             socket.emit('action', {
               type: 'FOLLOW_NOTIFICATION',
               payload: payload.follower_id
@@ -53,7 +54,9 @@ module.exports = (server) => {
 
 
     socket.on('disconnect', socket => {
-      !online_users[id] && online_users[id].length <= 1 ? delete online_users[id] : online_users[id].splice(online_users[id].indexOf(socket), 1);
+      if (online_users[id]) {
+        online_users[id].length <= 1 ? delete online_users[id] : online_users[id].splice(online_users[id].indexOf(socket), 1);
+      }
     });
 
   });

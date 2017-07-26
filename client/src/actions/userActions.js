@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { connectSocket } from './socketActions';
+import { getNotifications } from './notificationActions';
 
 const setActiveProfile = (userInfo) => {
     return {
@@ -79,6 +80,7 @@ export const getCurrentUser = () => (dispatch, getState) => {
   return axios.get(`/user/info`)
   .then((result) => {
     dispatch(connectSocket(result.data.id));
+    dispatch(getNotifications());
     dispatch(isSignUpRequired(result.data));
     return dispatch(setCurrentUser(result.data));
   })
