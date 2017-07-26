@@ -102,19 +102,19 @@ module.exports.toggleFollow = (req, res) => {
 };
 
 module.exports.clearNotifications = (req, res) => {
-  models.Notifications.where({id_notifier: req.user.id}).fetchAll()
+  models.Notifications.where({id_notified: req.user.id}).fetchAll()
     .then(results => {
       if (!results){
         throw results;
       } else {
         Promise.map(results.models, (eachResult) => {
-            return eachResult.save({is_received: true}, {method: 'update'});  //???
+            return eachResult.save({is_received: true}, {method: 'update'});
           })
-          .then(() => res.sendStatus(201).send('Notifications Cleared!'))
       }
     })
+    .then(() => res.status(201).send('Notifications Cleared!'))
     .error(err => {
-      res.status(500).send(err);
+      res.sendstatus(500);
     })
     .catch(() => {
       res.sendStatus(404);
@@ -234,23 +234,24 @@ module.exports.getFollowers = (req, res) => {
     })
 };
 
-//sort??
 
 module.exports.getNotifications = (req, res) => {
   var allNotifiers = [];
-  return models.Notifications.where({id_notifier: req.user.id, is_received: false}).fetchAll()
+  return models.Notifications.where({id_notified: req.user.id, is_received: false}).fetchAll()
   .then(notifications => {
     if(!notifications){
       throw notifications;
     } else {
       Promise.map(notifications.models, (eachPerson) => {
-          return models.Profile.where({id: eachPerson.get('id_follower')}).fetch()
+          return models.Profile.where({id: eachPerson.get('id_notifier')}).fetch()
             .then((result) => {
-              result.set('notificationType', 'FOLLOW_NOTIFICATION');   //Can I ???
+              result.set('notification_type', 'FOLLOW_NOTIFICATION');
               allNotifiers.push(result.attributes);
             });
         })
-        .then(() => res.status(200).send(allNotifiers));
+        .then(() => {
+          res.status(200).send(allNotifiers)
+        });
     }
   })
   .error(err => {
