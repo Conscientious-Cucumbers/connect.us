@@ -80,6 +80,7 @@ module.exports.createStatus = (req, res) => {
   .catch(err => {
     res.status(500).send(err);
   });
+
 };
 
 module.exports.toggleFollow = (req, res) => {
@@ -265,6 +266,6 @@ module.exports.getNotifications = (req, res) => {
     res.status(500).send('Error: ', err);
   })
   .catch(() => {
-    res.send([]);    // Do I need in this???
+    res.send([]);
   });
 };
