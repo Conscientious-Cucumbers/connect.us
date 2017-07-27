@@ -26,15 +26,20 @@ module.exports = (server) => {
         !online_users[id] ? online_users[id] = [socket] : online_users[id].push(socket);
       };
 
-
       if(action.type === 'socket/notify') {
         if (online_users[payload.followed_id]) {
-          is_received = true;
+
           online_users[payload.followed_id].forEach(socket => {
-            socket.emit('action', {
-              type: 'FOLLOW_NOTIFICATION',
-              payload: payload.follower_id
-            });
+            models.Profile.where({id: payload.follower_id}).fetch()
+              .then((result) => {
+
+                socket.emit('action', {
+                  notification_type: 'FOLLOW_NOTIFICATION',
+                  is_received: false,           
+                  payload: result
+                });
+                
+              });
           });
         }
 

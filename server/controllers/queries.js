@@ -70,7 +70,9 @@ module.exports.toggleStatusLiked = (req, res) => {
 
 module.exports.createStatus = (req, res) => {
   models.Status.forge({ 
+      title: req.body.title, 
       text: req.body.text, 
+      image: req.body.image, 
       id_user: req.user.id
     })
     .save()
@@ -237,7 +239,7 @@ module.exports.getFollowers = (req, res) => {
 
 module.exports.getNotifications = (req, res) => {
   var allNotifiers = [];
-  return models.Notifications.where({id_notified: req.user.id, is_received: false}).fetchAll()
+  return models.Notifications.where({id_notified: req.user.id}).fetchAll()
   .then(notifications => {
     if(!notifications){
       throw notifications;
@@ -246,6 +248,7 @@ module.exports.getNotifications = (req, res) => {
           return models.Profile.where({id: eachPerson.get('id_notifier')}).fetch()
             .then((result) => {
               result.set('notification_type', 'FOLLOW_NOTIFICATION');
+              result.set('is_received', eachPerson.get('is_received'));
               allNotifiers.push(result.attributes);
             });
         })
