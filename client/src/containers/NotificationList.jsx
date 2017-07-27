@@ -72,46 +72,6 @@ class NotificationList extends React.Component {
   }
 }
 
-// const NotificationList = (props) => {
-
-//   const notifications = () => {
-//     if (props.UnseenNotifications && props.UnseenNotifications.length) {
-//       return (
-//         <Badge
-//           className="notifications-badge"
-//           badgeStyle={{top: -9, right: -4, fontSize: 10, width: 18, height: 18}}
-//           badgeContent={props.UnseenNotifications.length}
-//           secondary>
-//           <i onClick={props.clearNotifications} className="fa fa-globe" aria-hidden="true"></i>
-//         </Badge>
-//       );
-//     } else {
-//       return (
-//         <i onClick={props.clearNotifications} className="fa fa-globe" aria-hidden="true"></i>
-//       );
-//     }
-//   };
-
-//   return (
-//     <NavDropdown eventKey={3} 
-//       title={notifications()} 
-//       id="notifications-nav-dropdown" 
-//       noCaret>
-//       {
-//         props.UnseenNotifications && props.UnseenNotifications.map((notification, index) => {
-//           return <NotificationItem key={(3 + (index * 2 + 1) ) / 10} notification={notification}/>;
-//         })
-//       }
-//       <MenuItem divider />
-//       {
-//         props.SeenNotifications && props.SeenNotifications.slice(0, 5).map((notification, index) => {
-//           return <NotificationItem key={(3 + (index + 2) * 2) / 10} notification={notification}/>;
-//         })
-//       }
-//     </NavDropdown>
-//   );
-// };
-
 const mapStateToProps = (state) => {
   return {
     SeenNotifications: state.SeenNotifications,

@@ -61,6 +61,10 @@ class NewsItem extends React.Component {
     );
   }
 
+  getNewsPage (e) {
+    window.location = this.props.newsItem.url;
+  }
+
   itemModal () {
     const actions = [
       <span className="modal-like" onClick={this.toggleLike.bind(this)}>
@@ -76,10 +80,11 @@ class NewsItem extends React.Component {
 
     return (
       <Dialog
-        title={<a href={this.props.newsItem.url} target="_blank"> {this.props.newsItem.title} </a>}
+        title={this.props.newsItem.title}
         actions={actions}
         modal={false}
         open={this.state.isOpen}
+        autoScrollBodyContent
         onRequestClose={() => this.toggleModal(false)}
       >
         <div>
