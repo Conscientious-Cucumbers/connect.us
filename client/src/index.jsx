@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
+import logger from 'redux-logger';
 import promise from 'redux-promise'
 import {Provider} from 'react-redux';
 import App from './containers/App.jsx';
@@ -20,15 +21,15 @@ injectTapEventPlugin();
 
 const store = createStore(
   allReducers,
-  applyMiddleware(thunk, promise, socketIoMiddleware)
+  applyMiddleware(thunk, logger, promise, socketIoMiddleware)
 );
 
-store.subscribe(() => {
-  if (store.getState().needsRefreshNotification) {
-    store.dispatch(resetNotificationRefresh());
-    store.dispatch(getNotifications());
-  }
-});
+// store.subscribe(() => {
+//   if (store.getState().needsRefreshNotification) {
+//     store.dispatch(resetNotificationRefresh());
+//     store.dispatch(getNotifications());
+//   }
+// });
 
 ReactDOM.render(
   <Provider store={store}>
