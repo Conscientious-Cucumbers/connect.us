@@ -6,6 +6,7 @@ import { FormGroup,
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import actions from '../actions';
+import ReactFilestack from 'filestack-react';
 
 const header = () => {
   return (
@@ -35,7 +36,20 @@ class StatusTextArea extends React.Component {
     });
   }
 
+  uploadPicture (file) {
+    console.log(file);
+  }
+
   render () {
+
+    const fileStackOpts = {
+      accept: 'image/*',
+      maxFiles: 1,
+      storeTo: {
+        location: 's3'
+      }
+    };
+
     return (
       <div>
         <Panel
@@ -50,7 +64,13 @@ class StatusTextArea extends React.Component {
                 componentClass="textarea" 
                 placeholder="What's on your mind?" />
             </FormGroup>
-
+            <ReactFilestack 
+              apikey={'AnjmM5YhHQ7uoOi019Ncrz'}
+              buttonText="Upload"
+              buttonClass="btn btn-primary"
+              options={fileStackOpts}
+              onSuccess={this.uploadPicture}
+            />
             <Button type="submit" 
               bsStyle="primary"
               className="right">

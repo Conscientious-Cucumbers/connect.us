@@ -18,7 +18,7 @@ module.exports = (server) => {
     socket.on('action', (action) => {
       const payload = action.payload;
 
-      console.log('***** online users: ', online_users);
+      console.log('***** online users: ', Object.keys(online_users));
 
       if (action.type === 'socket/connect') {
         var is_received = false;
