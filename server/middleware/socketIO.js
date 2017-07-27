@@ -28,18 +28,16 @@ module.exports = (server) => {
 
       if(action.type === 'socket/notify') {
         if (online_users[payload.followed_id]) {
-
-          online_users[payload.followed_id].forEach(socket => {
-            models.Profile.where({id: payload.follower_id}).fetch()
-              .then((result) => {
-
-                socket.emit('action', {
-                  notification_type: 'FOLLOW_NOTIFICATION',
-                  is_received: false,           
-                  payload: result
-                });
-                
+          models.Profile.where({id: payload.follower_id}).fetch()
+          .then((result) => {
+            result.set('is_received', false);
+            result.set('type', 'FOLLOW_NOTIFICATION');
+            online_users[payload.followed_id].forEach(socket => {
+              socket.emit('action', {
+                type: 'FOLLOW_NOTIFICATION',
+                payload: result.attributes
               });
+            });
           });
         }
 

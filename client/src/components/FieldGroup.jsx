@@ -4,7 +4,7 @@ import { FormGroup,
         FormControl, 
         HelpBlock } from 'react-bootstrap';
 
-const FieldGroup = ({ id, label, help, placeholder, required, name, onChange, width}) => {
+const FieldGroup = ({ id, label, help, placeholder, required, name, onChange, width, value}) => {
   return (
     <FormGroup controlId={id}>
       <ControlLabel>{label}</ControlLabel>
@@ -13,6 +13,7 @@ const FieldGroup = ({ id, label, help, placeholder, required, name, onChange, wi
         placeholder={placeholder} 
         required={required} 
         onChange={onChange}
+        value={value}
         name={name}/>
       {help && <HelpBlock>{help}</HelpBlock>}
     </FormGroup>
