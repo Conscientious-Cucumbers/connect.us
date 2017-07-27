@@ -12,3 +12,10 @@ export const socketNotify = (follower_id, followed_id) => {
     payload: { follower_id, followed_id }
   }
 };
+
+export const resetNotificationRefresh = () => {
+  console.log('resetting...');
+  return {
+    type: 'RESET_NOTIFICATION_REFRESH'
+  };
+}

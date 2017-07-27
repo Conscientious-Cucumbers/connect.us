@@ -3,8 +3,8 @@ import { user, activeProfile, signupOpen } from './userReducers';
 import { statusFeed, statusLikes } from './statusReducers';
 import { newsFeed, newsLikes } from './newsReducers';
 import { following, followers, activeFollowed } from './followReducers';  // DID add name and add it in allReducers
-import { getNotification } from './socketReducers';
-import { Notifications } from './notificationReducers';
+import { needsRefreshNotification } from './socketReducers';
+import { SeenNotifications, UnseenNotifications } from './notificationReducers';
 
 const allReducers = combineReducers({
     user: user,
@@ -17,8 +17,8 @@ const allReducers = combineReducers({
     signupOpen: signupOpen,
     following: following,
     followers: followers,
-    getNotification,
-    Notifications
+    needsRefreshNotification,
+    SeenNotifications, UnseenNotifications
 });
 
 export default allReducers;

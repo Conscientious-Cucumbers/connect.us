@@ -1,8 +1,15 @@
 import axios from 'axios';
 
-const setNotifications = (notifications) => {
+const setSeenNotifications = (notifications) => {
   return {
-    type: 'SET_NOTIFICATIONS',
+    type: 'SET_SEEN_NOTIFICATIONS',
+    payload: notifications
+  };
+};
+
+const setUnseenNotifications = (notifications) => {
+  return {
+    type: 'SET_UNSEEN_NOTIFICATIONS',
     payload: notifications
   };
 };
@@ -10,7 +17,8 @@ const setNotifications = (notifications) => {
 export const getNotifications = () => (dispatch, getState) => {
   axios.get('/user/notifications')
   .then((result) => {
-    dispatch(setNotifications(result.data));
+    dispatch(setSeenNotifications(result.data.filter(notification => notification.is_received)));
+    dispatch(setUnseenNotifications(result.data.filter(notification => !notification.is_received)));
   })
   .catch((err) => {
     console.log('Error getting notifications:');
