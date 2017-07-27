@@ -38,7 +38,6 @@ class App extends React.Component {
   }
 
   submitSignUp(e) {
-    e.preventDefault();
     this.props.finishSignup(this.state.formValues);
   }
 

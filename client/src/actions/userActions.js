@@ -37,8 +37,9 @@ const isSignUpRequired = (user) => (dispatch, getState) => {
 const updateUserInfo = (info) => (dispatch, getState) => {
   axios.post('/user/info', info)
   .then(() => {
+    console.log('user: ', getState().user);
+    console.log(info);
     dispatch(confirmFinishSignup());
-    // dispatch(getCurrentUser());
   })
   .catch(() => {
     console.log('error updating user info');
