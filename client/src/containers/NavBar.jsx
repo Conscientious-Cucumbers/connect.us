@@ -29,24 +29,6 @@ class NavBar extends React.Component {
     });
   }
 
-  // notifications () {
-  //   if (this.props.UnseenNotifications && this.props.UnseenNotifications.length) {
-  //     return (
-  //       <Badge
-  //         className="notifications-badge"
-  //         badgeStyle={{top: -9, right: -4, fontSize: 10, width: 18, height: 18}}
-  //         badgeContent={this.props.UnseenNotifications.length}
-  //         secondary>
-  //         <i onClick={this.props.clearNotifications} className="fa fa-globe" aria-hidden="true"></i>
-  //       </Badge>
-  //     );
-  //   } else {
-  //     return (
-  //       <i onClick={this.props.clearNotifications} className="fa fa-globe" aria-hidden="true"></i>
-  //     );
-  //   }
-  // }
-
   render () {
     return (
       <Navbar fluid inverse fixedTop>
