@@ -109,9 +109,9 @@ module.exports.clearNotifications = (req, res) => {
       if (!results){
         throw results;
       } else {
-        Promise.map(results.models, (eachResult) => {
-            return eachResult.save({is_received: true}, {method: 'update'});
-          })
+        return Promise.map(results.models, (eachResult) => {
+          return eachResult.save({is_received: true}, {method: 'update'});
+        });
       }
     })
     .then(() => res.status(201).send('Notifications Cleared!'))

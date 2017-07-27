@@ -11,8 +11,6 @@ import io from 'socket.io-client';
 import allReducers from './reducers';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { getNotifications } from './actions/notificationActions';
-import { resetNotificationRefresh } from './actions/socketActions';
 
 let socket = io('http://localhost:3000');
 let socketIoMiddleware = createSocketIoMiddleware(socket, ['socket/']);
@@ -21,15 +19,8 @@ injectTapEventPlugin();
 
 const store = createStore(
   allReducers,
-  applyMiddleware(thunk, logger, promise, socketIoMiddleware)
+  applyMiddleware(thunk, promise, socketIoMiddleware)
 );
-
-// store.subscribe(() => {
-//   if (store.getState().needsRefreshNotification) {
-//     store.dispatch(resetNotificationRefresh());
-//     store.dispatch(getNotifications());
-//   }
-// });
 
 ReactDOM.render(
   <Provider store={store}>

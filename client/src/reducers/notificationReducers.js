@@ -11,17 +11,17 @@ export const SeenNotifications = (state = null, action) => {
   }
 };
 
-export const UnseenNotifications = (state, action) => {
+export const UnseenNotifications = (state = null, action) => {
   switch (action.type) {
     case 'SET_UNSEEN_NOTIFICATIONS':
       console.log('**** unseen notifications: ', action.payload);
       return action.payload;
       break;
-    case 'NEEDS_REFRESH_NOTIFICATION':
-      console.log('unseen notifications on emit: ', state);
-      return state;
+    case 'FOLLOW_NOTIFICATION':
+      console.log('**** unseen notifications on emit: ', [...state, action.payload]);
+      return [...state, action.payload];
       break;
     default:
-      return null;
+      return state;
   }
 };
