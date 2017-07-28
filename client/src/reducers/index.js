@@ -1,21 +1,22 @@
 import {combineReducers} from 'redux';
 import { user, activeProfile, signupOpen } from './userReducers';
 import { statusFeed, statusLikes } from './statusReducers';
-import { newsFeed, newsLikes } from './newsReducers';
+import { newsFeed, newsLikes, isFetching } from './newsReducers';
 import { following, followers, activeFollowed } from './followReducers';
 import { SeenNotifications, UnseenNotifications } from './notificationReducers';
 
 const allReducers = combineReducers({
-  user: user,
-  statusFeed: statusFeed,
-  statusLikes: statusLikes,
-  newsFeed: newsFeed,
-  activeProfile: activeProfile,
-  activeFollowed: activeFollowed,
-  newsLikes: newsLikes,
-  signupOpen: signupOpen,
-  following: following,
-  followers: followers,
+  user,
+  statusFeed,
+  statusLikes,
+  newsFeed,
+  activeProfile,
+  activeFollowed,
+  newsLikes,
+  signupOpen,
+  following,
+  followers,
+  isFetching,
   SeenNotifications, UnseenNotifications
 });
 

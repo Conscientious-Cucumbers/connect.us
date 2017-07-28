@@ -6,6 +6,10 @@ import actions from '../actions';
 import { GridTile } from 'material-ui/GridList';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
+import ExitToApp from 'material-ui/svg-icons/action/exit-to-app';
+import IconButton from 'material-ui/IconButton';
+import { LinkContainer } from 'react-router-bootstrap';
+import { blue300 } from 'material-ui/styles/colors';
 
 
 class NewsItem extends React.Component {
@@ -43,19 +47,26 @@ class NewsItem extends React.Component {
   itemPreview () {
     return (
       <GridTile
-          key={this.props.newsItem.thumbnail}
-          title={this.props.newsItem.title}
-          actionIcon={
-            <span onClick={this.toggleLike.bind(this)}>
-              <LikeButton isLiked={this.state.isLiked} />
+        key={this.props.newsItem.thumbnail}
+        title={this.props.newsItem.title}
+        actionIcon={
+          <span onClick={this.toggleLike.bind(this)}>
+            <LikeButton isLiked={this.state.isLiked} />
+          </span>
+        }
+        actionPosition="left"
+        titlePosition="top"
+        titleBackground="linear-gradient(to bottom, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
+      >
+        <div className="news-item-preview-body">
+          <div className="news-item-source">
+            <span>
+              Source: {this.props.newsItem.source}
             </span>
-          }
-          actionPosition="left"
-          titlePosition="top"
-          titleBackground="linear-gradient(to bottom, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
-        >
+          </div>
           <img onTouchTap={() => this.toggleModal(true)} className="news-item-media" src={this.props.newsItem.thumbnail} />
-          {this.itemModal()}
+        </div>
+        {this.itemModal()}
       </GridTile>
     );
   }
@@ -66,9 +77,10 @@ class NewsItem extends React.Component {
 
   itemModal () {
     const actions = [
-      <span className="modal-like" onClick={this.toggleLike.bind(this)}>
-        <LikeButton isLiked={this.state.isLiked} />
-      </span>,
+      <LikeButton
+        onTouchTap={this.toggleLike.bind(this)}
+        className="modal-like"
+        isLiked={this.state.isLiked} />,
       <FlatButton
         label="Close"
         primary={true}
@@ -90,14 +102,27 @@ class NewsItem extends React.Component {
         autoScrollBodyContent
         onRequestClose={() => this.toggleModal(false)}
       >
+        <br />
         <div>
           <img src={this.props.newsItem.media} width="100%"/>
         </div>
         <br />
         <div className="news-modal-description">
-          <b>Description:{' '}</b> 
+          <b>Description:{' '}</b>
           {this.props.newsItem.text || 'No description available'}
         </div>
+        <br />
+        <div>
+          <b>Source: </b>{this.props.newsItem.source}
+        </div>
+        <br />
+        <div>
+          <b>Visit original article:</b>
+          <IconButton target="_blank" href={this.props.newsItem.url}>
+            <ExitToApp color={blue300}/>
+          </IconButton>
+        </div>
+        <br />
       </Dialog>
     );
   }

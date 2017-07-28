@@ -1,6 +1,6 @@
-body { 
+body {
   background-color: #eee;
-  padding-top:80px; 
+  padding-top:80px;
 }
 
 h6 {
@@ -39,8 +39,8 @@ h6 {
   font-size: 20px;
 }
 
-::-webkit-scrollbar { 
-    display: none; 
+::-webkit-scrollbar {
+    display: none;
 }
 
 .follow-button-wrapper {
@@ -92,10 +92,23 @@ h6 {
   max-height: 80px;
 }
 
+.news-item-preview-body {
+  position: relative;
+}
+
 .news-item-source {
-  flex: 5 1 auto;
-  color: #aaa;
-  font-size: 9px
+  position: sticky !important;
+  text-align: right;
+  top: 150px !important;
+  left: 1% !important;
+  font-weight: bold;
+  color: white;
+  font-size: 14px;
+  margin-top: -40px;
+  padding-right: 5%;
+  padding-bottom: 10px;
+  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%,rgba(0,0,0,0.6) 70%,rgba(0,0,0,0) 100%);
+  border-radius: 1px;
 }
 
 .news-item-description {
@@ -130,11 +143,13 @@ h6 {
   height: 500px;
   display: block;
   margin: 0 auto;
-  
+
 }
 
 .modal-like {
   float: left !important;
+  padding: 0px !important;
+  margin: -5px !important;
 }
 
 .news-modal-description: {
@@ -197,4 +212,3 @@ h6 {
 .panel-footer {
   background-color: white;
 }
-

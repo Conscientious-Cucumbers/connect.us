@@ -7,11 +7,19 @@ import Favorite from 'material-ui/svg-icons/action/favorite';
 const LikeButton = (props) => {
   if (props.isLiked) {
     return (
-      <IconButton><Favorite color="red"/></IconButton>
+      <IconButton
+        onTouchTap={props.onTouchTap}
+        className={props.className}>
+        <Favorite color="red"/>
+      </IconButton>
     );
   } else {
     return (
-      <IconButton><FavoriteBorder color="red"/></IconButton>
+      <IconButton
+        onTouchTap={props.onTouchTap}
+        className={props.className}>
+        <FavoriteBorder color="red"/>
+      </IconButton>
     );
   }
 };
