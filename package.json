@@ -11,6 +11,7 @@
   "author": "Hack Reactor",
   "license": "MIT",
   "dependencies": {
+    "@material/theme": "^0.1.6",
     "axios": "^0.16.2",
     "babel-core": "^6.24.1",
     "bcrypt-nodejs": "^0.0.3",
@@ -29,6 +30,7 @@
     "grunt-pg": "https://github.com/watsoncj/grunt-pg.git",
     "knex": "^0.12.9",
     "logger": "^0.0.1",
+    "material-components-web": "^0.16.0",
     "material-ui": "^0.18.7",
     "morgan": "^1.8.1",
     "passport": "^0.3.2",
