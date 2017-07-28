@@ -18,7 +18,9 @@ class StatusTextArea extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      text: ''
+      text: '',
+      title: '',
+      image: ''
     };
   }
 
@@ -28,16 +30,32 @@ class StatusTextArea extends React.Component {
     });
   }
 
+  handleTitleChange(e) {
+    this.setState({
+      title: e.target.value
+    });
+  };
+
   submitStatus(e) {
     e.preventDefault();
-    this.props.postStatus(this.state.text);
+    this.props.postStatus({
+      title: this.state.title, 
+      text: this.state.text, 
+      image: this.state.image
+    });
     this.setState({
-      text: ''
+      text: '',
+      title: '',
+      image: ''
     });
   }
 
   uploadPicture (file) {
-    console.log(file);
+    
+    this.setState({
+      image: file.filesUploaded[0].url
+    });
+
   }
 
   render () {
@@ -58,18 +76,30 @@ class StatusTextArea extends React.Component {
           bsStyle="info">
           <form onSubmit={this.submitStatus.bind(this)}>
             <FormGroup controlId="formControlsTextarea">
-              <FormControl
+
+                <FormControl 
+                onChange={this.handleTitleChange.bind(this)}
+                value={this.state.title}
+                type="text"
+                placeholder="Title" />
+
+
+                <FormControl 
                 onChange={this.handleTextChange.bind(this)}
                 value={this.state.text}
-                componentClass="textarea"
-                placeholder="What's on your mind?" />
+                componentClass="textarea" 
+                placeholder="your news" />
+
+                <img alt={"image"} src={this.state.image} />
+
             </FormGroup>
-            <ReactFilestack
+
+            <ReactFilestack 
               apikey={'AnjmM5YhHQ7uoOi019Ncrz'}
               buttonText="Upload"
               buttonClass="btn btn-primary"
               options={fileStackOpts}
-              onSuccess={this.uploadPicture}
+              onSuccess={this.uploadPicture.bind(this)}
             />
             <Button type="submit"
               bsStyle="primary"
