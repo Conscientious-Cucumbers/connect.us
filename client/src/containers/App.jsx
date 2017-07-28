@@ -1,6 +1,6 @@
 import React from 'react';
 import browserHistory from 'react-router';
-import { 
+import {
   BrowserRouter as Router,
   Route, Switch } from 'react-router-dom';
 import NavBar from './NavBar.jsx';
@@ -52,7 +52,7 @@ class App extends React.Component {
         </Modal.Header>
         <Form id="signupNewUserForm" onSubmit={this.submitSignUp.bind(this)}>
           <Modal.Body>
-              <FieldGroup 
+              <FieldGroup
               id="username"
               type="text"
               label="Username"
@@ -62,7 +62,7 @@ class App extends React.Component {
               required/>
           </Modal.Body>
           <Modal.Footer>
-            <Button 
+            <Button
             bsStyle="primary"
             type="submit">
             Submit
@@ -87,7 +87,7 @@ class App extends React.Component {
               <Route path="/settings" component={() => <Settings />}/>
               <Route path="/about" component={() => <About />}/>
               <Route path="/:username" component={({match}) => {
-                  return <Profile username={match.params.username}/>;
+                return <Profile username={match.params.username}/>;
               }}/>
             </Switch>
           </div>

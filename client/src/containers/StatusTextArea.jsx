@@ -26,7 +26,7 @@ class StatusTextArea extends React.Component {
     this.setState({
       text: e.target.value
     });
-  };
+  }
 
   submitStatus(e) {
     e.preventDefault();
@@ -53,25 +53,25 @@ class StatusTextArea extends React.Component {
     return (
       <div>
         <Panel
-          header={header()} 
+          header={header()}
           className="status-post status-textarea"
           bsStyle="info">
           <form onSubmit={this.submitStatus.bind(this)}>
             <FormGroup controlId="formControlsTextarea">
-              <FormControl 
+              <FormControl
                 onChange={this.handleTextChange.bind(this)}
                 value={this.state.text}
-                componentClass="textarea" 
+                componentClass="textarea"
                 placeholder="What's on your mind?" />
             </FormGroup>
-            <ReactFilestack 
+            <ReactFilestack
               apikey={'AnjmM5YhHQ7uoOi019Ncrz'}
               buttonText="Upload"
               buttonClass="btn btn-primary"
               options={fileStackOpts}
               onSuccess={this.uploadPicture}
             />
-            <Button type="submit" 
+            <Button type="submit"
               bsStyle="primary"
               className="right">
               Post

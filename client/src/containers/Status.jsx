@@ -69,7 +69,7 @@ class Status extends React.Component {
       </div>
     );
   }
-};
+}
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({

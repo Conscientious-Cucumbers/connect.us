@@ -3,10 +3,10 @@ import { connectSocket } from './socketActions';
 import { getNotifications } from './notificationActions';
 
 const setActiveProfile = (userInfo) => {
-    return {
-      type: 'USER_PROFILE_LOADED',
-      payload: userInfo
-    };
+  return {
+    type: 'USER_PROFILE_LOADED',
+    payload: userInfo
+  };
 };
 
 const setCurrentUser = (user) => {
@@ -56,7 +56,7 @@ const checkIfUserExists = (username) => (dispatch, getState) => {
     } else {
       alert('Username already exists!');
     }
-  })
+  });
 };
 
 export const updateSettings = (info) => (dispatch, getState) => {
@@ -82,7 +82,7 @@ export const getActiveProfile = (username) => (dispatch, getState) => {
 };
 
 export const getCurrentUser = () => (dispatch, getState) => {
-  return axios.get(`/user/info`)
+  return axios.get('/user/info')
   .then((result) => {
     dispatch(connectSocket(result.data.id));
     dispatch(isSignUpRequired(result.data));

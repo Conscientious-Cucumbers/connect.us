@@ -14,8 +14,8 @@ class Setting extends React.Component {
 
     this.state = {
       formValues: {}
-    }
-    this.postCurrentUserPath = this.postCurrentUserPath.bind(this)
+    };
+    this.postCurrentUserPath = this.postCurrentUserPath.bind(this);
   }
 
   handleFormChange(key, value) {
@@ -36,10 +36,10 @@ class Setting extends React.Component {
     return (
       <div>
         <form onSubmit={this.postCurrentUserPath}>
-          <FieldGroup 
+          <FieldGroup
                   id={this.props.field}
                   type="text"
-                  label={"Update your " + this.props.field}
+                  label={'Update your ' + this.props.field}
                   name={this.props.field.split(' ')[0]}
                   placeholder={'New ' + this.props.field}
                   onChange={(e) => this.handleFormChange(e.target.name, e.target.value)}/>
@@ -65,4 +65,3 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Setting);
-

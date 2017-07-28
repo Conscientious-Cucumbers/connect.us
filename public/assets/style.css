@@ -181,6 +181,15 @@ h6 {
   text-align: center;
 }
 
+.bottom-loading {
+  font-size: 25px !important;
+  position: relative; /* or absolute */
+  top: 50%;
+  text-align: center;
+  height: 0px;
+  padding: 0px !important;
+}
+
 .panel-body {
   padding-bottom: 0px;
 }
