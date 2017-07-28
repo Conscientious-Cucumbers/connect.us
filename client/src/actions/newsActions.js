@@ -7,6 +7,25 @@ const setNewsFeed = (newsFeed) => {
   };
 };
 
+const setNextNewsPage = (nextNews) => {
+  return {
+    type: 'SET_NEXT_NEWS_PAGE',
+    payload: nextNews
+  };
+};
+
+const finishNextPageFetch = () => {
+  return {
+    type: 'FINISH_PAGE_FETCH'
+  };
+};
+
+const startNextPageFetch = () => {
+  return {
+    type: 'START_PAGE_FETCH'
+  };
+};
+
 export const getNewsFeed = () => (dispatch, getState) => {
   axios.get('/api/news')
   .then((result) => {
@@ -49,4 +68,16 @@ export const postNewsLike = (newsLike) => (dispatch, getState) => {
     console.error('Error posting news likes');
     console.log(err);
   });
+};
+
+export const getNextNewsPage = (pageNum) => (dispatch, getState) => {
+  if (getState().isFetching) {
+    return;
+  }
+
+  dispatch(startNextPageFetch());
+  setTimeout(() => {
+    dispatch(setNextNewsPage(getState().newsFeed.slice(0, 10)));
+    dispatch(finishNextPageFetch());
+  }, 2000);
 };
