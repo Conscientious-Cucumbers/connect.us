@@ -8,6 +8,7 @@ import actions from '../actions';
 import { bindActionCreators } from 'redux';
 import {fullWhite} from 'material-ui/styles/colors';
 import RaisedButton from 'material-ui/RaisedButton';
+import Paper from 'material-ui/Paper';
 
 class Header extends React.Component {
 
@@ -20,11 +21,15 @@ class Header extends React.Component {
   }
 
   render() {
+    // className="profile-picture"
     return (
       <div>
-          <img 
-            className="profile-picture"
-            src={this.props.active.profile_picture || "http://www.bsmc.net.au/wp-content/uploads/No-image-available.jpg"} />
+          <div>
+            <Paper zDepth={5} className="profile-picture" circle>
+              <img 
+                  src={this.props.active.profile_picture || "http://www.bsmc.net.au/wp-content/uploads/No-image-available.jpg"} />
+            </Paper>
+          </div>
           <h2 className="profile-name">
             {this.props.active.first && this.props.active.last && `${this.props.active.first} ${this.props.active.last}` || this.props.active.display}
           </h2>

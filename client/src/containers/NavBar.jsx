@@ -11,6 +11,8 @@ import { Navbar,
 import { connect } from 'react-redux';
 import { clearNotifications } from '../actions/notificationActions';
 import { bindActionCreators } from 'redux';
+import Badge from 'material-ui/Badge';
+import NotificationList from './NotificationList.jsx';
 
 class NavBar extends React.Component {
 
@@ -55,18 +57,11 @@ class NavBar extends React.Component {
               </NavItem>
             </LinkContainer>
             <NavItem eventKey={1} href={`/${this.props.user ? this.props.user.username : null}`}>
-            <i className="fa fa-user" aria-hidden="true"></i>
+              <i className="fa fa-user" aria-hidden="true"></i>
             </NavItem>
-            <NavDropdown eventKey={3} 
-              title={<i onClick={this.props.clearNotifications} className="fa fa-globe" aria-hidden="true"></i>} 
-              id="notifications-nav-dropdown" 
-              noCaret>
-              <MenuItem eventKey={3.1}>This</MenuItem>
-              <MenuItem eventKey={3.2}>is the</MenuItem>
-              <MenuItem eventKey={3.3}>notifications dropdown</MenuItem>
-              <MenuItem divider />
-              <MenuItem eventKey={3.4}>For notifications</MenuItem>
-            </NavDropdown>
+
+            <NotificationList />
+            
             <NavDropdown eventKey={4}
               title=""
               id="settings-nav-dropdown">
@@ -94,13 +89,15 @@ class NavBar extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user
+    user: state.user,
+    SeenNotifications: state.SeenNotifications,
+    UnseenNotifications: state.UnseenNotifications
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    clearNotifications
+    clearNotifications: clearNotifications
   }, dispatch);
 };
 

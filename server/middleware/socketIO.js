@@ -1,4 +1,3 @@
-
 const axios = require('axios');
 const io = require('socket.io');
 const models = require('../../db/models');
@@ -19,7 +18,7 @@ module.exports = (server) => {
     socket.on('action', (action) => {
       const payload = action.payload;
 
-      console.log('***** online users: ', online_users);
+      console.log('***** online users: ', Object.keys(online_users));
 
       if (action.type === 'socket/connect') {
         var is_received = false;
@@ -27,14 +26,17 @@ module.exports = (server) => {
         !online_users[id] ? online_users[id] = [socket] : online_users[id].push(socket);
       };
 
-
       if(action.type === 'socket/notify') {
         if (online_users[payload.followed_id]) {
-          is_received = true;
-          online_users[payload.followed_id].forEach(socket => {
-            socket.emit('action', {
-              type: 'FOLLOW_NOTIFICATION',
-              payload: payload.follower_id
+          models.Profile.where({id: payload.follower_id}).fetch()
+          .then((result) => {
+            result.set('is_received', false);
+            result.set('type', 'FOLLOW_NOTIFICATION');
+            online_users[payload.followed_id].forEach(socket => {
+              socket.emit('action', {
+                type: 'FOLLOW_NOTIFICATION',
+                payload: result.attributes
+              });
             });
           });
         }

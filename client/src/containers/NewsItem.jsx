@@ -1,10 +1,11 @@
 import React from 'react';
-import { Panel, Row, Col, Modal, Button } from 'react-bootstrap';
 import LikeButton from '../components/LikeButton.jsx';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import actions from '../actions';
 import { GridTile } from 'material-ui/GridList';
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
 
 
 class NewsItem extends React.Component {
@@ -42,11 +43,12 @@ class NewsItem extends React.Component {
   itemPreview () {
     return (
       <GridTile
+          onTouchTap={() => this.toggleModal(true)}
           key={this.props.newsItem.thumbnail}
           title={this.props.newsItem.title}
           actionIcon={
             <span onClick={this.toggleLike.bind(this)}>
-            <LikeButton isLiked={this.state.isLiked} />
+              <LikeButton isLiked={this.state.isLiked} />
             </span>
           }
           actionPosition="left"
@@ -54,28 +56,38 @@ class NewsItem extends React.Component {
           titleBackground="linear-gradient(to bottom, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
         >
           <img className="news-item-media" src={this.props.newsItem.thumbnail} />
+          {this.itemModal()}
       </GridTile>
     );
   }
 
-  panelFooter () {
-    return (
-      <span onClick={() => this.toggleLike()}>
-        <LikeButton isLiked={this.state.isLiked}/>
-      </span>
-    );
+  getNewsPage (e) {
+    window.location = this.props.newsItem.url;
   }
 
   itemModal () {
+    const actions = [
+      <span className="modal-like" onClick={this.toggleLike.bind(this)}>
+        <LikeButton isLiked={this.state.isLiked} />
+      </span>,
+      <FlatButton
+        label="Close"
+        primary={true}
+        keyboardFocused={false}
+        onTouchTap={() => this.toggleModal(false)}
+      />
+    ];
+
     return (
-      <Modal
-        show={this.state.isOpen}
-        onHide={() => this.toggleModal(false)}>
-      <Modal.Header closeButton>
-        <Modal.Title>{this.props.newsItem.title}</Modal.Title>
-      </Modal.Header>
-      <Modal.Body className="news-modal-body">
-        <div className="news-modal-media">
+      <Dialog
+        title={this.props.newsItem.title}
+        actions={actions}
+        modal={false}
+        open={this.state.isOpen}
+        autoScrollBodyContent
+        onRequestClose={() => this.toggleModal(false)}
+      >
+        <div>
           <img src={this.props.newsItem.media} width="100%"/>
         </div>
         <br />
@@ -83,13 +95,7 @@ class NewsItem extends React.Component {
           <b>Description:{' '}</b> 
           {this.props.newsItem.text || 'No description available'}
         </div>
-      </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={() => this.toggleModal(false)}>
-          Close
-        </Button>
-      </Modal.Footer>
-      </Modal>
+      </Dialog>
     );
   }
 

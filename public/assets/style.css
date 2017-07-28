@@ -19,6 +19,13 @@ h6 {
   font-size: 100px;
 }
 
+.notifications-badge {
+  padding-bottom: 0px !important;
+  padding-top: 0px !important;
+  padding-left: 5px !important;
+  padding-right: 5px !important;
+}
+
 .navbar-brand:hover {
   cursor: pointer;
 }
@@ -73,8 +80,7 @@ h6 {
 }
 
 .news-feed-list {
-  width: 500;
-  height: 450;
+  width: 500px;
   overflow-y: auto;
 }
 
@@ -84,17 +90,6 @@ h6 {
   align-content: flex-start;
   align-items: flex-start;
   max-height: 80px;
-}
-
-.news-item-info {
-  display: flex;
-  flex: 5 1 auto;
-  flex-direction: column;
-  justify-content: space-around;
-  overflow: hidden;
-  margin-left: 10px;
-  max-height: 80px;
-  height: auto;
 }
 
 .news-item-source {
@@ -118,7 +113,7 @@ h6 {
 
 .news-item-media {
   cursor: pointer;
-  max-width: 500px !important;
+  max-width: 100% !important;
   height: auto;
 }
 
@@ -138,36 +133,40 @@ h6 {
   
 }
 
+.modal-like {
+  float: left !important;
+}
+
 .news-modal-description: {
 
 }
 
 .profile-tab {
-  text-align: center;
+  padding: 50px;
   position: center;
 }
 
-.profile-picture {
+.profile-picture img {
   border-radius: 50%;
   display: block;
   margin: 0 auto;
-  width: 30%;
-  border: 3px solid;
+  width: 100%;
+  height: 100%;
+}
+
+.profile-picture {
+  height: 300px;
+  border: 1px solid black;
+  width: 300px;
+  position: sticky;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .profile-name {
   text-align: center;
-}
-
-.nav-tabs > li, .nav-pills > li {
-    float:none;
-    display:inline-block;
-    *display:inline; /* ie7 fix */
-     zoom:1; /* hasLayout ie7 trigger */
-}
-
-.nav-tabs, .nav-pills {
-    text-align:center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .about-user {
@@ -188,13 +187,5 @@ h6 {
 
 .panel-footer {
   background-color: white;
-}
-
-.like-button, .like-button:hover, .like-button:active, .like-button:focus {
-/*  float: right;*/
-  border: none;
-  /*padding: 5px;*/
-  background-color: rgba(0, 0, 0, 0);
-  outline: none;
 }
 

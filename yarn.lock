@@ -1729,6 +1729,10 @@ decamelize@^1.0.0, decamelize@^1.1.1:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/decamelize/-/decamelize-1.2.0.tgz#f6534d15148269b20352e7bee26f501f9a191290"
 
+deep-diff@^0.3.5:
+  version "0.3.8"
+  resolved "https://registry.yarnpkg.com/deep-diff/-/deep-diff-0.3.8.tgz#c01de63efb0eec9798801d40c7e0dae25b582c84"
+
 deep-eql@^0.1.3:
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/deep-eql/-/deep-eql-0.1.3.tgz#ef558acab8de25206cd713906d74e56930eb69f2"
@@ -1824,7 +1828,7 @@ doctrine@^1.2.2:
     esutils "^2.0.2"
     isarray "^1.0.0"
 
-dom-helpers@^3.2.0:
+dom-helpers@^3.2.0, dom-helpers@^3.2.1:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/dom-helpers/-/dom-helpers-3.2.1.tgz#3203e07fed217bd1f424b019735582fc37b2825a"
 
@@ -2357,6 +2361,16 @@ file-entry-cache@^2.0.0:
 filename-regex@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/filename-regex/-/filename-regex-2.0.0.tgz#996e3e80479b98b9897f15a8a58b3d084e926775"
+
+filestack-js@^0.6.0:
+  version "0.6.3"
+  resolved "https://registry.yarnpkg.com/filestack-js/-/filestack-js-0.6.3.tgz#4b68852b5fc3891cd1e6e89dba6b2405ab5f4ea8"
+
+filestack-react@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/filestack-react/-/filestack-react-1.0.0.tgz#683bc4715d4b01af26986f795498e206f6ac0f58"
+  dependencies:
+    filestack-js "^0.6.0"
 
 fill-range@^2.1.0:
   version "2.2.3"
@@ -3397,7 +3411,7 @@ jstransform@^11.0.3:
     object-assign "^2.0.0"
     source-map "^0.4.2"
 
-keycode@^2.1.2, keycode@^2.1.8:
+keycode@^2.1.2, keycode@^2.1.7, keycode@^2.1.8:
   version "2.1.9"
   resolved "https://registry.yarnpkg.com/keycode/-/keycode-2.1.9.tgz#964a23c54e4889405b4861a5c9f0480d45141dfa"
 
@@ -3626,6 +3640,10 @@ lodash@~0.9.2:
 lodash@~2.4.1:
   version "2.4.2"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-2.4.2.tgz#fadd834b9683073da179b3eae6d9c0d15053f73e"
+
+logger@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/logger/-/logger-0.0.1.tgz#cb08171f8a6f6f674b8499dadf50bed4befb72c4"
 
 longest@^1.0.1:
   version "1.0.1"
@@ -4687,6 +4705,35 @@ react-router@^4.1.1:
     prop-types "^15.5.4"
     warning "^3.0.0"
 
+react-swipeable-views-core@^0.11.1:
+  version "0.11.1"
+  resolved "https://registry.yarnpkg.com/react-swipeable-views-core/-/react-swipeable-views-core-0.11.1.tgz#61d046799f90725bbf91a0eb3abcab805c774cac"
+  dependencies:
+    babel-runtime "^6.23.0"
+    warning "^3.0.0"
+
+react-swipeable-views-utils@^0.12.0:
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/react-swipeable-views-utils/-/react-swipeable-views-utils-0.12.0.tgz#4ff11f20a8da0561f623876d9fd691116e1a6a03"
+  dependencies:
+    babel-runtime "^6.23.0"
+    fbjs "^0.8.4"
+    keycode "^2.1.7"
+    prop-types "^15.5.4"
+    react-event-listener "^0.4.5"
+    react-swipeable-views-core "^0.11.1"
+
+react-swipeable-views@^0.12.4:
+  version "0.12.4"
+  resolved "https://registry.yarnpkg.com/react-swipeable-views/-/react-swipeable-views-0.12.4.tgz#0c97bdad9dd709c1eacd7839478fa70d4241adb6"
+  dependencies:
+    babel-runtime "^6.23.0"
+    dom-helpers "^3.2.1"
+    prop-types "^15.5.4"
+    react-swipeable-views-core "^0.11.1"
+    react-swipeable-views-utils "^0.12.0"
+    warning "^3.0.0"
+
 react-tap-event-plugin@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/react-tap-event-plugin/-/react-tap-event-plugin-2.0.1.tgz#316beb3bc6556e29ec869a7293e89c826a9074d2"
@@ -4834,6 +4881,12 @@ redis@^2.1.0, redis@^2.7.1, redis@~2.7.1:
     double-ended-queue "^2.1.0-0"
     redis-commands "^1.2.0"
     redis-parser "^2.5.0"
+
+redux-logger@^3.0.6:
+  version "3.0.6"
+  resolved "https://registry.yarnpkg.com/redux-logger/-/redux-logger-3.0.6.tgz#f7555966f3098f3c88604c449cf0baf5778274bf"
+  dependencies:
+    deep-diff "^0.3.5"
 
 redux-promise@^0.5.3:
   version "0.5.3"

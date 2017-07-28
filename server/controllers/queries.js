@@ -7,7 +7,6 @@ const Promise = require('bluebird');
 //////////// POST ///////////////
 
 module.exports.toggleNewsLiked = (req, res) => {
-  // check if news exists
   const newsItem = req.body.newsLike;
   var newsId;
   models.NewsItem.where({url: newsItem.url}).fetch()
@@ -71,7 +70,9 @@ module.exports.toggleStatusLiked = (req, res) => {
 
 module.exports.createStatus = (req, res) => {
   models.Status.forge({ 
+      title: req.body.title, 
       text: req.body.text, 
+      image: req.body.image, 
       id_user: req.user.id
     })
     .save()
@@ -102,6 +103,25 @@ module.exports.toggleFollow = (req, res) => {
     });
 };
 
+module.exports.clearNotifications = (req, res) => {
+  models.Notifications.where({id_notified: req.user.id}).fetchAll()
+    .then(results => {
+      if (!results){
+        throw results;
+      } else {
+        return Promise.map(results.models, (eachResult) => {
+          return eachResult.save({is_received: true}, {method: 'update'});
+        });
+      }
+    })
+    .then(() => res.status(201).send('Notifications Cleared!'))
+    .error(err => {
+      res.sendstatus(500);
+    })
+    .catch(() => {
+      res.sendStatus(404);
+    });
+};
 
 
 ////////////////  GET  /////////////////
@@ -214,5 +234,34 @@ module.exports.getFollowers = (req, res) => {
 
         })
     })
+};
+
+
+module.exports.getNotifications = (req, res) => {
+  var allNotifiers = [];
+  return models.Notifications.where({id_notified: req.user.id}).fetchAll()
+  .then(notifications => {
+    if(!notifications){
+      throw notifications;
+    } else {
+      Promise.map(notifications.models, (eachPerson) => {
+          return models.Profile.where({id: eachPerson.get('id_notifier')}).fetch()
+            .then((result) => {
+              result.set('notification_type', 'FOLLOW_NOTIFICATION');
+              result.set('is_received', eachPerson.get('is_received'));
+              allNotifiers.push(result.attributes);
+            });
+        })
+        .then(() => {
+          res.status(200).send(allNotifiers)
+        });
+    }
+  })
+  .error(err => {
+    res.status(500).send('Error: ', err);
+  })
+  .catch(() => {
+    res.send([]);    // Do I need in this???
+  });
 };
 
