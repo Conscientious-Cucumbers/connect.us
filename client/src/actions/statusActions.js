@@ -32,9 +32,9 @@ export const getStatusLikes = (username) => (dispatch, getState) => {
   .catch((err) => console.log('Error fetching status likes: ', err));
 };
 
-export const postStatus = (text) => (dispatch, getState) => {
-  axios.post('/user/status', { text })
 
+export const postStatus = (status) => (dispatch, getState) => {
+  axios.post(`/user/status`, status)
   .then((result) => {
     dispatch(getTimeline(getState().user.username));
   })

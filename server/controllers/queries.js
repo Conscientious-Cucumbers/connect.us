@@ -46,6 +46,7 @@ module.exports.toggleNewsLiked = (req, res) => {
   .then(() => res.status(201).send('Toggled News Liked'));
 };
 
+
 module.exports.toggleStatusLiked = (req, res) => {
   console.log('******** ToggledStatusLiked request body: ', req.body);
   return models.StatusLike.where({id_status: req.body.id_status, id_user: req.user.id}).fetch()
@@ -69,16 +70,18 @@ module.exports.toggleStatusLiked = (req, res) => {
 
 
 module.exports.createStatus = (req, res) => {
-  models.Status.forge({
-    title: req.body.title,
-    text: req.body.text,
-    image: req.body.image,
+
+  console.log("************ createStatus got called!", req.body);
+
+  models.Status.forge({ 
+    title: req.body.title, 
+    text: req.body.text, 
+    image: req.body.image, 
     id_user: req.user.id
   })
   .save()
-  .then(() => { res.status(201).send('Status Created!'); })
-  .catch(err => {
-    res.status(500).send(err);
+  .then(() => {res.status(201).send('Status Created!')})
+  .catch(err => {res.status(500).send(err)
   });
 };
 
@@ -265,6 +268,6 @@ module.exports.getNotifications = (req, res) => {
     res.status(500).send('Error: ', err);
   })
   .catch(() => {
-    res.send([]);    // Do I need in this???
+    res.send([]);
   });
 };

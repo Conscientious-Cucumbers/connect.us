@@ -168,7 +168,7 @@ const mapDispatchToProps = (dispatch) => {
     getActiveProfile: actions.getActiveProfile,
     getCurrentUser: actions.getCurrentUser,
     getNewsLikes: actions.getNewsLikes,
-    getFollowing: actions.getFollowing,    // Added!
+    getFollowing: actions.getFollowing,
     getFollowers: actions.getFollowers,
     getTimeline: actions.getTimeline,
     getStatusLikes: actions.getStatusLikes
