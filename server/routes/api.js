@@ -6,14 +6,13 @@ const Promise = require('bluebird');
 const models = require('../../db/models');
 
 
-var apiResult;
-var googleNews;
+var apiResult, googleNews;
 
 router.route('/news')
   .get((req, res) => {
-    axios.get("https://newsapi.org/v1/articles?source=google-news&sortBy=top&apiKey=f97f9989c5f94e93ba130be4b6c2f09a")
-        .then(function(result_google) {    
-          console.log("****** How many news fetched: ", result_google.data.articles.length);
+    axios.get('https://newsapi.org/v1/articles?source=google-news&sortBy=top&apiKey=f97f9989c5f94e93ba130be4b6c2f09a')
+        .then(function(result_google) {
+          console.log('****** How many news fetched: ', result_google.data.articles.length);
 
           apiResult = result_google.data.articles;
           googleNews = [];
@@ -32,7 +31,7 @@ router.route('/news')
 
             googleNews.push(news);
 
-          };
+          }
 
           Promise.map(googleNews, (newsItem) => {
             return models.NewsItem.where({url: newsItem.url}).fetch()
@@ -61,13 +60,13 @@ router.route('/news')
           // console.log(googleNews[0]);
 
           // axios.get("https://www.reddit.com/r/news.json")
-          //   .then(function(result_reddit) {    
+          //   .then(function(result_reddit) {
           //     console.log("****** How many funny fetched: ", result_reddit.data.data.children.length);
           //   })
           //   .catch(e => console.log('reddit error', e));
 
-        .catch(e => console.log('google error', e));
-      })
+          .catch(e => console.log('google error', e));
+        });
   })
   .post((req, res) => {
     res.status(201).send({ data: 'Posted!' });

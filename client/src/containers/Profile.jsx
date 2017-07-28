@@ -24,7 +24,7 @@ class Profile extends React.Component {
     super(props);
     this.state = {
       slideIndex: 0
-    }
+    };
   }
 
   componentDidMount () {
@@ -143,7 +143,7 @@ class Profile extends React.Component {
     return (
         <div className="container">
           {
-            !!this.props.activeProfile
+            !!this.props.activeProfile && !!this.props.user
             ?
             this.loaded()
             :
@@ -152,7 +152,7 @@ class Profile extends React.Component {
         </div>
     );
   }
-};
+}
 
 const mapStateToProps = (state) => {
   return {

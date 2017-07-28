@@ -47,66 +47,68 @@ module.exports.toggleNewsLiked = (req, res) => {
 };
 
 module.exports.toggleStatusLiked = (req, res) => {
-  console.log("******** ToggledStatusLiked request body: ", req.body);
+  console.log('******** ToggledStatusLiked request body: ', req.body);
   return models.StatusLike.where({id_status: req.body.id_status, id_user: req.user.id}).fetch()
-    .then((result) => {
-      if(result){
-        return result.destroy()
-          .then(() => res.status(201).send('Unliked Status'));
-      } else {
-        models.StatusLike.forge({ 
-            id_status: req.body.id_status, 
-            id_user: req.user.id
-          })
-          .save()
-          .then(() => res.status(201).send('Liked Status'))
-          .catch(err => {
-            res.status(500).send(err);
-          });
-      }
-    })
+  .then((result) => {
+    if (result) {
+      return result.destroy()
+        .then(() => res.status(201).send('Unliked Status'));
+    } else {
+      models.StatusLike.forge({
+        id_status: req.body.id_status,
+        id_user: req.user.id
+      })
+      .save()
+      .then(() => res.status(201).send('Liked Status'))
+      .catch(err => {
+        res.status(500).send(err);
+      });
+    }
+  });
 };
 
 
 module.exports.createStatus = (req, res) => {
-  models.Status.forge({ 
-      title: req.body.title, 
-      text: req.body.text, 
-      image: req.body.image, 
-      id_user: req.user.id
-    })
-    .save()
-    .then(() => {res.status(201).send('Status Created!')})
-    .catch(err => {res.status(500).send(err)
-    });
+  models.Status.forge({
+    title: req.body.title,
+    text: req.body.text,
+    image: req.body.image,
+    id_user: req.user.id
+  })
+  .save()
+  .then(() => { res.status(201).send('Status Created!'); })
+  .catch(err => {
+    res.status(500).send(err);
+  });
 };
 
 module.exports.toggleFollow = (req, res) => {
-  console.log("******** ToggledFollowPOST request body: ", req.body);
+  console.log('******** ToggledFollowPOST request body: ', req.body);
   return models.Follow.where({id_follower: req.user.id, id_followed: req.body.id}).fetch()
-    .then((result) => {
-      if(result){
-        return result.destroy()
-          .then(() => res.status(201).send('Unfollowing User'));
-      } else {
+  .then((result) => {
+    if (result) {
+      return result.destroy()
+        .then(() => res.status(201).send('Unfollowing User'));
+    } else {
 
-        models.Follow.forge({
-            id_follower: req.user.id,
-            id_followed: req.body.id
-          })
-          .save()
-          .then(() => {res.status(201).send('Following User')})
-          .catch(err => {res.status(500).send(err)
-          });
+      models.Follow.forge({
+        id_follower: req.user.id,
+        id_followed: req.body.id
+      })
+      .save()
+      .then(() => { res.status(201).send('Following User'); })
+      .catch(err => {
+        res.status(500).send(err);
+      });
 
-      }
-    });
+    }
+  });
 };
 
 module.exports.clearNotifications = (req, res) => {
   models.Notifications.where({id_notified: req.user.id}).fetchAll()
     .then(results => {
-      if (!results){
+      if (!results) {
         throw results;
       } else {
         return Promise.map(results.models, (eachResult) => {
@@ -129,7 +131,7 @@ module.exports.clearNotifications = (req, res) => {
 module.exports.getNewsLike = (req, res) => {
   models.Profile.where({ username: req.params.username }).fetch()
     .then(profile => {
-      console.log("****** getNewsLike profile: ", profile.attributes.id);
+      console.log('****** getNewsLike profile: ', profile.attributes.id);
       return models.NewsLike.where({id_user: profile.attributes.id}).fetchAll();
     })
     .then(news => {
@@ -144,7 +146,7 @@ module.exports.getNewsLike = (req, res) => {
         });
       }, Promise.resolve())
       .then(() => {
-        res.status(200).send(sendNews)
+        res.status(200).send(sendNews);
       });
     })
     .error(err => {
@@ -159,7 +161,7 @@ module.exports.getNewsLike = (req, res) => {
 module.exports.getStatusesLike = (req, res) => {
   models.Profile.where({ username: req.params.username }).fetch()
     .then(profile => {
-      console.log("****** getStatusesLike profile: ", profile.attributes.id);
+      console.log('****** getStatusesLike profile: ', profile.attributes.id);
       return models.StatusLike.where({id_user: profile.attributes.id}).fetchAll();
     })
     .then(news => {
@@ -174,7 +176,7 @@ module.exports.getStatusesLike = (req, res) => {
         });
       }, Promise.resolve())
       .then(() => {
-        res.status(200).send(sendStatuses)
+        res.status(200).send(sendStatuses);
       });
     })
     .error(err => {
@@ -189,13 +191,13 @@ module.exports.getStatusesLike = (req, res) => {
 
 module.exports.getStatuses = (req, res) => {
   models.Profile.where({ username: req.params.username }).fetch()
-    .then(profile => {
-      console.log("****** getStatusLike profile: ", profile.attributes.id);
-      return models.Status.where({id_user: profile.attributes.id}).fetchAll();
-    })
-    .then(statuses => {
-      res.status(200).send(statuses);
-    })
+  .then(profile => {
+    console.log('****** getStatusLike profile: ', profile.attributes.id);
+    return models.Status.where({id_user: profile.attributes.id}).fetchAll();
+  })
+  .then(statuses => {
+    res.status(200).send(statuses);
+  });
 };
 
 
@@ -210,7 +212,7 @@ module.exports.getFollows = (req, res) => {
 
           Promise.map(follows.models, (eachPerson) => {
             return models.Profile.where({id: eachPerson.attributes.id_followed}).fetch()
-              .then((result) => {allfollowing.push(result.attributes)})
+            .then((result) => { allfollowing.push(result.attributes); });
           })
           .then(() => res.status(200).send(allfollowing));
 
@@ -228,12 +230,14 @@ module.exports.getFollowers = (req, res) => {
 
           Promise.map(follows.models, (eachPerson) => {
             return models.Profile.where({id: eachPerson.attributes.id_follower}).fetch()
-              .then((result) => {allfollowers.push(result.attributes)})
+            .then((result) => {
+              allfollowers.push(result.attributes);
+            });
           })
           .then(() => res.status(200).send(allfollowers));
 
-        })
-    })
+        });
+    });
 };
 
 
@@ -241,20 +245,20 @@ module.exports.getNotifications = (req, res) => {
   var allNotifiers = [];
   return models.Notifications.where({id_notified: req.user.id}).fetchAll()
   .then(notifications => {
-    if(!notifications){
+    if (!notifications) {
       throw notifications;
     } else {
       Promise.map(notifications.models, (eachPerson) => {
-          return models.Profile.where({id: eachPerson.get('id_notifier')}).fetch()
-            .then((result) => {
-              result.set('notification_type', 'FOLLOW_NOTIFICATION');
-              result.set('is_received', eachPerson.get('is_received'));
-              allNotifiers.push(result.attributes);
-            });
-        })
-        .then(() => {
-          res.status(200).send(allNotifiers)
-        });
+        return models.Profile.where({id: eachPerson.get('id_notifier')}).fetch()
+          .then((result) => {
+            result.set('notification_type', 'FOLLOW_NOTIFICATION');
+            result.set('is_received', eachPerson.get('is_received'));
+            allNotifiers.push(result.attributes);
+          });
+      })
+      .then(() => {
+        res.status(200).send(allNotifiers);
+      });
     }
   })
   .error(err => {
@@ -264,4 +268,3 @@ module.exports.getNotifications = (req, res) => {
     res.send([]);    // Do I need in this???
   });
 };
-

@@ -30,6 +30,6 @@ const mapStateToProps = (state) => {
   return {
     active: state.activeProfile
   };
-}
+};
 
 export default connect(mapStateToProps)(AboutUser);

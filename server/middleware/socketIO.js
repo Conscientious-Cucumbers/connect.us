@@ -24,9 +24,9 @@ module.exports = (server) => {
         var is_received = false;
         id = payload.id;
         !online_users[id] ? online_users[id] = [socket] : online_users[id].push(socket);
-      };
+      }
 
-      if(action.type === 'socket/notify') {
+      if (action.type === 'socket/notify') {
         if (online_users[payload.followed_id]) {
           models.Profile.where({id: payload.follower_id}).fetch()
           .then((result) => {
@@ -43,13 +43,13 @@ module.exports = (server) => {
 
         //Query:
         models.Notifications.forge({
-            id_notifier: payload.follower_id,
-            id_notified: payload.followed_id,
-            type: 'FOLLOW_NOTIFICATION',
-            is_received: is_received
-          })
-          .save()
-          .catch(err => {console.log("Error: ", err)});
+          id_notifier: payload.follower_id,
+          id_notified: payload.followed_id,
+          type: 'FOLLOW_NOTIFICATION',
+          is_received: is_received
+        })
+        .save()
+        .catch(err => { console.log('Error: ', err); });
       }
 
     });

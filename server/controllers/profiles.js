@@ -41,7 +41,7 @@ module.exports.getOne = (req, res) => {
     .catch(() => {
       res.sendStatus(404);
     });
-}
+};
 
 
 //gets user profile info by req.params.username
@@ -59,7 +59,7 @@ module.exports.getInfo = (req, res) => {
     .catch(() => {
       res.sendStatus(404);
     });
-}
+};
 
 
 

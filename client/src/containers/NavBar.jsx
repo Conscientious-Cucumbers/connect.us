@@ -1,9 +1,9 @@
 import React from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
-import { Navbar, 
-         Nav, 
-         NavItem, 
-         NavDropdown, 
+import { Navbar,
+         Nav,
+         NavItem,
+         NavDropdown,
          MenuItem,
          FormGroup,
          FormControl,
@@ -19,7 +19,7 @@ class NavBar extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      searchInput: ""
+      searchInput: ''
     };
   }
 
@@ -61,7 +61,7 @@ class NavBar extends React.Component {
             </NavItem>
 
             <NotificationList />
-            
+
             <NavDropdown eventKey={4}
               title=""
               id="settings-nav-dropdown">

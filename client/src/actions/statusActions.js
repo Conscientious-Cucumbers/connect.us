@@ -33,14 +33,14 @@ export const getStatusLikes = (username) => (dispatch, getState) => {
 };
 
 export const postStatus = (text) => (dispatch, getState) => {
-  axios.post(`/user/status`, { text })
+  axios.post('/user/status', { text })
 
   .then((result) => {
     dispatch(getTimeline(getState().user.username));
   })
   .catch((err) => {
     console.log('Error posting status: ', err);
-  })
+  });
 };
 
 export const postStatusLike = (id_status) => (dispatch, getState) => {
