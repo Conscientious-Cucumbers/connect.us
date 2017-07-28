@@ -7,7 +7,7 @@ export const newsFeed = (state = null, action) => {
   case 'REFRESH_NEWS':
     return action.payload;
   case 'SET_NEXT_NEWS_PAGE':
-    return [...state, ...state.slice(0, 10)];
+    return [...state, ...action.payload];
   }
 
   // return NewsFeedData;

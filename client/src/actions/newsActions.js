@@ -74,10 +74,10 @@ export const getNextNewsPage = (pageNum) => (dispatch, getState) => {
   if (getState().isFetching) {
     return;
   }
-  
+
   dispatch(startNextPageFetch());
   setTimeout(() => {
-    dispatch(setNextNewsPage());
+    dispatch(setNextNewsPage(getState().newsFeed.slice(0, 10)));
     dispatch(finishNextPageFetch());
   }, 2000);
 };

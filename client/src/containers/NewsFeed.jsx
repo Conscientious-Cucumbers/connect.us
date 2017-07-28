@@ -28,7 +28,7 @@ const NewsFeed = (props) => (
           ?
             <Loading className="bottom-loading" />
           :
-          <div>Loaded!</div>
+          <div></div>
       }
     </GridList>
     <ReactScrollPagination
