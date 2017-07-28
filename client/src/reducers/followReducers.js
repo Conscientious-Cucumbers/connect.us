@@ -1,16 +1,16 @@
 
 export const following = (state = null, action) => {
   switch (action.type) {
-    
+
   case 'FOLLOWING':
     return action.payload;
   default:
     return state;
-    
+
   }
 };
 
-const activeFollowed = (state = false, action) => {
+export const activeFollowed = (state = false, action) => {
   switch (action.type) {
 
   case 'IS_FOLLOWED':
