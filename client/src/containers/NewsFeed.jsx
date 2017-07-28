@@ -32,6 +32,7 @@ const NewsFeed = (props) => (
       }
     </GridList>
     <ReactScrollPagination
+      paginationShowTime={3000}
       fetchFunc={props.getNextNewsPage}
     />
   </div>
