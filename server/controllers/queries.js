@@ -70,33 +70,19 @@ module.exports.toggleStatusLiked = (req, res) => {
 
 
 module.exports.createStatus = (req, res) => {
-<<<<<<< 074a7711d27d869fa67822535704487c6030f7b3
-  models.Status.forge({
-    title: req.body.title,
-    text: req.body.text,
-    image: req.body.image,
-    id_user: req.user.id
-  })
-  .save()
-  .then(() => { res.status(201).send('Status Created!'); })
-  .catch(err => {
-    res.status(500).send(err);
-  });
 
-=======
   console.log("************ createStatus got called!", req.body);
 
   models.Status.forge({ 
-      title: req.body.title, 
-      text: req.body.text, 
-      image: req.body.image, 
-      id_user: req.user.id
-    })
-    .save()
-    .then(() => {res.status(201).send('Status Created!')})
-    .catch(err => {res.status(500).send(err)
-    });
->>>>>>> status upload picture is done
+    title: req.body.title, 
+    text: req.body.text, 
+    image: req.body.image, 
+    id_user: req.user.id
+  })
+  .save()
+  .then(() => {res.status(201).send('Status Created!')})
+  .catch(err => {res.status(500).send(err)
+  });
 };
 
 module.exports.toggleFollow = (req, res) => {
