@@ -20,6 +20,7 @@ const NewsFeed = (props) => (
       : 
         <Loading />
     }
+      <Loading className="bottom-loading" />
     </GridList>
   </div>
 );

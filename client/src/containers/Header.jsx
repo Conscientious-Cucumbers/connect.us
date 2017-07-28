@@ -27,7 +27,7 @@ class Header extends React.Component {
           <div>
             <Paper zDepth={5} className="profile-picture" circle>
               <img 
-                  src={this.props.active.profile_picture || "http://www.bsmc.net.au/wp-content/uploads/No-image-available.jpg"} />
+                  src={this.props.active.profile_picture || 'http://www.bsmc.net.au/wp-content/uploads/No-image-available.jpg'} />
             </Paper>
           </div>
           <h2 className="profile-name">
@@ -40,10 +40,10 @@ class Header extends React.Component {
             <div className="follow-button-wrapper">
               <RaisedButton 
                 onTouchTap={this.toggleFollow.bind(this)}
-                backgroundColor={this.props.activeFollowed ? fullWhite : "#0079BF"}
-                labelColor={this.props.activeFollowed ? "#0079BF" : fullWhite}
+                backgroundColor={this.props.activeFollowed ? fullWhite : '#0079BF'}
+                labelColor={this.props.activeFollowed ? '#0079BF' : fullWhite}
                 className="follow-button" 
-                label={this.props.activeFollowed ? "Following" : "Follow"}/>
+                label={this.props.activeFollowed ? 'Following' : 'Follow'}/>
             </div>
           }
         <br />

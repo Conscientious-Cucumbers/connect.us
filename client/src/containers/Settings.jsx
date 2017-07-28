@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import actions from '../actions';
 import Loading from '../components/Loading.jsx';
-import Setting from './Setting.jsx'
+import Setting from './Setting.jsx';
 
 // Get rid of any of the apove dependencies not neccesary
 
@@ -15,7 +15,7 @@ class Settings extends React.Component {
     this.state = {
       settings: ['username', 'first name', 'last name', 'phone number']
 
-    }
+    };
     //console.log('this is the user object', this.props.user)
   }
 
@@ -24,12 +24,12 @@ class Settings extends React.Component {
   }
 
   loaded () {
-      return (
-        <div>
-          <h1> Settings </h1>
-          {this.state.settings.map((setting, key) => <Setting field={setting} key={key} />)}
-        </div>
-      );  
+    return (
+      <div>
+        <h1> Settings </h1>
+        {this.state.settings.map((setting, key) => <Setting field={setting} key={key} />)}
+      </div>
+    );
   }
 
   render () {
@@ -52,6 +52,6 @@ const mapStateToProps = (state) => {
   return {
     user: state.user
   };
-}
+};
 
 export default connect(mapStateToProps)(Settings);

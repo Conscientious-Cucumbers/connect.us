@@ -43,7 +43,6 @@ class NewsItem extends React.Component {
   itemPreview () {
     return (
       <GridTile
-          onTouchTap={() => this.toggleModal(true)}
           key={this.props.newsItem.thumbnail}
           title={this.props.newsItem.title}
           actionIcon={
@@ -55,7 +54,7 @@ class NewsItem extends React.Component {
           titlePosition="top"
           titleBackground="linear-gradient(to bottom, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
         >
-          <img className="news-item-media" src={this.props.newsItem.thumbnail} />
+          <img onTouchTap={() => this.toggleModal(true)} className="news-item-media" src={this.props.newsItem.thumbnail} />
           {this.itemModal()}
       </GridTile>
     );
@@ -77,6 +76,10 @@ class NewsItem extends React.Component {
         onTouchTap={() => this.toggleModal(false)}
       />
     ];
+
+    //     <div>
+    //   <iframe width="100%" height="500px" src={this.props.newsItem.url} />
+    // </div>
 
     return (
       <Dialog

@@ -1,8 +1,9 @@
 import React from 'react';
+import CircularProgress from 'material-ui/CircularProgress';
 
-const Loading = () => (
-  <div className="loading">
-    <i className="fa fa-spin fa-spinner" aria-hidden="true"></i>
+const Loading = (props) => (
+  <div className={props.className || 'loading'}>
+    <CircularProgress color="black" />
   </div>
 );
 

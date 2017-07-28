@@ -18,13 +18,13 @@ export const getFollowing = (username) => (dispatch, getState) => {
   })
   .catch((err) => {
     console.error('Error fetching following list');
-    console.log(err);
+    console.error(err);
   });
 };
 
 const isFollowing = (followers, state) => {
   const isFollowed = followers.reduce((wasFound, follower) => {
-    return wasFound || follower.username === state.user.username
+    return wasFound || follower.username === state.user.username;
   }, false);
 
   return {
@@ -50,7 +50,7 @@ export const getFollowers = (username) => (dispatch, getState) => {
   })
   .catch((err) => {
     console.error('Error fetching followers list');
-    console.log(err);
+    console.error(err);
   });
 };
 
@@ -68,5 +68,3 @@ export const toggleFollow = (id) => (dispatch, getState) => {
     return dispatch(getFollowers(getState().activeProfile.username));
   });
 };
-
-
