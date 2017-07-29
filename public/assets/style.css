@@ -1,3 +1,7 @@
+.btn:focus, input[type="button"]:focus {
+    outline: none;
+}
+
 body {
   background-color: #eee;
   padding-top:80px;
@@ -211,6 +215,10 @@ h6 {
 
 .panel-footer {
   background-color: white;
+}
+
+.btn btn-border btn-round color-1 material-design {
+
 }
 
 .btn {
