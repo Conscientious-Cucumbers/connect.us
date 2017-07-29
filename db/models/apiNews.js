@@ -4,7 +4,7 @@ const db = require('../');
 const ApiNews = db.Model.extend({
   tableName: 'api_news',
   user: function() {
-    return this.hasOne('usee');
+    return this.hasOne('user');
   },
   likes: function() {
     return this.hasMany('nothing');
