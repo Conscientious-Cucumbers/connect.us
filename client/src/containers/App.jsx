@@ -48,11 +48,11 @@ class App extends React.Component {
         onHide={() => {}}
         bsSize="large">
         <Modal.Header>
-        <h3>Sign Up</h3>
+          <h3>Sign Up</h3>
         </Modal.Header>
         <Form id="signupNewUserForm" onSubmit={this.submitSignUp.bind(this)}>
           <Modal.Body>
-              <FieldGroup
+            <FieldGroup
               id="username"
               type="text"
               label="Username"
@@ -63,8 +63,8 @@ class App extends React.Component {
           </Modal.Body>
           <Modal.Footer>
             <Button
-            bsStyle="primary"
-            type="submit">
+              bsStyle="primary"
+              type="submit">
             Submit
             </Button>
           </Modal.Footer>

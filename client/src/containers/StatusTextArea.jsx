@@ -81,7 +81,6 @@ class StatusTextArea extends React.Component {
                 type="text"
                 placeholder="Title" /> <br />
 
-
               <TextField
                 onChange={this.handleTextChange.bind(this)}
                 value={this.state.text}

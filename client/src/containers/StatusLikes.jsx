@@ -8,14 +8,14 @@ const StatusLikes = (props) => (
   <PanelGroup>
     {
       props.statusLikes
-      ?
-      props.statusLikes.map((status, index) => {
-        return (
-          <Status key={index} status={status}/>
-        ); 
-      })
-      :
-      <Loading />
+        ?
+        props.statusLikes.map((status, index) => {
+          return (
+            <Status key={index} status={status}/>
+          );
+        })
+        :
+        <Loading />
     }
   </PanelGroup>
 );

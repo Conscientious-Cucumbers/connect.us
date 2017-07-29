@@ -141,15 +141,15 @@ class Profile extends React.Component {
 
   render () {
     return (
-        <div className="container">
-          {
-            !!this.props.activeProfile && !!this.props.user
+      <div className="container">
+        {
+          !!this.props.activeProfile && !!this.props.user
             ?
             this.loaded()
             :
             this.loading()
-          }
-        </div>
+        }
+      </div>
     );
   }
 }
