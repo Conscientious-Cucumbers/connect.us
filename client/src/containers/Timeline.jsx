@@ -20,7 +20,7 @@ class Timeline extends React.Component {
       <PanelGroup>
         {this.props.profileRoute === this.props.user.username
           ?
-        <StatusTextArea />
+          <StatusTextArea />
           :
           null
         }
