@@ -28,12 +28,12 @@ class Timeline extends React.Component {
           this.props.statusFeed.map((status, index) => {
             return (
               <Status key={index} status={status} isTimeline/>
-            ); 
+            );
           })
         }
       </PanelGroup>
     );
-    
+
   }
 }
 
