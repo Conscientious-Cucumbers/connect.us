@@ -59,15 +59,16 @@ class Status extends React.Component {
     return (
       <div>
         <Panel
+
           footer={this.panelFooter()}
-          className="status-post"
+          className="status-post-2"
           header={this.title()}
           bsStyle="info">
           {this.props.status.title}
           <br></br>
-          {this.props.status.text}
+          <img alt={'image'} src={this.props.status.image} />
           <br></br>
-          <img alt={"image"} src={this.props.status.image} />
+          {this.props.status.text}
 
         </Panel>
         <br/>

@@ -1,5 +1,7 @@
-.btn:focus, input[type="button"]:focus {
+.btn:focus, input[type="button"]:focus, .btn:hover, input[type="button"]:hover {
   outline: none;
+  text-decoration: none;
+  background-color: #9E9E9E;
 }
 
 body {
@@ -58,6 +60,12 @@ h6 {
 .jumbotron {
   background-color: white;
   border: 1px solid #bbb;
+}
+
+.status-post-2 {
+  margin-left: 155px;
+  margin-right: 155px;
+  text-align: center;
 }
 
 .status-post {
@@ -230,7 +238,7 @@ h6 {
   text-transform: uppercase;
   width: 150px;
   height: 40px;
-  background-color: #222222;
+  background-color: #9E9E9E;
 
   &.color-1 {
     background-color: #607D8B;
@@ -296,4 +304,9 @@ h1 {
   font-size: 2rem;
   line-height: 1.5em;
   margin:2em 0 2em 0;
+}
+
+img {
+  display: block;
+  margin: 0 auto;
 }
