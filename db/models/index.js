@@ -8,3 +8,5 @@ module.exports.Follow = require('./follows');
 module.exports.NewsComments = require('./newsComments');
 module.exports.Notifications = require('./notifications');
 module.exports.NewsSources = require('./news_sources');
+module.exports.ApiNews = require('./apiNews');
+
