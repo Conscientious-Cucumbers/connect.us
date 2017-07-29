@@ -21,6 +21,13 @@
     }
   },
 
+  "sources": [
+    "abc-news-au",
+    "cnn",
+    "ign",
+    "google-news"
+  ],
+
   "passport": {
     "Google": {},
     "Facebook": {},
