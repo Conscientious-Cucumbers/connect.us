@@ -3,11 +3,8 @@ const db = require('../');
 //fix
 const ApiNews = db.Model.extend({
   tableName: 'api_news',
-  user: function() {
-    return this.hasOne('user');
-  },
-  likes: function() {
-    return this.hasMany('nothing');
+  source: function() {
+    return this.hasOne('news_sources', 'id_source');
   }
 });
 
