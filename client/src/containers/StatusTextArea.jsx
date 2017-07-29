@@ -49,7 +49,6 @@ class StatusTextArea extends React.Component {
   }
 
   uploadPicture (file) {
-
     this.setState({
       image: file.filesUploaded[0].url
     });

@@ -11,7 +11,7 @@ db.plugin('registry');
 //   //console.log(db.Model)
 //   db.Model.fetchAll().then((content)=> console.log(content)).catch(err=>{});
 // }
-
+db.plugin('pagination');
 // getUserInfo()
 
 module.exports = db;
