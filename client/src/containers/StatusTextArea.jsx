@@ -87,8 +87,11 @@ class StatusTextArea extends React.Component {
 <<<<<<< HEAD
 =======
 
+<<<<<<< HEAD
 >>>>>>> status text fields and square buttons changed to material-ui
 
+=======
+>>>>>>> adjusted margins and centered text in statuses
               <TextField
                 onChange={this.handleTextChange.bind(this)}
                 id="status-description-field"
