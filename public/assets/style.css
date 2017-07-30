@@ -1,12 +1,24 @@
 .btn:focus, input[type="button"]:focus, .btn:hover, input[type="button"]:hover {
   outline: none;
   text-decoration: none;
-  background-color: #9E9E9E;
+  background-color: #B0BEC5;
 }
 
 body {
   background-color: #eee;
   padding-top:80px;
+}
+
+h3 {
+  color: #FAFAFA;
+}
+
+.panel-info > .panel-heading {
+  background-color: #78909C;
+}
+
+.navbar-inverse .navbar-brand {
+  color: orange;
 }
 
 h6 {
