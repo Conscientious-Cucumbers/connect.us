@@ -66,7 +66,7 @@ class Status extends React.Component {
           bsStyle="info">
           {this.props.status.title}
           <br></br>
-          <img alt={'image'} src={this.props.status.image} />
+          <img className="status-image" alt={'image'} src={this.props.status.image} />
           <br></br>
           {this.props.status.text}
 
