@@ -58,12 +58,12 @@ class Profile extends React.Component {
           className="profile-tabs"
           onChange={this.handleTabChange.bind(this)}
           value={this.state.slideIndex}>
-          <Tab label="Timeline" value={0} />
-          <Tab label="About" value={1} />
-          <Tab label="Liked News" value={2} />
-          <Tab label="Liked Status" value={3} />
-          <Tab label="Followers" value={4} />
-          <Tab label="Following" value={5} />
+          <Tab style={{backgroundColor: '#78909C'}} label="Timeline" value={0} />
+          <Tab style={{backgroundColor: '#90A4AE'}} label="About" value={1} />
+          <Tab style={{backgroundColor: '#B0BEC5'}} label="Liked News" value={2} />
+          <Tab style={{backgroundColor: '#455A64'}} label="Liked Status" value={3} />
+          <Tab style={{backgroundColor: '#263238'}} label="Followers" value={4} />
+          <Tab style={{backgroundColor: '#CFD8DC'}} label="Following" value={5} />
         </Tabs>
 
         <SwipeableViews
