@@ -76,15 +76,16 @@ class StatusTextArea extends React.Component {
 
               <TextField
                 onChange={this.handleTitleChange.bind(this)}
+                id="status-title-field"
                 value={this.state.title}
                 type="text"
                 placeholder="Title" /> <br />
 
               <TextField
                 onChange={this.handleTextChange.bind(this)}
+                id="status-description-field"
                 value={this.state.text}
-                componentClass="textarea"
-                placeholder="News" /> <br />
+                placeholder="Description" /> <br />
 
               <img src={this.state.image} />
 
