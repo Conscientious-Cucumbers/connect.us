@@ -5,7 +5,7 @@ const db = require('../');
 const NewsSources = db.Model.extend({
   tableName: 'news_sources',
   source: function() {
-    return this.hasOne('source');
+    return this.hasMany('api_news', 'id_source');
   }
 });
 

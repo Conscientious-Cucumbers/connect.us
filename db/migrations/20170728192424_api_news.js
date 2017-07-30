@@ -8,7 +8,7 @@ exports.up = function (knex, Promise) {
       table.string('media', 300).nullable();
       table.string('url', 500).nullable();
       table.string('date', 100).notNullable();
-      table.integer('id_source', 20).notNullable();
+      table.integer('id_source', 20).notNullable().references('news_sources.id');
       table.timestamps(true, true);
     })
   ]);

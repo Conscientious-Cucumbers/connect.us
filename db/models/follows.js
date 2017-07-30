@@ -3,10 +3,10 @@ const db = require('../');
 const Follow = db.Model.extend({
   tableName: 'follows',
   follower: function() {
-    return this.hasOne('profiles', 'id_follower');
+    return this.belongsTo('profiles');
   },
   followed: function() {
-    return this.hasOne('profiles', 'id_followed');
+    return this.belongsTo('profiles');
   }
 });
 
