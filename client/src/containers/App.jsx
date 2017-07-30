@@ -48,7 +48,7 @@ class App extends React.Component {
         onHide={() => {}}
         bsSize="large">
         <Modal.Header>
-          <h3>Sign Up</h3>
+          <h3 style={{color: '#EF6C00'}}>Sign Up</h3>
         </Modal.Header>
         <Form id="signupNewUserForm" onSubmit={this.submitSignUp.bind(this)}>
           <Modal.Body>
