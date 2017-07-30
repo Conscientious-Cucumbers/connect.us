@@ -6,70 +6,43 @@ const Promise = require('bluebird');
 const models = require('../../db/models');
 
 
-var apiResult, googleNews;
-
 router.route('/news')
   .get((req, res) => {
-    axios.get('https://newsapi.org/v1/articles?source=google-news&sortBy=top&apiKey=f97f9989c5f94e93ba130be4b6c2f09a')
-        .then(function(result_google) {
-          console.log('****** How many news fetched: ', result_google.data.articles.length);
+    models.ApiNews.forge()
+    .fetchPage({
+     pageSize: 10,
+     page: req.query.page || 1// Page number in params ???
+    })
+    .then(function (pageResults) {
 
-          apiResult = result_google.data.articles;
-          googleNews = [];
-
-          for (var i = 0; i < apiResult.length; i++) {
-
-            var news = {};
-
-            news.title = apiResult[i].title;
-            news.text = apiResult[i].description;
-            news.thumbnail = apiResult[i].urlToImage;
-            news.media = apiResult[i].urlToImage;
-            news.date = apiResult[i].publishedAt;
-            news.url = apiResult[i].url;
-            news.source = 'Google News';
-
-            googleNews.push(news);
-
+      Promise.map(pageResults, (pageresult) => {
+        return models.NewsItem.where({url: pageresult.url}).fetch()
+        .then((result) => {
+          if (result.attributes) {
+            return models.NewsLike.where({id_news: result.attributes.id}).fetchAll();
           }
-
-          Promise.map(googleNews, (newsItem) => {
-            return models.NewsItem.where({url: newsItem.url}).fetch()
-            .then((result) => {
-              if (result.attributes) {
-                return models.NewsLike.where({id_news: result.attributes.id}).fetchAll();
-              }
-              throw newsItem;
-            })
-            .then((result) => {
-              result = result.models.map((item) => item.attributes)
-                      .filter((item) => item.id_user === req.user.id);
-              // console.log('filtered item: ', result);
-              if (result.length) {
-                newsItem.liked = true;
-              }
-              throw null;
-            })
-            .catch(() => {
-              return newsItem;
-            });
-          })
-          .then((googleNews) => {
-            res.send(googleNews);
-          })
-          // console.log(googleNews[0]);
-
-          // axios.get("https://www.reddit.com/r/news.json")
-          //   .then(function(result_reddit) {
-          //     console.log("****** How many funny fetched: ", result_reddit.data.data.children.length);
-          //   })
-          //   .catch(e => console.log('reddit error', e));
-
-          .catch(e => console.log('google error', e));
+          throw pageresult;
+        })
+        .then((result) => {
+          result = result.models.map((item) => item.attributes)
+                  .filter((item) => item.id_user === req.user.id);
+          if (result.length) {
+            pageresult.liked = true;
+          }
+          throw null;
+        })
+        .catch(() => {
+          return pageresult;
         });
+      })
+      //check if it is still referencing to the 'pageResults' from pagination:
+      .then((pageResults) => {
+        res.status(201).send(pageResults);
+      })
+      .catch(e => console.log('error', e));
+
+    });
+
   })
-  .post((req, res) => {
-    res.status(201).send({ data: 'Posted!' });
-  });
 
 module.exports = router;
