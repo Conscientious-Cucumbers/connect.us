@@ -306,7 +306,10 @@ h1 {
   margin:2em 0 2em 0;
 }
 
+.status-image {
+  margin: 0 auto;
+}
+
 img {
   display: block;
-  margin: 0 auto;
 }
