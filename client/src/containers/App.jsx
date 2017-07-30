@@ -77,9 +77,9 @@ class App extends React.Component {
     return (
       <Router history={browserHistory}>
         <div className="app-container">
-          <div className="navbar-container">
+          
             <NavBar />
-          </div>
+        
           <div className='body-container'>
             {this.signUpModal()}
             <Switch>
