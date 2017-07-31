@@ -35,16 +35,16 @@ class NewsFeed extends React.Component {
           {
             !!this.props.newsFeed
               ?
-                this.props.newsFeed.map(((newsItem, index) => {
-                  return <NewsItem key={index} newsItem={newsItem} />;
-                }))
+              this.props.newsFeed.map(((newsItem, index) => {
+                return <NewsItem key={index} newsItem={newsItem} />;
+              }))
               :
               <Loading />
           }
           {
             this.props.isFetching
               ?
-                <Loading className="bottom-loading" />
+              <Loading className="bottom-loading" />
               :
               <div></div>
           }
