@@ -6,9 +6,11 @@
 
 .status-date {
   font-size: 10px;
-  font-weight: bold;
+  font-style: oblique;
+  font-variant: small-caps;
   color: black;
   float: right;
+  margin-right: 10px;
 }
 
 .status-title-inner {
