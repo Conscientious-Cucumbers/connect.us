@@ -79,7 +79,12 @@ h6 {
 }
 
 .status-title {
+  padding-top: 10px;
   font-weight: bolder;
+}
+
+.status-title-divider {
+  margin: 10px 10px 10px 10px !important;
 }
 
 .status-description {
