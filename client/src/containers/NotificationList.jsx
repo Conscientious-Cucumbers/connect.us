@@ -5,6 +5,7 @@ import { NavDropdown, MenuItem } from 'react-bootstrap';
 import Badge from 'material-ui/Badge';
 import { bindActionCreators } from 'redux';
 import { clearNotifications } from '../actions/notificationActions';
+import {IconMenu, IconButton} from 'material-ui';
 
 
 class NotificationList extends React.Component {
@@ -38,7 +39,9 @@ class NotificationList extends React.Component {
           badgeStyle={{top: -9, right: -4, fontSize: 10, width: 18, height: 18}}
           badgeContent={this.props.UnseenNotifications.length}
           secondary>
-          <i className="fa fa-globe" aria-hidden="true"></i>
+          <IconButton>
+            <i className="fa fa-globe" aria-hidden="true"></i>
+          </IconButton>
         </Badge>
       );
     } else {
@@ -51,18 +54,27 @@ class NotificationList extends React.Component {
 
   render () {
 
-    //   <DropDownMenu>
-
-     //      {this.props.UnseenNotifications && this.props.UnseenNotifications.map((notification, index) => {return <Menu key={(3 + (index * 2 + 1) ) / 10} notification={notification}/>})}
-          
-     //  </DropDownMenu>
+    return (
+      <IconMenu
+      iconButtonElement={this.notifications()}
+      anchorOrigin={{horizontal: 'left', vertical: 'down'}}
+      targetOrigin={{horizontal: 'left', vertical: 'top'}}
+      >
+        {
+          this.props.UnseenNotifications &&
+          this.props.UnseenNotifications.map((notification, index) => {
+            return <Menu key={(3 + (index * 2 + 1) ) / 10} notification={notification}/>;
+          })
+        }
+      </IconMenu>
+    );
 
     return (
-      
-      <NavDropdown eventKey={3} 
+
+      <NavDropdown eventKey={3}
         className='pull-right'
-        title={this.notifications()} 
-        id="notifications-nav-dropdown" 
+        title={this.notifications()}
+        id="notifications-nav-dropdown"
         onTouchTap={this.needsClearNotifications.bind(this)}
         noCaret>
         {

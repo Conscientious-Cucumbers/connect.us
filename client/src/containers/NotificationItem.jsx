@@ -1,5 +1,6 @@
 import React from 'react';
-import { MenuItem } from 'react-bootstrap';
+// import { MenuItem } from 'react-bootstrap';
+import MenuItem from 'material-ui/MenuItem';
 import { LinkContainer } from 'react-router-bootstrap';
 
 const NotificationItem = (props) => (
