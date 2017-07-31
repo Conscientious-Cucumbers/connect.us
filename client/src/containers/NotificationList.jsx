@@ -56,9 +56,9 @@ class NotificationList extends React.Component {
 
     return (
       <IconMenu
-      iconButtonElement={this.notifications()}
-      anchorOrigin={{horizontal: 'left', vertical: 'down'}}
-      targetOrigin={{horizontal: 'left', vertical: 'top'}}
+        iconButtonElement={this.notifications()}
+        anchorOrigin={{horizontal: 'left', vertical: 'down'}}
+        targetOrigin={{horizontal: 'left', vertical: 'top'}}
       >
         {
           this.props.UnseenNotifications &&
