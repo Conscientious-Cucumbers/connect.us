@@ -74,7 +74,9 @@ export const getNextNewsPage = (pageNum) => (dispatch, getState) => {
   if (getState().isFetching) {
     return;
   }
-  axios.get('/api/news', {page: pageNum})
+  axios.get('/api/news', {
+    params: {page: pageNum}
+  })
   .then((result) => {
     dispatch(setNextNewsPage(result.data));
     dispatch(finishNextPageFetch());
