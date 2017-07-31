@@ -2,10 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import NotificationItem from './NotificationItem.jsx';
 import { NavDropdown, MenuItem } from 'react-bootstrap';
-//import Badge from 'material-ui/Badge';
+import Badge from 'material-ui/Badge';
 import { bindActionCreators } from 'redux';
 import { clearNotifications } from '../actions/notificationActions';
-import {AppBar, Tabs, Tab, IconButton, NotificationsIcon, FlatButton, Badge, IconMenu, DropDownMenu, MenuItem as MI, SearcbBar } from 'material-ui'
 
 
 class NotificationList extends React.Component {
@@ -51,16 +50,33 @@ class NotificationList extends React.Component {
 
 
   render () {
+
+    //   <DropDownMenu>
+
+     //      {this.props.UnseenNotifications && this.props.UnseenNotifications.map((notification, index) => {return <Menu key={(3 + (index * 2 + 1) ) / 10} notification={notification}/>})}
+          
+     //  </DropDownMenu>
+
     return (
       
-      <DropDownMenu>
-
-          {this.props.UnseenNotifications && this.props.UnseenNotifications.map((notification, index) => {return <MenuItem key={(3 + (index * 2 + 1) ) / 10} notification={notification}/>})}
-          
-      </DropDownMenu>
-
-
-      
+      <NavDropdown eventKey={3} 
+        class='pull-right'
+        title={this.notifications()} 
+        id="notifications-nav-dropdown" 
+        onTouchTap={this.needsClearNotifications.bind(this)}
+        noCaret>
+        {
+          this.props.UnseenNotifications && this.props.UnseenNotifications.map((notification, index) => {
+            return <NotificationItem key={(3 + (index * 2 + 1) ) / 10} notification={notification}/>;
+          })
+        }
+        <MenuItem divider />
+        {
+          this.props.SeenNotifications && this.props.SeenNotifications.slice(0, 5).map((notification, index) => {
+            return <NotificationItem key={(3 + (index + 2) * 2) / 10} notification={notification}/>;
+          })
+        }
+      </NavDropdown>
     );
   }
 }
