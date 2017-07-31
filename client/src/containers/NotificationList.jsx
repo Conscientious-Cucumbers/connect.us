@@ -60,7 +60,7 @@ class NotificationList extends React.Component {
     return (
       
       <NavDropdown eventKey={3} 
-        class='pull-right'
+        className='pull-right'
         title={this.notifications()} 
         id="notifications-nav-dropdown" 
         onTouchTap={this.needsClearNotifications.bind(this)}
