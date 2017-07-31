@@ -24,28 +24,28 @@ class Header extends React.Component {
     // className="profile-picture"
     return (
       <div>
-          <div>
-            <Paper zDepth={5} className="profile-picture" circle>
-              <img 
-                  src={this.props.active.profile_picture || 'http://www.bsmc.net.au/wp-content/uploads/No-image-available.jpg'} />
-            </Paper>
+        <div>
+          <Paper zDepth={5} className="profile-picture" circle>
+            <img
+              src={this.props.active.profile_picture || 'http://www.bsmc.net.au/wp-content/uploads/No-image-available.jpg'} />
+          </Paper>
+        </div>
+        <h2 className="profile-name">
+          {this.props.active.first && this.props.active.last && `${this.props.active.first} ${this.props.active.last}` || this.props.active.display}
+        </h2>
+        {!this.props.user || this.props.user.username === this.props.active.username
+          ?
+          null
+          :
+          <div className="follow-button-wrapper">
+            <RaisedButton
+              onTouchTap={this.toggleFollow.bind(this)}
+              backgroundColor={this.props.activeFollowed ? fullWhite : '#78909C'}
+              labelColor={this.props.activeFollowed ? '#78909C' : fullWhite}
+              className="follow-button"
+              label={this.props.activeFollowed ? 'Following' : 'Follow'} />
           </div>
-          <h2 className="profile-name">
-            {this.props.active.first && this.props.active.last && `${this.props.active.first} ${this.props.active.last}` || this.props.active.display}
-          </h2>
-          {!this.props.user || this.props.user.username === this.props.active.username
-            ?
-            null
-            :
-            <div className="follow-button-wrapper">
-              <RaisedButton 
-                onTouchTap={this.toggleFollow.bind(this)}
-                backgroundColor={this.props.activeFollowed ? fullWhite : '#0079BF'}
-                labelColor={this.props.activeFollowed ? '#0079BF' : fullWhite}
-                className="follow-button" 
-                label={this.props.activeFollowed ? 'Following' : 'Follow'}/>
-            </div>
-          }
+        }
         <br />
       </div>
     );
@@ -67,5 +67,3 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
-
-

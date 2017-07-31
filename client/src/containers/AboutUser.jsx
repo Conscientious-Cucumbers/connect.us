@@ -1,6 +1,7 @@
 import React from 'react';
 import { FormControl, ControlLabel } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
 
 class AboutUser extends React.Component {
 
@@ -11,7 +12,7 @@ class AboutUser extends React.Component {
   render () {
     return (
       <div className="about-user">
-        <h6>CONTACT INFORMATION</h6>
+        <h6 style={{color: '#E65100'}}>CONTACT INFORMATION</h6>
         <hr className="contact-info-hr"/>
         <h7><b>Username</b></h7>
         <p>{this.props.active.username}</p>
