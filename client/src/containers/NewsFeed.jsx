@@ -7,6 +7,7 @@ import ReactScrollPagination from 'react-scroll-pagination';
 import { getNextNewsPage } from '../actions/newsActions';
 import { bindActionCreators } from 'redux';
 
+<<<<<<< HEAD
 class NewsFeed extends React.Component {
   constructor (props) {
     super(props);
@@ -57,6 +58,38 @@ class NewsFeed extends React.Component {
     );
   }
 }
+=======
+const NewsFeed = (props) => (
+  <div className="news-feed-container">
+    <GridList
+      cols={1}
+      padding={10}
+      className="news-feed-list"
+    >
+      {
+        !!props.newsFeed
+          ?
+          props.newsFeed.map(((newsItem, index) => {
+            return <NewsItem key={index} newsItem={newsItem} />;
+          }))
+          :
+          <Loading />
+      }
+      {
+        props.isFetching
+          ?
+          <Loading className="bottom-loading" />
+          :
+          <div></div>
+      }
+    </GridList>
+    <ReactScrollPagination
+      paginationShowTime={3000}
+      fetchFunc={props.getNextNewsPage}
+    />
+  </div>
+);
+>>>>>>> css refactoring for profile and status
 
 const mapStateToProps = (state) => {
   return {

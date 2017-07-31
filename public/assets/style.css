@@ -4,6 +4,10 @@
   background-color: #B0BEC5;
 }
 
+.follow-entry:hover {
+  background-color: #ECEFF1;
+}
+
 body {
   background-color: #eee;
   padding-top:80px;
@@ -65,16 +69,18 @@ h6 {
   text-align: center
 }
 
-.follow-button {
-  border: solid 1px #0079BF;
-}
-
 .jumbotron {
   background-color: white;
   border: 1px solid #bbb;
 }
 
+.status-description {
+  font-size: 15px;
+}
+
 .status-post-2 {
+  font-family: "Times New Roman";
+  font-size: 20px;
   margin-left: 155px;
   margin-right: 155px;
   text-align: center;
