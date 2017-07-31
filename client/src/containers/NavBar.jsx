@@ -39,6 +39,7 @@ class NavBar extends React.Component {
 
   iconElementLeft () {
     return (
+<<<<<<< HEAD
       <Link to="/">
         <MediaQuery minWidth={500}>
           <div className="logo-image-container">
@@ -51,6 +52,14 @@ class NavBar extends React.Component {
           </div>
         </MediaQuery>
       </Link>
+=======
+      <SearchBar
+        type='text'
+        method="GET"
+        onRequestSearch={`/${this.state.searchInput}`}
+        onChange={this.setSearchInput.bind(this)}
+        style={{positon: 'sticky'}}/>
+>>>>>>> fixed linting errors
     );
   }
 
@@ -59,6 +68,7 @@ class NavBar extends React.Component {
     return (
       <div>
 
+<<<<<<< HEAD
         <AppBar title={this.iconElementLeft()}
         style={{position: 'fixed', backgroundColor: 'rgb(18,30,36)', top: '0px', height: '65px'}}
         iconElementLeft={
@@ -103,6 +113,37 @@ class NavBar extends React.Component {
             <LinkContainer to='/settings'><MI primaryText="Settings" /></LinkContainer>
             <LinkContainer to='/about'><MI primaryText="About" /></LinkContainer>
             <MI primaryText="Log Out" href="/logout" />
+=======
+        <AppBar title={
+          <LinkContainer to="/">
+            <p >
+              ConnectHub.us
+            </p>
+          </LinkContainer>
+        }
+        style={{position: 'fixed', backgroundColor: '#FF3E35', top: '0px', height: '60px'}}
+        iconElementLeft={this.iconElementLeft()}
+        >
+
+          <LinkContainer to='/#'>
+            <IconButton tooltip="Home">
+              <ActionHome color={'18243D'}/>
+            </IconButton>
+          </LinkContainer>
+
+          <IconButton href={`/${this.props.user ? this.props.user.username : null}`} tooltip="Profile" >
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill = "#18243D" viewBox="0 0 24 24">
+              <path d={this.svg2}/>
+            </svg>
+          </IconButton>
+
+          <NotificationList />
+
+          <IconMenu iconButtonElement={<IconButton tooltip="Settings"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill = "#18243D" viewBox="0 0 24 24"><path d={this.svg1}/></svg> </IconButton>}>
+            <LinkContainer to='/settings'><MI primaryText="Settings" /></LinkContainer>
+            <LinkContainer to='/about'><MI primaryText="About" /></LinkContainer>
+            <MI primaryText="Log Out" eventKey={4.3} href="/logout" />
+>>>>>>> fixed linting errors
           </IconMenu>
         </AppBar>
 
