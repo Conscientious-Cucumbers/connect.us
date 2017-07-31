@@ -36,9 +36,9 @@ class Status extends React.Component {
   title () {
     const date = new Date(this.props.status.created_at);
     return (
-      <h3>
+      <span className="status-date">
         {date.toDateString()} at {date.toLocaleTimeString()}
-      </h3>
+      </span>
     );
   }
 
@@ -61,12 +61,9 @@ class Status extends React.Component {
     return (
       <div>
         <Paper zDepth={5}
-          footer={this.panelFooter()}
-          className="status-post-2"
-          header={this.title()}
-          bsStyle="info">
+          className="status-post-2">
           <div className="status-title">
-            {this.props.status.title}
+            <span className="status-title-inner">{this.props.status.title}</span> <span className="status-date">{this.title()}</span>
             <Divider className="status-title-divider"/>
           </div>
           <br></br>
@@ -74,6 +71,9 @@ class Status extends React.Component {
           <br></br>
           <div className="status-description">
             {this.props.status.text}
+          </div>
+          <div>
+            {this.panelFooter()}
           </div>
         </Paper>
         <br/>
