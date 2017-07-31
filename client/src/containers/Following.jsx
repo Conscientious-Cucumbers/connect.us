@@ -15,12 +15,12 @@ const Following = (props) => {
     <List>
       {
         props.following
-        ?
-        props.following.map((follows, index) => {
-          return <FollowEntry key={index} follows={follows}/>;
-        }) 
-        :
-        <Loading />
+          ?
+          props.following.map((follows, index) => {
+            return <FollowEntry key={index} follows={follows}/>;
+          })
+          :
+          <Loading />
       }
     </List>
   );
@@ -33,5 +33,5 @@ const mapStateToProps = (state) => {
 };
 
 
-// export default Following;   
+// export default Following;
 export default connect(mapStateToProps)(Following);

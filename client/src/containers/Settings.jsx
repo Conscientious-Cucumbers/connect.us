@@ -34,15 +34,15 @@ class Settings extends React.Component {
 
   render () {
     return (
-        <div className="container">
-          {
-            this.props.user && this.props.user.username
+      <div className="container">
+        {
+          this.props.user && this.props.user.username
             ?
             this.loaded()
             :
             this.loading()
-          }
-        </div>
+        }
+      </div>
     );
   }
 

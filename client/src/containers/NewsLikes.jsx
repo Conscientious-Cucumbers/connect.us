@@ -17,18 +17,18 @@ class NewsLikes extends React.Component {
     return (
       <div className="news-feed-container">
         <GridList
-        cols={1}
-        padding={10}
-        className="news-feed-list"
+          cols={1}
+          padding={10}
+          className="news-feed-list"
         >
           {
-            this.props.newsLikes 
-            ?
-            this.props.newsLikes.map((item, index) => {
-              return <NewsItem isNewsLike={this.state.isNewsLike} key={index} newsItem={item}/>;
-            }) 
-            :
-            <Loading />
+            this.props.newsLikes
+              ?
+              this.props.newsLikes.map((item, index) => {
+                return <NewsItem isNewsLike={this.state.isNewsLike} key={index} newsItem={item}/>;
+              })
+              :
+              <Loading />
           }
         </GridList>
       </div>

@@ -8,6 +8,10 @@
   background-color: #ECEFF1;
 }
 
+.fa-search:before {
+  color: #FFA500;
+}
+
 body {
   background-color: #eee;
   padding-top:80px;
@@ -74,7 +78,12 @@ h6 {
   border: 1px solid #bbb;
 }
 
+.status-title {
+  font-weight: bolder;
+}
+
 .status-description {
+  font-weight: lighter;
   font-size: 15px;
 }
 
