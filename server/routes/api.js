@@ -11,10 +11,17 @@ router.route('/news')
     models.ApiNews.forge()
     .fetchPage({
       pageSize: 10,
+      withRelated: ['source'],
       page: req.query.page || 1// Page number in params ???
     })
     .then(function (pageResults) {
-      Promise.map(pageResults.toJSON(), (pageresult) => {
+      //console.log("****** pageResults.toJSON(): ", pageResults.toJSON());
+      return Promise.map(pageResults.toJSON(), (pageresult) => {
+        pageresult.source = pageresult.source.name;
+        delete pageresult.id_source;
+        delete pageresult.id;
+
+        //console.log("*********pageresult: ", pageresult);
         return models.NewsItem.where({url: pageresult.url}).fetch()
         .then((result) => {
           if (result.attributes) {
@@ -26,6 +33,7 @@ router.route('/news')
           result = result.models.map((item) => item.attributes)
                   .filter((item) => item.id_user === req.user.id);
           if (result.length) {
+            console.log("******* pageresult.liked: ", pageresult.title)
             pageresult.liked = true;
           }
           throw null;
@@ -34,8 +42,8 @@ router.route('/news')
           return pageresult;
         });
       })
-      //check if it is still referencing to the 'pageResults' from pagination:
-      .then(() => {
+      .then((pageResults) => {
+        console.log("********** pageResults: ", pageResults);
         res.status(201).send(pageResults);
       })
       .catch(e => console.log('Error fetching news: ', e));

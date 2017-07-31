@@ -7,6 +7,7 @@ const Promise = require('bluebird');
 //////////// POST ///////////////
 
 module.exports.toggleNewsLiked = (req, res) => {
+  console.log("********** toggleNewsLiked req.body: ", req.body);
   const newsItem = req.body.newsLike;
   var newsId;
   models.NewsItem.where({url: newsItem.url}).fetch()
@@ -27,6 +28,7 @@ module.exports.toggleNewsLiked = (req, res) => {
     throw result;
   })
   .catch((newsLike) => {
+    console.log("****** toggleNewsLiked newsLike: ", newsLike)
     newsId = newsLike.get('id');
     return models.NewsLike.where({
       id_user: req.user.id,
@@ -196,10 +198,22 @@ module.exports.getStatuses = (req, res) => {
   models.Profile.where({ username: req.params.username }).fetch()
   .then(profile => {
     console.log('****** getStatusLike profile: ', profile.attributes.id);
-    return models.Status.where({id_user: profile.attributes.id}).fetchAll();
+    return models.Status.where({id_user: profile.get('id')}).fetchAll();
   })
   .then(statuses => {
-    res.status(200).send(statuses);
+    return Promise.map(statuses.toJSON(), (eachstatus) => {
+      return models.StatusLike.where({id_status: eachstatus.id, id_user: req.user.id}).fetch()
+        .then((result) => {
+          if(result){
+            eachstatus.liked = true;
+          }
+          return eachstatus;
+        })
+    });
+  })
+  .then((statuses) => {
+    console.log("****** getStatuses liked: ", statuses);
+    res.status(200).send(statuses)
   });
 };
 

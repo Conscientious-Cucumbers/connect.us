@@ -20,7 +20,7 @@ class Status extends React.Component {
   componentDidMount () {
     this.setState({
       isSelf: this.props.user.username === this.props.activeProfile.username,
-      isLiked: this.props.user.username === this.props.activeProfile.username
+      isLiked: this.props.status.liked || this.props.user.username === this.props.activeProfile.username
     });
   }
 
