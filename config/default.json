@@ -22,10 +22,10 @@
   },
 
   "sources": [
-    "abc-news-au",
-    "cnn",
-    "ign",
-    "google-news"
+    {"name": "ABC News AU", "source": "abc-news-au"},
+    {"name": "CNN", "source": "cnn"},
+    {"name": "IGN", "source": "ign"},
+    {"name": "Google News", "source": "google-news"}
   ],
 
   "passport": {
