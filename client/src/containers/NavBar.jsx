@@ -37,7 +37,14 @@ class NavBar extends React.Component {
 
   render () {
     return (
-       <AppBar title="connectUs" style={{position:'fixed',backgroundColor:'#3B5998', top:'0px', height:'60px'}} iconElementLeft={<SearchBar type='text' method="GET" onRequestSearch={`/${this.state.searchInput}`} onChange={this.setSearchInput.bind(this)} style={{left: '150px', height: '45px', width:'400px', position:'absolute'}}/> }>
+      <div>
+       
+       <AppBar title={ <LinkContainer to="/">
+            <p >
+            ConnectHub.us
+            </p>
+            </LinkContainer>} style={{position:'fixed',backgroundColor:'#FF3E35', top:'0px', height:'60px'}} iconElementLeft={<SearchBar type='text' method="GET" onRequestSearch={`/${this.state.searchInput}`} onChange={this.setSearchInput.bind(this)} style={{positon:'sticky'}}/> }>
+
           <LinkContainer to='/#'>
             <IconButton tooltip="Home"> <ActionHome color={'18243D'}/> 
               <NavItem eventKey={2}> </NavItem>
@@ -45,8 +52,8 @@ class NavBar extends React.Component {
           </LinkContainer>
           
             <IconButton href={`/${this.props.user ? this.props.user.username : null}`}tooltip="Profile" >    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill = "#18243D" viewBox="0 0 24 24"><path d={this.svg2}/></svg>   </IconButton> 
-     
-          <IconButton tooltip="Notifications" color={'white'}> <svg xmlns="http://www.w3.org/2000/svg" width="24"  fill = "#18243D" height="24" viewBox="0 0 24 24"><path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6z"/></svg>   </IconButton> 
+         
+               <IconButton> <NotificationList /> </IconButton>
           <IconMenu  iconButtonElement= {<IconButton tooltip="Settings">  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill = "#18243D"  viewBox="0 0 24 24"><path d={this.svg1}/></svg> </IconButton>}>
             <LinkContainer to='/settings'><MI primaryText="Settings" /></LinkContainer>
             <LinkContainer to='/about'><MI primaryText="About" /></LinkContainer>
@@ -54,7 +61,7 @@ class NavBar extends React.Component {
           </IconMenu>
        </AppBar>
 
-       
+       </div>
     );
   }
 }
