@@ -4,6 +4,7 @@ import LikeButton from '../components/LikeButton.jsx';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import actions from '../actions';
+import Paper from 'material-ui/Paper';
 
 class Status extends React.Component {
 
@@ -58,20 +59,22 @@ class Status extends React.Component {
   render () {
     return (
       <div>
-        <Panel
+        <Paper zDepth={5}
 
           footer={this.panelFooter()}
           className="status-post-2"
           header={this.title()}
           bsStyle="info">
-          {this.props.status.title}
+          <div className="status-title">
+            {this.props.status.title}
+          </div>
           <br></br>
           <img className="status-image" alt={'image'} src={this.props.status.image} />
           <br></br>
           <div className="status-description">
             {this.props.status.text}
           </div>
-        </Panel>
+        </Paper>
         <br/>
 
       </div>

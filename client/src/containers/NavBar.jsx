@@ -1,13 +1,6 @@
 import React from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
-import { Navbar,
-         Nav,
-         NavItem,
-         NavDropdown,
-         MenuItem,
-         FormGroup,
-         FormControl,
-         Button } from 'react-bootstrap';
+import { Navbar, Nav, NavItem, NavDropdown, MenuItem, FormGroup, FormControl, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { clearNotifications } from '../actions/notificationActions';
 import { bindActionCreators } from 'redux';
@@ -48,6 +41,7 @@ class NavBar extends React.Component {
 
   render () {
     return (
+<<<<<<< HEAD
       <div>
 
          <AppBar title={
@@ -65,6 +59,32 @@ class NavBar extends React.Component {
               <IconButton tooltip="Home">
                 <ActionHome color={'18243D'}/>
               </IconButton>
+=======
+      <Navbar fluid inverse fixedTop>
+        <Navbar.Header>
+          <LinkContainer to="/">
+            <Navbar.Brand>
+            ConnectHub.us
+            </Navbar.Brand>
+          </LinkContainer>
+          <Navbar.Toggle />
+        </Navbar.Header>
+        <Navbar.Collapse>
+          <Navbar.Form pullLeft>
+            <form method="GET" action={`/${this.state.searchInput}`}>
+              <FormGroup>
+                <FormControl onChange={this.setSearchInput.bind(this)} type="text" placeholder="Search for user" />
+              </FormGroup>
+              {' '}
+              <Button className="fa fa-search" type="submit"></Button>
+            </form>
+          </Navbar.Form>
+          <Nav pullRight>
+            <LinkContainer to="/#">
+              <NavItem eventKey={2}>
+                <i className="fa fa-home" aria-hidden="true"></i>
+              </NavItem>
+>>>>>>> additional css refactoring for status and profile
             </LinkContainer>
 
             <IconButton href={`/${this.props.user ? this.props.user.username : null}`} tooltip="Profile" >

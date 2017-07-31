@@ -10,12 +10,12 @@ const Followers = (props) => (
   <List>
     {
       props.followers
-      ?
-      props.followers.map((follows, index) => {
-        return <FollowEntry key={index} follows={follows}/>;
-      }) 
-      :
-      <Loading />
+        ?
+        props.followers.map((follows, index) => {
+          return <FollowEntry key={index} follows={follows}/>;
+        })
+        :
+        <Loading />
     }
   </List>
 );
