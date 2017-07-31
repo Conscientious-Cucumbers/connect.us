@@ -4,6 +4,18 @@
   background-color: #B0BEC5;
 }
 
+.status-date {
+  font-size: 10px;
+  font-weight: bold;
+  color: black;
+  float: right;
+}
+
+.status-title-inner {
+  margin-right: -160px;
+
+}
+
 .follow-entry:hover {
   background-color: #ECEFF1;
 }
