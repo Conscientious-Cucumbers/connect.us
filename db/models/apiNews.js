@@ -4,7 +4,7 @@ const db = require('../');
 const ApiNews = db.Model.extend({
   tableName: 'api_news',
   source: function() {
-    return this.belongsTo('news_sources', 'id_source');
+    return this.belongsTo('NewsSources', 'id_source');
   }
 });
 
