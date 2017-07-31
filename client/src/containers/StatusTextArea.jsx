@@ -49,10 +49,6 @@ class StatusTextArea extends React.Component {
   }
 
   uploadPicture (file) {
-<<<<<<< HEAD
-=======
-
->>>>>>> status text fields and square buttons changed to material-ui
     this.setState({
       image: file.filesUploaded[0].url
     });
@@ -84,24 +80,12 @@ class StatusTextArea extends React.Component {
                 value={this.state.title}
                 type="text"
                 placeholder="Title" /> <br />
-<<<<<<< HEAD
-=======
 
-<<<<<<< HEAD
->>>>>>> status text fields and square buttons changed to material-ui
-
-=======
->>>>>>> adjusted margins and centered text in statuses
               <TextField
                 onChange={this.handleTextChange.bind(this)}
                 id="status-description-field"
                 value={this.state.text}
-<<<<<<< HEAD
                 placeholder="Description" /> <br />
-=======
-                componentClass="textarea"
-                placeholder="News" /> <br />
->>>>>>> status text fields and square buttons changed to material-ui
 
               <img src={this.state.image} />
 
