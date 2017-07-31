@@ -74,10 +74,13 @@ export const getNextNewsPage = (pageNum) => (dispatch, getState) => {
   if (getState().isFetching) {
     return;
   }
-
-  dispatch(startNextPageFetch());
-  setTimeout(() => {
-    dispatch(setNextNewsPage(getState().newsFeed.slice(0, 10)));
+  axios.get('/api/news', {page: pageNum})
+  .then((result) => {
+    dispatch(setNextNewsPage(result.data));
     dispatch(finishNextPageFetch());
-  }, 2000);
+  });
+  // dispatch(startNextPageFetch());
+  // setTimeout(() => {
+  //
+  // }, 2000);
 };

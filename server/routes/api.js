@@ -10,12 +10,11 @@ router.route('/news')
   .get((req, res) => {
     models.ApiNews.forge()
     .fetchPage({
-     pageSize: 10,
-     page: req.query.page || 1// Page number in params ???
+      pageSize: 10,
+      page: req.query.page || 1// Page number in params ???
     })
     .then(function (pageResults) {
-
-      Promise.map(pageResults, (pageresult) => {
+      Promise.map(pageResults.toJSON(), (pageresult) => {
         return models.NewsItem.where({url: pageresult.url}).fetch()
         .then((result) => {
           if (result.attributes) {
@@ -36,13 +35,13 @@ router.route('/news')
         });
       })
       //check if it is still referencing to the 'pageResults' from pagination:
-      .then((pageResults) => {
+      .then(() => {
         res.status(201).send(pageResults);
       })
-      .catch(e => console.log('error', e));
+      .catch(e => console.log('Error fetching news: ', e));
 
     });
 
-  })
+  });
 
 module.exports = router;

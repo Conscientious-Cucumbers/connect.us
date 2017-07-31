@@ -7,7 +7,8 @@ exports.seed = function(knex, Promise) {
       // Inserts seed entries
       return knex('news_sources').insert(availableSources.map(source => {
         return {
-          source: source.split('-').join(' ')
+          name: source.name,
+          source: source.source
         };
       }));
     });

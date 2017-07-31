@@ -1,20 +1,51 @@
 const axios = require('axios');
-const availableSources = require('config')['sources'];
 const models = require('../db/models');
 var Promise = require('bluebird');
+var _ = require('lodash');
+// const knex = require('knex')(require('../knexfile'));
 
-const fetchAll = function(sources) {
-  const fetched_news = [];
-  Promise.map(sources, function(source) {
-    return fetch(source)
-    .then(function(source_news) {
-      fetched_news.push(...source_news);
+const updateNews = function() {
+  console.log('Updating table...');
+  fetchAll()
+  .then((fetchedNews) => {
+    return models.ApiNews.fetchAll()
+    .then((dbNews) => {
+      const news_JSON = dbNews.toJSON()
+      .map(item => {
+        delete item.id;
+        return item;
+      });
+      return _.uniqBy(newsSort(fetchedNews).concat(news_JSON), 'url');
     });
   })
-  .then(function() {
-    console.log(fetched_news);
-    console.log('Length of news: ', fetched_news.length);
-    return fetched_news;
+  .tap((result) => {
+    models.ApiNews.where('id', '!=', '0').destroy();
+  })
+  .then((result) => {
+    Promise.map(result, (newsItem) => {
+      // console.log('news item: ', newsItem);
+      return models.ApiNews.forge(newsItem).save();
+    });
+  })
+  .catch((err) => {
+    console.log('Error inserting news: ', err);
+  });
+};
+
+const newsSort = function(fetched) {
+  return fetched.sort((a, b) => new Date(b.date) - new Date(a.date));
+};
+
+const fetchAll = function() {
+
+  return models.NewsSources.fetchAll()
+  .then((result) => {
+    if (result) {
+      return Promise.map(result.toJSON(), function(source) {
+        return fetch(source);
+      })
+      .then((news) => news.reduce((a, b) => a.concat(b), []));
+    }
   });
 };
 
@@ -22,11 +53,22 @@ const fetch = function(source) {
   // axios call
     // map the object to the properties we need
     // store in the database
-
-
-  return axios.get(`https://newsapi.org/v1/articles?source=${source}&sortBy=top&apiKey=f97f9989c5f94e93ba130be4b6c2f09a`)
+  console.log('Fetching ', source.name);
+  console.log('with id ', source.id);
+  return axios.get(`https://newsapi.org/v1/articles?source=${source.source}&sortBy=top&apiKey=f97f9989c5f94e93ba130be4b6c2f09a`)
   .then(function(result) {
-    return result.data.articles;
+    const articles = result.data.articles;
+    return articles.map(function(article) {
+      return {
+        title: article.title,
+        thumbnail: article.urlToImage,
+        text: article.description,
+        media: article.urlToImage,
+        url: article.url,
+        date: article.publishedAt || new Date().toString(),
+        id_source: source.id
+      };
+    });
   })
   .catch(function(e) {
     console.log('Error fetching ' + source, e);
@@ -35,7 +77,9 @@ const fetch = function(source) {
 
 
 module.exports.start = function(interval) {
-  fetchAll(availableSources);
+  updateNews();
+  // fetchAll()
+  // .then(result => console.log(result));
   // setInterval(function() {
   //   fetchAll(availableSources);
   // }, interval);
