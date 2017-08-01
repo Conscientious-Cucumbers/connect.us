@@ -56,7 +56,7 @@ class NewsItem extends React.Component {
         }
         actionPosition="left"
         titlePosition="top"
-        titleBackground="linear-gradient(to bottom, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
+        titleBackground="linear-gradient(to bottom, rgba(18,30,36,0.7) 0%,rgba(18,30,36,0.3) 70%,rgba(0,0,0,0) 100%)"
       >
         <div className="news-item-preview-body">
           <div className="news-item-source">
