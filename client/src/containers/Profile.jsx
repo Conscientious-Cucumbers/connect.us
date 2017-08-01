@@ -29,11 +29,6 @@ class Profile extends React.Component {
 
   componentDidMount () {
     this.props.getActiveProfile(this.props.username);
-    this.props.getNewsLikes(this.props.username);
-    this.props.getFollowing(this.props.username);
-    this.props.getFollowers(this.props.username);
-    this.props.getStatusLikes(this.props.username);
-    this.props.getTimeline(this.props.username);
   }
 
   profileExists () {

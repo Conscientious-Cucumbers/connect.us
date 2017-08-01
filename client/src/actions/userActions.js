@@ -1,6 +1,9 @@
 import axios from 'axios';
 import { connectSocket } from './socketActions';
 import { getNotifications } from './notificationActions';
+import { getNewsLikes } from './newsActions';
+import { getFollowing, getFollowers } from './followActions';
+import { getTimeline, getStatusLikes } from './statusActions';
 
 const setActiveProfile = (userInfo) => {
   return {
@@ -74,6 +77,13 @@ export const finishSignup = (formData) => (dispatch, getState) => {
 export const getActiveProfile = (username) => (dispatch, getState) => {
   return axios.get(`/user/${username}/info`)
   .then((result) => {
+    if (Object.keys(result.data).length) {
+      dispatch(getNewsLikes(username));
+      dispatch(getFollowing(username));
+      dispatch(getFollowers(username));
+      dispatch(getStatusLikes(username));
+      dispatch(getTimeline(username));
+    }
     dispatch(setActiveProfile(result.data));
   })
   .catch((error) => {
