@@ -5,10 +5,11 @@ import { bindActionCreators } from 'redux';
 import actions from '../actions';
 import ReactFilestack from 'filestack-react';
 import TextField from 'material-ui/TextField';
+import Paper from 'material-ui/Paper';
 
 const header = () => {
   return (
-    <h3>Post a status</h3>
+    <div>Post a status</div>
   );
 };
 
@@ -67,10 +68,11 @@ class StatusTextArea extends React.Component {
 
     return (
       <div>
-        <Panel
-          header={header()}
-          className="status-post status-textarea"
-          bsStyle="info">
+        <Paper zDepth={0} rounded={false}
+          className="status-post status-textarea">
+          <div className="status-make-a-post">
+            {header()}
+          </div>
           <form onSubmit={this.submitStatus.bind(this)}>
             <FormGroup controlId="formControlsTextarea">
 
@@ -79,13 +81,13 @@ class StatusTextArea extends React.Component {
                 id="status-title-field"
                 value={this.state.title}
                 type="text"
-                placeholder="Title" /> <br />
+                placeholder="Title" className="status-text-field"/> <br />
 
               <TextField
                 onChange={this.handleTextChange.bind(this)}
                 id="status-description-field"
                 value={this.state.text}
-                placeholder="Description" /> <br />
+                placeholder="Description" className="status-text-field"/> <br />
 
               <img src={this.state.image} />
 
@@ -104,7 +106,7 @@ class StatusTextArea extends React.Component {
               Post
             </Button>
           </form>
-        </Panel>
+        </Paper>
         <br />
       </div>
     );

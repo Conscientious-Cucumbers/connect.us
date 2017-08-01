@@ -4,6 +4,20 @@
   background-color: #B0BEC5;
 }
 
+.status-text-field {
+  padding-left: 10px;
+}
+
+.status-make-a-post {
+  font-size: 20px;
+  font-variant: small-caps;
+  font-weight: bold;
+  color: black;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  padding-top: 15px;
+}
+
 .status-date {
   font-size: 10px;
   font-style: oblique;
