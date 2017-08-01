@@ -6,7 +6,7 @@ const statusLike = db.Model.extend({
     return this.belongsTo('profiles', 'id_user');
   },
   status: function() {
-    return this.belongsTo('statuses', 'id_status');
+    return this.belongsTo('Status', 'id_status');
   }
 });
 
