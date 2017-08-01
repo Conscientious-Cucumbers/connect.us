@@ -1,5 +1,6 @@
 import React from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
+import { Link } from 'react-router-dom';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem, FormGroup, FormControl, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { clearNotifications } from '../actions/notificationActions';
@@ -9,6 +10,10 @@ import NotificationList from './NotificationList.jsx';
 import {AppBar, Tabs, Tab, IconButton, NotificationsIcon, FlatButton, Badge, IconMenu, DropDownMenu, MenuItem as MI, SearcbBar } from 'material-ui';
 import ActionHome from 'material-ui/svg-icons/action/home';
 import SearchBar from 'material-ui-search-bar';
+import MediaQuery from 'react-responsive';
+import SearchIcon from 'material-ui/svg-icons/action/search';
+import UserIcon from 'material-ui/svg-icons/social/person';
+import SettingsIcon from 'material-ui/svg-icons/action/settings';
 
 
 class NavBar extends React.Component {
@@ -18,8 +23,6 @@ class NavBar extends React.Component {
     this.state = {
       searchInput: ''
     };
-    this.svg1 = 'M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z';
-    this.svg2 = 'M12 5.9c1.16 0 2.1.94 2.1 2.1s-.94 2.1-2.1 2.1S9.9 9.16 9.9 8s.94-2.1 2.1-2.1m0 9c2.97 0 6.1 1.46 6.1 2.1v1.1H5.9V17c0-.64 3.13-2.1 6.1-2.1M12 4C9.79 4 8 5.79 8 8s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 9c-2.67 0-8 1.34-8 4v3h16v-3c0-2.66-5.33-4-8-4z';
   }
 
   setSearchInput(value) {
@@ -36,43 +39,70 @@ class NavBar extends React.Component {
 
   iconElementLeft () {
     return (
-      <SearchBar
-        type='text'
-        className="search-bar"
-        method="GET"
-        onRequestSearch={this.onSearch.bind(this)}
-        onChange={this.setSearchInput.bind(this)}
-        style={{positon: 'sticky'}}/>
+      <Link to="/">
+        <MediaQuery minWidth={500}>
+          <div className="logo-image-container">
+            <img className="logo-image" src="/assets/connecthub_logo.png" />
+          </div>
+        </MediaQuery>
+        <MediaQuery maxWidth={500}>
+          <div className="logo-image-container">
+            <img className="logo-icon" src="/assets/connecthub_icon.png" />
+          </div>
+        </MediaQuery>
+      </Link>
     );
   }
 
   render () {
+    // iconElementLeft={this.iconElementLeft()}
     return (
       <div>
 
         <AppBar title={this.iconElementLeft()}
-        style={{position: 'fixed', backgroundColor: '#546E7A', top: '0px', height: '60px'}}
-        iconElementLeft={<img className="logo-image" src="/assets/connecthub_logo.png" />}
-        >
-
-          <LinkContainer to='/#'>
-            <IconButton tooltip="Home">
-              <ActionHome color={'18243D'}/>
+        style={{position: 'fixed', backgroundColor: 'rgb(18,30,36)', top: '0px', height: '65px'}}
+        iconElementLeft={
+          <MediaQuery maxWidth={680}>
+            <IconButton tooltip="Search">
+              <SearchIcon color={'white'}/>
             </IconButton>
-          </LinkContainer>
+          </MediaQuery>
+        }
+        >
+          <MediaQuery minWidth={680}>
+            <div className="search-bar">
+              <SearchBar
+                type='text'
+                className="search-bar-text"
+                method="GET"
+                onRequestSearch={this.onSearch.bind(this)}
+                onChange={this.setSearchInput.bind(this)} />
+            </div>
+          </MediaQuery>
 
-          <IconButton href={`/${this.props.user ? this.props.user.username : null}`} tooltip="Profile" >
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill = "#18243D" viewBox="0 0 24 24">
-              <path d={this.svg2}/>
-            </svg>
-          </IconButton>
+          <div className="navbar-home">
+            <IconButton href="/" tooltip="Home">
+              <ActionHome color={'white'}/>
+            </IconButton>
+          </div>
+
+          <div className="navbar-profile">
+            <IconButton href={`/${this.props.user ? this.props.user.username : '/'}`} tooltip="Profile" >
+              <UserIcon color={'white'} />
+            </IconButton>
+          </div>
 
           <NotificationList />
 
-          <IconMenu iconButtonElement={<IconButton tooltip="Settings"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill = "#18243D" viewBox="0 0 24 24"><path d={this.svg1}/></svg> </IconButton>}>
+          <IconMenu
+            iconButtonElement={
+                <IconButton className="navbar-settings" tooltip="Settings">
+                  <SettingsIcon color={'white'}/>
+                </IconButton>
+            }>
             <LinkContainer to='/settings'><MI primaryText="Settings" /></LinkContainer>
             <LinkContainer to='/about'><MI primaryText="About" /></LinkContainer>
-            <MI primaryText="Log Out" eventKey={4.3} href="/logout" />
+            <MI primaryText="Log Out" href="/logout" />
           </IconMenu>
         </AppBar>
 

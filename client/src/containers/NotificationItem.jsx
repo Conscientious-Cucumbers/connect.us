@@ -4,7 +4,7 @@ import MenuItem from 'material-ui/MenuItem';
 import { LinkContainer } from 'react-router-bootstrap';
 
 const NotificationItem = (props) => (
-  <MenuItem href={'/' + props.notification.username} eventKey={props.key}>
+  <MenuItem href={'/' + props.notification.username} value={props.key}>
     {props.notification.first} {props.notification.last} is now following you
   </MenuItem>
 );
