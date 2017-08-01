@@ -7,6 +7,7 @@ import { bindActionCreators } from 'redux';
 import { clearNotifications } from '../actions/notificationActions';
 import {IconMenu, IconButton} from 'material-ui';
 import GlobeIcon from 'material-ui/svg-icons/social/public';
+import Divider from 'material-ui/Divider';
 
 
 class NotificationList extends React.Component {
@@ -35,15 +36,15 @@ class NotificationList extends React.Component {
   notifications () {
     if (this.props.UnseenNotifications && this.props.UnseenNotifications.length) {
       return (
-        <Badge
-          className="notifications-badge"
-          badgeStyle={{top: -9, right: -4, fontSize: 10, width: 18, height: 18}}
-          badgeContent={this.props.UnseenNotifications.length}
-          secondary>
           <IconButton tooltip="Notifications" className="navbar-notifications">
-            <GlobeIcon color={'white'}/>
+            <Badge
+              className="notifications-badge"
+              badgeStyle={{top: -7, right: 1, fontSize: 10, width: 18, height: 18}}
+              badgeContent={this.props.UnseenNotifications.length}
+              secondary>
+              <GlobeIcon color={'white'}/>
+            </Badge>
           </IconButton>
-        </Badge>
       );
     } else {
       return (
@@ -60,6 +61,9 @@ class NotificationList extends React.Component {
     return (
       <IconMenu
         iconButtonElement={this.notifications()}
+        onTouchTap={this.needsClearNotifications.bind(this)}
+        anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
+        maxHeight={150}
       >
         {
           this.props.UnseenNotifications &&
@@ -67,6 +71,16 @@ class NotificationList extends React.Component {
             return <NotificationItem key={(3 + (index * 2 + 1) ) / 10} notification={notification}/>;
           })
         }
+
+        <Divider />
+
+        {
+          this.props.SeenNotifications &&
+          this.props.SeenNotifications.slice(0, 10).map((notification, index) => {
+            return <NotificationItem key={(3 + (index + 2) * 2) / 10} notification={notification} seen/>;
+          })
+        }
+
       </IconMenu>
     );
 

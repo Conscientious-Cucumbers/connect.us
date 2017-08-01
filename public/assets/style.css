@@ -1,7 +1,7 @@
 .btn:focus, input[type="button"]:focus, .btn:hover, input[type="button"]:hover {
   outline: none;
   text-decoration: none;
-  background-color: #B0BEC5;
+  background-color: rgb(58,70,76);
 }
 
 .profile-not-found {
@@ -64,6 +64,10 @@
 
 .navbar-notifications {
   margin-top: 7px !important;
+}
+
+.unseen-notification {
+  color: #FF4081 !important;
 }
 
 .status-date {
@@ -146,12 +150,16 @@ h6 {
 }
 
 .follow-button-wrapper {
-  text-align: center
+  text-align: center;
 }
 
 .jumbotron {
   background-color: white;
   border: 1px solid #bbb;
+}
+
+.panel-heading {
+  background-color: rgb(58,70,76) !important;
 }
 
 .status-title {
@@ -347,7 +355,7 @@ h6 {
   text-transform: uppercase;
   width: 150px;
   height: 40px;
-  background-color: #90A4AE;
+  background-color: rgb(58,70,76);
 
   &.color-1 {
     background-color: #607D8B;

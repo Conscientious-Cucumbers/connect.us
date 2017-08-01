@@ -40,8 +40,8 @@ class Header extends React.Component {
           <div className="follow-button-wrapper">
             <RaisedButton
               onTouchTap={this.toggleFollow.bind(this)}
-              backgroundColor={this.props.activeFollowed ? fullWhite : '#78909C'}
-              labelColor={this.props.activeFollowed ? '#78909C' : fullWhite}
+              backgroundColor={this.props.activeFollowed ? fullWhite : 'rgb(58,70,76)'}
+              labelColor={this.props.activeFollowed ? 'rgb(58,70,76)' : fullWhite}
               className="follow-button"
               label={this.props.activeFollowed ? 'Following' : 'Follow'} />
           </div>

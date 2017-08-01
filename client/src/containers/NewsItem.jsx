@@ -119,7 +119,7 @@ class NewsItem extends React.Component {
         <div>
           <b>Visit original article:</b>
           <IconButton target="_blank" href={this.props.newsItem.url}>
-            <ExitToApp color={blue300}/>
+            <ExitToApp color={'rgb(18,30,36)'}/>
           </IconButton>
         </div>
         <br />
