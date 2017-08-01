@@ -22,20 +22,29 @@ class NavBar extends React.Component {
     this.svg2 = 'M12 5.9c1.16 0 2.1.94 2.1 2.1s-.94 2.1-2.1 2.1S9.9 9.16 9.9 8s.94-2.1 2.1-2.1m0 9c2.97 0 6.1 1.46 6.1 2.1v1.1H5.9V17c0-.64 3.13-2.1 6.1-2.1M12 4C9.79 4 8 5.79 8 8s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 9c-2.67 0-8 1.34-8 4v3h16v-3c0-2.66-5.33-4-8-4z';
   }
 
-  setSearchInput(e) {
+  setSearchInput(value) {
     this.setState({
-      searchInput: e.target.value
+      searchInput: value
     });
+  }
+
+  onSearch () {
+    if (this.state.searchInput) {
+      window.location.pathname = `/${this.state.searchInput}`;
+    }
   }
 
   iconElementLeft () {
     return (
-      <SearchBar
-        type='text'
-        method="GET"
-        onRequestSearch={`/${this.state.searchInput}`}
-        onChange={this.setSearchInput.bind(this)}
-        style={{positon: 'sticky'}}/>
+      <span>
+        <img width="150px" height="auto" src="/assets/connecthub_logo.png" />
+        <SearchBar
+          type='text'
+          method="GET"
+          onRequestSearch={this.onSearch.bind(this)}
+          onChange={this.setSearchInput.bind(this)}
+          style={{positon: 'sticky'}}/>
+      </span>
     );
   }
 
@@ -43,15 +52,8 @@ class NavBar extends React.Component {
     return (
       <div>
 
-        <AppBar title={
-          <LinkContainer to="/">
-            <p >
-              ConnectHub.us
-            </p>
-          </LinkContainer>
-        }
-        style={{position: 'fixed', backgroundColor: '#FF3E35', top: '0px', height: '60px'}}
-        iconElementLeft={this.iconElementLeft()}
+        <AppBar title={this.iconElementLeft()}
+        style={{position: 'fixed', backgroundColor: '#546E7A', top: '0px', height: '60px'}}
         >
 
           <LinkContainer to='/#'>

@@ -54,20 +54,20 @@ class NotificationList extends React.Component {
 
   render () {
 
-    return (
-      <IconMenu
-        iconButtonElement={this.notifications()}
-        anchorOrigin={{horizontal: 'left', vertical: 'down'}}
-        targetOrigin={{horizontal: 'left', vertical: 'top'}}
-      >
-        {
-          this.props.UnseenNotifications &&
-          this.props.UnseenNotifications.map((notification, index) => {
-            return <Menu key={(3 + (index * 2 + 1) ) / 10} notification={notification}/>;
-          })
-        }
-      </IconMenu>
-    );
+    // return (
+    //   <IconMenu
+    //     iconButtonElement={this.notifications()}
+    //     anchorOrigin={{horizontal: 'left', vertical: 'down'}}
+    //     targetOrigin={{horizontal: 'left', vertical: 'top'}}
+    //   >
+    //     {
+    //       this.props.UnseenNotifications &&
+    //       this.props.UnseenNotifications.map((notification, index) => {
+    //         return <Menu key={(3 + (index * 2 + 1) ) / 10} notification={notification}/>;
+    //       })
+    //     }
+    //   </IconMenu>
+    // );
 
     return (
 
