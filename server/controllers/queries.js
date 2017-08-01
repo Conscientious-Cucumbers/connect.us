@@ -167,22 +167,13 @@ module.exports.getStatusesLike = (req, res) => {
   models.Profile.where({ username: req.params.username }).fetch()
     .then(profile => {
       console.log('****** getStatusesLike profile: ', profile.attributes.id);
-      return models.StatusLike.where({id_user: profile.attributes.id}).fetchAll();
-    })
-    .then(news => {
-      const sendStatuses = [];
-      return news.reduce((acc, eachstatus) => {
-        return acc
-        .then(() => {
-          return models.Status.where({id: eachstatus.attributes.id_status}).fetch();
-        })
-        .then((status) => {
-          return sendStatuses.push(status.attributes);
-        });
-      }, Promise.resolve())
-      .then(() => {
-        res.status(200).send(sendStatuses);
+      return models.StatusLike.where({id_user: profile.attributes.id}).fetchAll({
+        withRelated: ['status']
       });
+    })
+    .then(statuses => {
+      console.log('statuses: ', statuses.toJSON());
+      res.status(200).send(statuses.toJSON());
     })
     .error(err => {
       res.status(500).send('Error: ', err);
