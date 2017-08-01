@@ -162,7 +162,7 @@ module.exports.getNewsLike = (req, res) => {
     });
 };
 
-
+//fix !
 module.exports.getStatusesLike = (req, res) => {
   models.Profile.where({ username: req.params.username }).fetch()
     .then(profile => {
@@ -172,8 +172,22 @@ module.exports.getStatusesLike = (req, res) => {
       });
     })
     .then(statuses => {
-      console.log('statuses: ', statuses.toJSON());
-      res.status(200).send(statuses.toJSON());
+      // console.log('*********** statuses: ', statuses.toJSON());
+
+      return Promise.map(statuses.toJSON(), (status) => {
+        return models.StatusLike.where({id_status: status.status.id, id_user: req.user.id}).fetch()
+        .then((result) => {
+          if(result){
+            status.status.liked = true;
+          }
+          return status.status;
+        });
+      });
+
+    })
+    .then((statuses) => {
+      console.log('send stauses: ', statuses);
+      res.status(200).send(statuses);
     })
     .error(err => {
       res.status(500).send('Error: ', err);
@@ -188,7 +202,7 @@ module.exports.getStatusesLike = (req, res) => {
 module.exports.getStatuses = (req, res) => {
   models.Profile.where({ username: req.params.username }).fetch()
   .then(profile => {
-    console.log('****** getStatusLike profile: ', profile.attributes.id);
+    //console.log('****** getStatusLike profile: ', profile.attributes.id);
     return models.Status.where({id_user: profile.get('id')}).fetchAll();
   })
   .then(statuses => {
@@ -203,7 +217,7 @@ module.exports.getStatuses = (req, res) => {
     });
   })
   .then((statuses) => {
-    console.log("****** getStatuses liked: ", statuses);
+    //console.log("****** getStatuses liked: ", statuses);
     res.status(200).send(statuses)
   });
 };
