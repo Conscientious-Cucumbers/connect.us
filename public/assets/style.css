@@ -4,6 +4,12 @@
   background-color: #B0BEC5;
 }
 
+.logo-image {
+  width: 150px;
+  height: auto;
+  margin-top: -8px;
+}
+
 .status-date {
   font-size: 10px;
   font-style: oblique;

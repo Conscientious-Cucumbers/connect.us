@@ -36,15 +36,13 @@ class NavBar extends React.Component {
 
   iconElementLeft () {
     return (
-      <span>
-        <img width="150px" height="auto" src="/assets/connecthub_logo.png" />
-        <SearchBar
-          type='text'
-          method="GET"
-          onRequestSearch={this.onSearch.bind(this)}
-          onChange={this.setSearchInput.bind(this)}
-          style={{positon: 'sticky'}}/>
-      </span>
+      <SearchBar
+        type='text'
+        className="search-bar"
+        method="GET"
+        onRequestSearch={this.onSearch.bind(this)}
+        onChange={this.setSearchInput.bind(this)}
+        style={{positon: 'sticky'}}/>
     );
   }
 
@@ -54,6 +52,7 @@ class NavBar extends React.Component {
 
         <AppBar title={this.iconElementLeft()}
         style={{position: 'fixed', backgroundColor: '#546E7A', top: '0px', height: '60px'}}
+        iconElementLeft={<img className="logo-image" src="/assets/connecthub_logo.png" />}
         >
 
           <LinkContainer to='/#'>
