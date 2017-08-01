@@ -69,8 +69,7 @@ class StatusTextArea extends React.Component {
       <div>
         <Panel
           header={header()}
-          className="status-post status-textarea"
-          bsStyle="info">
+          className="status-post status-textarea">
           <form onSubmit={this.submitStatus.bind(this)}>
             <FormGroup controlId="formControlsTextarea">
 

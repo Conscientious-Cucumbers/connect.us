@@ -1,7 +1,6 @@
 import React from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Link } from 'react-router-dom';
-import { Navbar, Nav, NavItem, NavDropdown, MenuItem, FormGroup, FormControl, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { clearNotifications } from '../actions/notificationActions';
 import { bindActionCreators } from 'redux';
@@ -94,6 +93,7 @@ class NavBar extends React.Component {
           <NotificationList />
 
           <IconMenu
+            anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
             iconButtonElement={
                 <IconButton className="navbar-settings" tooltip="Settings">
                   <SettingsIcon color={'white'}/>
