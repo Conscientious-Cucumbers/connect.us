@@ -4,6 +4,31 @@
   background-color: #B0BEC5;
 }
 
+.profile-not-found {
+  color: #FF5722;
+  font-weight: bolder;
+  margin-left: 10px;
+}
+
+.frowny-face {
+  height: 100px !important;
+  width: 100px !important;
+  margin-top: 15px;
+  margin-left: 40px;
+}
+
+.return-home-button {
+  margin-bottom: 20px !important;
+  margin-left: 20px !important;
+  padding-top: 10px !important;
+  font-weight: bolder;
+}
+
+.profile-not-found-message {
+  margin-left: 10px;
+  margin-bottom: 40px;
+}
+
 .logo-image-container {
   display: fixed;
   margin-right: 1px !important;
