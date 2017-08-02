@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { clearNotifications } from '../actions/notificationActions';
 import { bindActionCreators } from 'redux';
-//import Badge from 'material-ui/Badge';
 import NotificationList from './NotificationList.jsx';
 import {AppBar, Tabs, Tab, IconButton, NotificationsIcon, FlatButton, Badge, IconMenu, DropDownMenu, MenuItem as MI, SearcbBar } from 'material-ui';
 import ActionHome from 'material-ui/svg-icons/action/home';
