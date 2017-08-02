@@ -33,7 +33,7 @@ router.route('/news')
           result = result.models.map((item) => item.attributes)
                   .filter((item) => item.id_user === req.user.id);
           if (result.length) {
-            console.log("******* pageresult.liked: ", pageresult.title)
+            //console.log("******* pageresult.liked: ", pageresult.title)
             pageresult.liked = true;
           }
           throw null;
@@ -43,7 +43,7 @@ router.route('/news')
         });
       })
       .then((pageResults) => {
-        console.log("********** pageResults: ", pageResults);
+        //console.log("********** pageResults: ", pageResults);
         res.status(201).send(pageResults);
       })
       .catch(e => console.log('Error fetching news: ', e));
