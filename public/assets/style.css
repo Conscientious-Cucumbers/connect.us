@@ -4,6 +4,21 @@
   background-color: rgb(58,70,76);
 }
 
+.login-logo-image {
+  height: 70%;
+  width: 70%;
+  margin: auto;
+  margin-bottom: -60px;
+}
+
+.login-email {
+  color: white;
+}
+
+.login-password {
+  color: white;
+}
+
 @keyframes growFromLeft {
   0% {
     width: 0px;
@@ -452,7 +467,7 @@ h1 {
 }
 
 .login-body {
-  background-color: rgb(58,70,76);
+  background-color: #121E24;
 }
 
 img {
