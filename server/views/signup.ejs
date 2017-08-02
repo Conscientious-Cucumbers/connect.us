@@ -1,8 +1,7 @@
 <% include head.ejs%>
 <body class="login-body">
     <div class="col-sm-6 col-sm-offset-3">
-
-        <h1 class="signup-statement" style="text-align: center; color: #EF6C00"> Signup</h1>
+        <img class="signup-logo-image" src="/assets/connecthub_logo.png">
 
         <!-- show any messages that come back with authentication -->
         <% if (message.length > 0) { %>
@@ -10,7 +9,7 @@
         <% } %>
 
         <!-- LOGIN FORM -->
-        <form action="/signup" method="post">
+        <form action="/signup" method="post" style="color: white">
             <div class="form-group">
                 <label>Username</label>
                 <input type="text" class="form-control" name="username" required>
@@ -32,19 +31,19 @@
                 <input type="password" class="form-control" name="password" required>
             </div>
 
-            <button type="submit" class="btn btn-border btn-round color-1 material-design">Signup</button>
+            <button type="submit" class="btn btn-border btn-round color-1 material-design" style="background: #FD593E;">Signup</button>
+            <a class="login-option" href="/login">Login</a>
+
         </form>
 
         <hr>
-        <div style="color: #EF6C00">
-            Or signup with any of the following services:<br />
-            <a style="margin-left:0px;margin-right:15px" href="/auth/facebook"><img style="margin-top:25px" src="/assets/fb-logo.png" /></a>
-            <a style="margin-right:0px" href="/auth/google"><img style="width:29px; margin-top:25px" src="/assets/google-logo.png" /></a>
+        <div style="color: #FD533E">
+            Or login with any of the following services:<br />
+            <a class="btn btn-block btn-social btn-facebook" style="overflow: inherit !important; width: 235px !important; background-color: #3B5998; text-transform: initial; line-height: 40px" href="/auth/facebook">
+              <span class="fa fa-facebook" style="padding: 10px; font-size: x-large; float: left; border-right: 1px solid rgba(0,0,0,0.2); width: 40px;"></span> Connect with Facebook </a>
+              <a class="btn btn-block btn-social btn-google" style="overflow: inherit !important; width: 235px !important; background-color: #DD4B39; text-transform: initial; line-height: 40px" href="/auth/google">
+                <span class="fa fa-google-plus" style="padding: 10px; font-size: x-large; float: left; border-right: 1px solid rgba(0,0,0,0.2); width: 40px; margin-right: -15px"></span> Connect with Google </a>
         </div>
-        <hr>
-
-        <p style="color: #EF6C00">Already have an account?</p>
-        <a href="/login"><button type="submit" class="btn btn-border btn-round color-1 material-design" data-color="426FC5">Login</button></a>
     </div>
   </body>
 

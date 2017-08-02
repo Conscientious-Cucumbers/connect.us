@@ -4,11 +4,28 @@
   background-color: rgb(58,70,76);
 }
 
+.signup-option {
+  float: right;
+  color: #FD5F3F;
+}
+
+.login-option {
+  float: right;
+  color: #FD5F3F;
+}
+
 .login-logo-image {
   height: 70%;
   width: 70%;
   margin: auto;
-  margin-bottom: -60px;
+  margin-bottom: -10%;
+}
+
+.signup-logo-image {
+  height: 70%;
+  width: 70%;
+  margin: auto;
+  margin-bottom: -10%;
 }
 
 .login-email {
