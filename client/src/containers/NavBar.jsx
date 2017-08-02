@@ -13,7 +13,7 @@ import MediaQuery from 'react-responsive';
 import SearchIcon from 'material-ui/svg-icons/action/search';
 import UserIcon from 'material-ui/svg-icons/social/person';
 import SettingsIcon from 'material-ui/svg-icons/action/settings';
-import CloseIcon from 'material-ui/svg-icons/Navigation/close';
+import CloseIcon from 'material-ui/svg-icons/navigation/close';
 
 
 class NavBar extends React.Component {
@@ -24,6 +24,14 @@ class NavBar extends React.Component {
       searchInput: '',
       xsSearchShowing: false
     };
+  }
+
+  componentDidMount() {
+    window.addEventListener('resize', () => {
+      this.setState({
+        xsSearchShowing: false
+      });
+    }, true);
   }
 
   setSearchInput(value) {

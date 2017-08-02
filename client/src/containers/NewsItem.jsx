@@ -17,14 +17,30 @@ class NewsItem extends React.Component {
     super(props);
     this.state = {
       isOpen: false,
-      isLiked: false
+      isLiked: false,
+      imgSource: ''
     };
   }
 
   componentDidMount () {
     this.setState({
-      isLiked: this.props.newsItem.liked
+      isLiked: this.props.newsItem.liked,
+      imgSource: this.props.newsItem.media || '/assets/no_image_found.jpg'
     });
+  }
+
+  onImgError() {
+    this.setState({
+      imgSource: '/assets/no_image_found.jpg'
+    });
+  }
+
+  onPrevImgLoad({target: img}) {
+    if (img.offsetWidth < 50 || img.offsetHeight < 50) {
+      this.setState({
+        imgSource: '/assets/no_image_found.jpg'
+      });
+    }
   }
 
   toggleModal (modalState) {
@@ -64,7 +80,12 @@ class NewsItem extends React.Component {
               Source: {this.props.newsItem.source}
             </span>
           </div>
-          <img onTouchTap={() => this.toggleModal(true)} className="news-item-media" src={this.props.newsItem.thumbnail} />
+          <img
+            onError={this.onImgError.bind(this)}
+            onLoad={this.onPrevImgLoad.bind(this)}
+            onTouchTap={() => this.toggleModal(true)}
+            className="news-item-media"
+            src={this.state.imgSource} />
         </div>
         {this.itemModal()}
       </GridTile>
@@ -104,7 +125,10 @@ class NewsItem extends React.Component {
       >
         <br />
         <div>
-          <img src={this.props.newsItem.media} width="100%"/>
+          <img
+            onError={this.onImgError.bind(this)}
+            src={this.state.imgSource}
+            width="100%"/>
         </div>
         <br />
         <div className="news-modal-description">
