@@ -1,7 +1,7 @@
 .btn:focus, .btn:disabled, input[type="button"]:focus, .btn:hover, input[type="button"]:hover {
   outline: none;
   text-decoration: none;
-  background-color: rgb(58,70,76);
+  background-color: '#121E24';
 }
 
 .signup-option {
@@ -133,7 +133,7 @@
 }
 
 .status-title-inner {
-  margin-right: -160px;
+  text-align: center;
 
 }
 
@@ -217,6 +217,8 @@ h6 {
 
 .status-title {
   padding-top: 10px;
+  text-align: left !important;
+  margin-left: 3%;
   font-weight: bolder;
 }
 
@@ -235,8 +237,8 @@ h6 {
 .status-post-2 {
   font-family: "Times New Roman";
   font-size: 20px;
-  margin-left: 155px;
-  margin-right: 155px;
+  margin-left: 10%;
+  margin-right: 10%;
   text-align: center;
 }
 
@@ -341,8 +343,48 @@ h6 {
 }
 
 .profile-tab {
-  padding: 50px;
+  margin-left: -40px;
+  margin-right: -40px;
+  margin-top: 20px;
   position: center;
+}
+
+
+.nested-tabs {
+  margin-left: 5%; !important;
+  margin-right: 5%; !important;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.favorite-tabs {
+  background-color: #EEEEEE !important;
+}
+
+.favorite-tabs-container {
+  margin-top: 20px;
+}
+
+.connection-tabs {
+
+}
+
+.bottom-navigation-container {
+  margin-left: -3%;
+  margin-right: -3%;
+}
+
+.bottom-navigation-tabs {
+  background-color: #121E24 !important;
+  color: white !important;
+}
+
+.bottom-navigation-item div{
+  color: white !important;
+}
+
+.bottom-navigation-item-active div{
+  color: #FD453E !important;
 }
 
 .profile-picture img {
@@ -480,7 +522,19 @@ h1 {
 
 .status-image {
   margin: 0 auto;
-  width: 94%;
+  overflow:auto;
+}
+
+@media (max-width: 700px) {
+  .status-image {
+    width: 90%;
+  }
+}
+
+@media (min-width: 700px) {
+  .status-image {
+    width: 50%;
+  }
 }
 
 .login-body {
