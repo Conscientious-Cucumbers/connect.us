@@ -77,9 +77,7 @@ const fetch = function(source) {
 
 module.exports.start = function(interval) {
   updateNews();
-  // fetchAll()
-  // .then(result => console.log(result));
-  // setInterval(function() {
-  //   fetchAll(availableSources);
-  // }, interval);
+  setInterval(function() {
+    updateNews();
+  }, interval);
 };

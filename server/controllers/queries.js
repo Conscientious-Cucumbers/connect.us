@@ -7,7 +7,6 @@ const Promise = require('bluebird');
 //////////// POST ///////////////
 
 module.exports.toggleNewsLiked = (req, res) => {
-  console.log("********** toggleNewsLiked req.body: ", req.body);
   const newsItem = req.body.newsLike;
   var newsId;
   models.NewsItem.where({url: newsItem.url}).fetch()
@@ -28,7 +27,6 @@ module.exports.toggleNewsLiked = (req, res) => {
     throw result;
   })
   .catch((newsLike) => {
-    console.log("****** toggleNewsLiked newsLike: ", newsLike)
     newsId = newsLike.get('id');
     return models.NewsLike.where({
       id_user: req.user.id,
@@ -50,7 +48,6 @@ module.exports.toggleNewsLiked = (req, res) => {
 
 
 module.exports.toggleStatusLiked = (req, res) => {
-  console.log('******** ToggledStatusLiked request body: ', req.body);
   return models.StatusLike.where({id_status: req.body.id_status, id_user: req.user.id}).fetch()
   .then((result) => {
     if (result) {
@@ -73,22 +70,24 @@ module.exports.toggleStatusLiked = (req, res) => {
 
 module.exports.createStatus = (req, res) => {
 
-  console.log("************ createStatus got called!", req.body);
 
-  models.Status.forge({ 
-    title: req.body.title, 
-    text: req.body.text, 
-    image: req.body.image, 
+  models.Status.forge({
+    title: req.body.title,
+    text: req.body.text,
+    image: req.body.image,
     id_user: req.user.id
   })
   .save()
-  .then(() => {res.status(201).send('Status Created!')})
-  .catch(err => {res.status(500).send(err)
+  .then(() => {
+    res.status(201).send('Status Created!');
+  })
+  .catch(err => {
+    res.status(500).send(err);
   });
 };
 
 module.exports.toggleFollow = (req, res) => {
-  console.log('******** ToggledFollowPOST request body: ', req.body);
+  // console.log('******** ToggledFollowPOST request body: ', req.body);
   return models.Follow.where({id_follower: req.user.id, id_followed: req.body.id}).fetch()
   .then((result) => {
     if (result) {
@@ -136,24 +135,26 @@ module.exports.clearNotifications = (req, res) => {
 module.exports.getNewsLike = (req, res) => {
   models.Profile.where({ username: req.params.username }).fetch()
     .then(profile => {
-      console.log('****** getNewsLike profile: ', profile.attributes.id);
-      return models.NewsLike.where({id_user: profile.attributes.id}).fetchAll();
-    })
-    .then(news => {
-      const sendNews = [];
-      return news.reduce((acc, eachnews) => {
-        return acc
-        .then(() => {
-          return models.NewsItem.where({id: eachnews.attributes.id_news}).fetch();
-        })
-        .then((news) => {
-          return sendNews.push(news.attributes);
-        });
-      }, Promise.resolve())
-      .then(() => {
-        res.status(200).send(sendNews);
+      // console.log('****** getNewsLike profile: ', profile.attributes.id);
+      return models.NewsLike.where({id_user: profile.attributes.id}).fetchAll({
+        withRelated: ['news']
       });
     })
+    .then(news => {
+
+      // console.log(news.toJSON());
+      return Promise.map(news.toJSON(), (newsItem) => {
+        return models.NewsLike.where({id_news: newsItem.news.id, id_user: req.user.id}).fetch()
+        .then((result) => {
+          if (result) {
+            newsItem.news.liked = true;
+          }
+          return newsItem.news;
+        });
+      });
+
+    })
+    .then((result) => res.send(result))
     .error(err => {
       res.status(500).send('Error: ', err);
     })
@@ -166,7 +167,6 @@ module.exports.getNewsLike = (req, res) => {
 module.exports.getStatusesLike = (req, res) => {
   models.Profile.where({ username: req.params.username }).fetch()
     .then(profile => {
-      console.log('****** getStatusesLike profile: ', profile.attributes.id);
       return models.StatusLike.where({id_user: profile.attributes.id}).fetchAll({
         withRelated: ['status']
       });
@@ -177,7 +177,7 @@ module.exports.getStatusesLike = (req, res) => {
       return Promise.map(statuses.toJSON(), (status) => {
         return models.StatusLike.where({id_status: status.status.id, id_user: req.user.id}).fetch()
         .then((result) => {
-          if(result){
+          if (result) {
             status.status.liked = true;
           }
           return status.status;
@@ -186,7 +186,6 @@ module.exports.getStatusesLike = (req, res) => {
 
     })
     .then((statuses) => {
-      console.log('send stauses: ', statuses);
       res.status(200).send(statuses);
     })
     .error(err => {
@@ -209,16 +208,15 @@ module.exports.getStatuses = (req, res) => {
     return Promise.map(statuses.toJSON(), (eachstatus) => {
       return models.StatusLike.where({id_status: eachstatus.id, id_user: req.user.id}).fetch()
         .then((result) => {
-          if(result){
+          if (result) {
             eachstatus.liked = true;
           }
           return eachstatus;
-        })
+        });
     });
   })
   .then((statuses) => {
-    //console.log("****** getStatuses liked: ", statuses);
-    res.status(200).send(statuses)
+    res.status(200).send(statuses);
   });
 };
 

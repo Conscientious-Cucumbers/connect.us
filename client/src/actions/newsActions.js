@@ -20,6 +20,12 @@ const finishNextPageFetch = () => {
   };
 };
 
+const finishFetchingPages = () => {
+  return {
+    type: 'NO_MORE_RESULTS'
+  };
+};
+
 const startNextPageFetch = () => {
   return {
     type: 'START_PAGE_FETCH'
@@ -47,9 +53,11 @@ const setNewsLikes = (likes) => {
 export const getNewsLikes = (username) => (dispatch, getState) => {
   axios.get(`/user/${username}/news/like`)
   .then((result) => {
-    result.data.forEach(item => {
-      item.liked = true;
-    });
+    if (getState().user.username === username) {
+      result.data.forEach(item => {
+        item.liked = true;
+      });
+    }
     dispatch(setNewsLikes(result.data));
   })
   .catch((err) => {
@@ -62,7 +70,7 @@ export const getNewsLikes = (username) => (dispatch, getState) => {
 export const postNewsLike = (newsLike) => (dispatch, getState) => {
   axios.post('/user/news/togglelike', { newsLike })
   .then((success) => {
-    dispatch(getNewsLikes(getState().user.username));
+    dispatch(getNewsLikes(getState().activeProfile.username));
   })
   .catch((err) => {
     console.error('Error posting news likes');
@@ -74,12 +82,17 @@ export const getNextNewsPage = (pageNum) => (dispatch, getState) => {
   if (getState().isFetching) {
     return;
   }
+  dispatch(startNextPageFetch());
   axios.get('/api/news', {
     params: {page: pageNum}
   })
   .then((result) => {
-    dispatch(setNextNewsPage(result.data));
-    dispatch(finishNextPageFetch());
+    if (result.data.length) {
+      dispatch(setNextNewsPage(result.data));
+      dispatch(finishNextPageFetch());
+    } else {
+      dispatch(finishFetchingPages());
+    }
   });
   // dispatch(startNextPageFetch());
   // setTimeout(() => {

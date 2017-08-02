@@ -42,7 +42,7 @@ class NewsFeed extends React.Component {
               <Loading />
           }
           {
-            this.props.isFetching
+            this.props.isFetching && this.props.isFetching !== 'finished'
               ?
               <Loading className="bottom-loading" />
               :
