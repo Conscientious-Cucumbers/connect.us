@@ -3,7 +3,7 @@
     <div class="col-sm-6 col-sm-offset-3">
 
           <img class="login-logo-image" src="/assets/connecthub_logo.png">
-          
+
         <% if (message.length) { %>
         <div class="alert alert-danger"><%= message %></div>
         <% } %>
@@ -19,19 +19,21 @@
                 <input type="password" class="form-control" name="password">
             </div>
 
-            <button type="submit" class="btn btn-border btn-round color-1 material-design" style="background: orange;">Login</button>
+            <button type="submit" class="btn btn-border btn-round color-1 material-design" style="background: #FF7043;">Login</button>
         </form>
 
         <hr>
-        <div style="color: #EF6C00">
+        <div style="color: #FD533E">
             Or login with any of the following services:<br />
-            <a style="margin-left:0px;margin-right:15px" href="/auth/facebook"><img style="margin-top:25px" src="/assets/fb-logo.png" /></a>
-            <a style="margin-right:0px" href="/auth/google"><img style="width:29px; margin-top:25px" src="/assets/google-logo.png" /></a>
+            <a class="btn btn-block btn-social btn-facebook" style="overflow: inherit !important; width: 235px !important; background-color: #3B5998" href="/auth/facebook">
+              <span class="fa fa-facebook" style="padding: 10px;"></span> Sign in with Facebook </a>
+              <a class="btn btn-block btn-social btn-google" style="overflow: inherit !important; width: 235px !important; background-color: #DD4B39" href="/auth/google">
+                <span class="fa fa-google-plus" style="padding: 10px;"></span> Sign in with Google </a>
         </div>
         <hr>
 
-        <p style="color: #EF6C00">Need to sign up for an account?</p>
-        <a href="/signup"><button type="submit" class="btn btn-border btn-round color-1 material-design" style="background: orange">Signup</button></a>
+        <p style="color: #FD533E">Need to sign up for an account?</p>
+        <a href="/signup"><button type="submit" class="btn btn-border btn-round color-1 material-design" style="background: #FF7043">Signup</button></a>
     </div>
   </body>
 
