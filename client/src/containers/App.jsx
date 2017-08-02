@@ -72,7 +72,7 @@ class App extends React.Component {
             </Button>
           </Modal.Footer>
         </Form>
-        <Favicon url={['https://m.facebook.com/apple-touch-icon-precomposed.png?refsrc=https%3A%2F%2Ffacebook.com%2F&_rdr']}/>
+        <Favicon url={['https://m.facebook.com/apple-touch-icon-precomposed.png?refsrc=https%3A%2F%2Ffacebook.com%2F&_rdr','https://m.facebook.com/apple-touch-icon-precomposed.png?refsrc=https%3A%2F%2Ffacebook.com%2F&_rdr', 'https://m.facebook.com/apple-touch-icon-precomposed.png?refsrc=https%3A%2F%2Ffacebook.com%2F&_rdr']}/>
       </Modal>
     );
   }

@@ -27,7 +27,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
 
 ## Usage
 
-> Some usage instructions
+> Create an account from scratch using the 'sign in' tab. Or, sign in with the Google or Facebook login buttons.  Once logged in, you can go to you 
 
 ## Requirements
 
