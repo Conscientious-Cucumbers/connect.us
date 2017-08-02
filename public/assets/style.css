@@ -1,4 +1,4 @@
-.btn:focus, input[type="button"]:focus, .btn:hover, input[type="button"]:hover {
+.btn:focus, .btn:disabled, input[type="button"]:focus, .btn:hover, input[type="button"]:hover {
   outline: none;
   text-decoration: none;
   background-color: rgb(58,70,76);
@@ -196,6 +196,8 @@ h6 {
   font-weight: lighter;
   font-size: 15px;
   padding-bottom: 15px;
+  margin-left: 3%;
+  text-align: left;
 }
 
 .status-post-2 {
@@ -446,6 +448,11 @@ h1 {
 
 .status-image {
   margin: 0 auto;
+  width: 94%;
+}
+
+.login-body {
+  background-color: rgb(58,70,76);
 }
 
 img {

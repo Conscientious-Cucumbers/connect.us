@@ -53,7 +53,7 @@ const checkIfUserExists = (username) => (dispatch, getState) => {
   return axios.get(`/user/${username}/info`)
   .then((result) => {
     if (!Object.keys(result.data).length) {
-      const newInfo = Object.assign(getState().user, {username: username});
+      const newInfo = Object.assign({}, getState().user, {username: username});
       dispatch(setCurrentUser(newInfo));
       dispatch(updateUserInfo(newInfo));
     } else {
@@ -66,7 +66,7 @@ export const updateSettings = (info) => (dispatch, getState) => {
   if (info.username) {
     dispatch(checkIfUserExists(info.username));
   } else {
-    dispatch(updateUserInfo(Object.assign(getState().user, info)));
+    dispatch(updateUserInfo(Object.assign({}, getState().user, info)));
   }
 };
 

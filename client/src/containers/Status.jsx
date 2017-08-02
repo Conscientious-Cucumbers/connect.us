@@ -33,7 +33,7 @@ class Status extends React.Component {
     });
   }
 
-  title () {
+  date () {
     const date = new Date(this.props.status.created_at);
     return (
       <span className="status-date">
@@ -63,14 +63,24 @@ class Status extends React.Component {
         <Paper zDepth={5}
           className="status-post-2">
           <div className="status-title">
-            <span className="status-title-inner">{this.props.status.title}</span> <span className="status-date">{this.title()}</span>
+            <div>
+              <span className="status-title-inner">{this.props.status.title}</span>
+            </div>
+            <div className="status-date">{this.date()}</div>
             <Divider className="status-title-divider"/>
           </div>
-          <br></br>
-          <img className="status-image" alt={'image'} src={this.props.status.image} />
-          <br></br>
+          {
+            this.props.status.image
+            ?
+              <div>
+                <img className="status-image" alt={'image'} src={this.props.status.image} />
+                <Divider className="status-title-divider"/>
+              </div>
+            :
+              null
+          }
           <div className="status-description">
-            {this.props.status.text}
+            <b>Description:</b> {this.props.status.text}
           </div>
           <div>
             {this.panelFooter()}

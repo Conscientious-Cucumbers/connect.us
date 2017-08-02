@@ -99,7 +99,8 @@ class StatusTextArea extends React.Component {
             />
             <Button type="submit"
               bsStyle="primary"
-              className="right">
+              className="right post-status-btn"
+              disabled={!this.state.text || !this.state.title}>
               Post
             </Button>
           </form>

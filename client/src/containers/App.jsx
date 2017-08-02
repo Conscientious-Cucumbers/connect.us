@@ -27,7 +27,7 @@ class App extends React.Component {
   handleFormChange(key, value) {
     this.setState((prevState) => {
       return {
-        formValues: Object.assign(prevState.formValues, {[key]: value})
+        formValues: Object.assign({}, prevState.formValues, {[key]: value})
       };
     });
   }
@@ -38,6 +38,7 @@ class App extends React.Component {
   }
 
   submitSignUp(e) {
+    e.preventDefault();
     this.props.finishSignup(this.state.formValues);
   }
 
