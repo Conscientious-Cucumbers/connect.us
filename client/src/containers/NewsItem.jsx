@@ -51,7 +51,7 @@ class NewsItem extends React.Component {
 
   toggleLike () {
     this.props.postNewsLike(this.props.newsItem);
-    if (!this.props.isNewsLike) {
+    if (!this.props.isNewsLike || this.props.user.username !== this.props.activeProfile.username) {
       this.setState((prevState) => {
         return {
           isLiked: !prevState.isLiked
@@ -156,10 +156,17 @@ class NewsItem extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+    activeProfile: state.activeProfile
+  };
+};
+
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     postNewsLike: actions.postNewsLike
   }, dispatch);
 };
 
-export default connect(null, mapDispatchToProps)(NewsItem);
+export default connect(mapStateToProps, mapDispatchToProps)(NewsItem);

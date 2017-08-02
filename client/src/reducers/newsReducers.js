@@ -30,9 +30,11 @@ export const isFetching = (state = false, action) => {
   switch (action.type) {
 
   case 'START_PAGE_FETCH':
-    return true;
+    return 'fetching';
   case 'FINISH_PAGE_FETCH':
     return false;
+  case 'NO_MORE_RESULTS':
+    return 'finished';
   default:
     return state;
 

@@ -3,10 +3,10 @@ const db = require('../');
 const newsLike = db.Model.extend({
   tableName: 'news_likes',
   user: function() {
-    return this.belongsTo('profiles', 'id_user');
+    return this.belongsTo('Profile', 'id_user');
   },
-  status: function() {
-    return this.belongsTo('news_items', 'id_news');
+  news: function() {
+    return this.belongsTo('NewsItem', 'id_news');
   }
 });
 
