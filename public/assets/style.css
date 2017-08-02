@@ -4,6 +4,15 @@
   background-color: rgb(58,70,76);
 }
 
+@keyframes growFromLeft {
+  0% {
+    width: 0px;
+  }
+  100% {
+    width: 328px;
+  }
+}
+
 .profile-not-found {
   color: #FF5722;
   font-weight: bolder;
@@ -49,6 +58,18 @@
 .search-bar {
   margin-top: 9px !important;
 }
+
+.search-bar-xs {
+  margin-top: -46px !important;
+  padding-left: 46px;
+  padding-right: 44px;
+  margin-right: -47px;
+  animation-duration: 0.2s; /* the duration of the animation */
+  animation-timing-function: ease-out;; /* how the animation will behave */
+  animation-delay: 0s; /* how long to delay the animation from starting */
+  animation-iteration-count: 1; /* how many times the animation will play */
+  animation-name: growFromLeft; /* the name of the animation we defined above */
+  }
 
 .navbar-home {
   margin-top: 7px !important;
