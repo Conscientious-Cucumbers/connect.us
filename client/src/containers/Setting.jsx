@@ -22,7 +22,7 @@ class Setting extends React.Component {
     //console.log(key)
     this.setState((prevState) => {
       return {
-        formValues: Object.assign(prevState.formValues, {[key]: value})
+        formValues: Object.assign({}, prevState.formValues, {[key]: value})
       };
     });
   }
