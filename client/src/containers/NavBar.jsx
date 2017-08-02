@@ -13,6 +13,7 @@ import MediaQuery from 'react-responsive';
 import SearchIcon from 'material-ui/svg-icons/action/search';
 import UserIcon from 'material-ui/svg-icons/social/person';
 import SettingsIcon from 'material-ui/svg-icons/action/settings';
+import CloseIcon from 'material-ui/svg-icons/Navigation/close';
 
 
 class NavBar extends React.Component {
@@ -20,7 +21,8 @@ class NavBar extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      searchInput: ''
+      searchInput: '',
+      xsSearchShowing: false
     };
   }
 
@@ -34,6 +36,14 @@ class NavBar extends React.Component {
     if (this.state.searchInput) {
       window.location.pathname = `/${this.state.searchInput}`;
     }
+  }
+
+  toggleSearchBarShowing() {
+    this.setState((prevState) => {
+      return {
+        xsSearchShowing: !prevState.xsSearchShowing
+      };
+    });
   }
 
   iconElementLeft () {
@@ -61,12 +71,33 @@ class NavBar extends React.Component {
         style={{position: 'fixed', backgroundColor: 'rgb(18,30,36)', top: '0px', height: '65px'}}
         iconElementLeft={
           <MediaQuery maxWidth={680}>
-            <IconButton tooltip="Search">
-              <SearchIcon color={'white'}/>
+            <IconButton
+              onTouchTap={this.toggleSearchBarShowing.bind(this)}
+              tooltip="Search">
+              {
+                this.state.xsSearchShowing
+                ?
+                  <CloseIcon color={'white'}/>
+                :
+                  <SearchIcon color={'white'}/>
+              }
             </IconButton>
+            {
+              this.state.xsSearchShowing
+              ?
+              <div className="search-bar-xs">
+                <SearchBar
+                  type='text'
+                  className="search-bar-text"
+                  method="GET"
+                  onRequestSearch={this.onSearch.bind(this)}
+                  onChange={this.setSearchInput.bind(this)} />
+              </div>
+              :
+              null
+            }
           </MediaQuery>
-        }
-        >
+        }>
           <MediaQuery minWidth={680}>
             <div className="search-bar">
               <SearchBar
@@ -78,31 +109,37 @@ class NavBar extends React.Component {
             </div>
           </MediaQuery>
 
-          <div className="navbar-home">
-            <IconButton href="/" tooltip="Home">
-              <ActionHome color={'white'}/>
-            </IconButton>
-          </div>
-
-          <div className="navbar-profile">
-            <IconButton href={`/${this.props.user ? this.props.user.username : '/'}`} tooltip="Profile" >
-              <UserIcon color={'white'} />
-            </IconButton>
-          </div>
-
-          <NotificationList />
-
-          <IconMenu
-            anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
-            iconButtonElement={
+          <MediaQuery minWidth={this.state.xsSearchShowing ? 680 : 0}>
+            <div className="navbar-home">
+              <IconButton href="/" tooltip="Home">
+                <ActionHome color={'white'}/>
+              </IconButton>
+            </div>
+          </MediaQuery>
+          <MediaQuery minWidth={this.state.xsSearchShowing ? 680 : 0}>
+            <div className="navbar-profile">
+              <IconButton href={`/${this.props.user ? this.props.user.username : '/'}`} tooltip="Profile" >
+                <UserIcon color={'white'} />
+              </IconButton>
+            </div>
+          </MediaQuery>
+          <MediaQuery minWidth={this.state.xsSearchShowing ? 680 : 0}>
+            <NotificationList />
+          </MediaQuery>
+          <MediaQuery minWidth={this.state.xsSearchShowing ? 680 : 0}>
+            <IconMenu
+              anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
+              iconButtonElement={
                 <IconButton className="navbar-settings" tooltip="Settings">
                   <SettingsIcon color={'white'}/>
                 </IconButton>
-            }>
-            <LinkContainer to='/settings'><MI primaryText="Settings" /></LinkContainer>
-            <LinkContainer to='/about'><MI primaryText="About" /></LinkContainer>
-            <MI primaryText="Log Out" href="/logout" />
-          </IconMenu>
+              }>
+              <LinkContainer to='/settings'><MI primaryText="Settings" /></LinkContainer>
+              <LinkContainer to='/about'><MI primaryText="About" /></LinkContainer>
+              <MI primaryText="Log Out" href="/logout" />
+            </IconMenu>
+          </MediaQuery>
+
         </AppBar>
 
       </div>

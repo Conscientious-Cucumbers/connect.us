@@ -2,7 +2,6 @@ const axios = require('axios');
 const models = require('../db/models');
 var Promise = require('bluebird');
 var _ = require('lodash');
-// const knex = require('knex')(require('../knexfile'));
 
 const updateNews = function() {
   console.log('Updating table...');
