@@ -1,17 +1,17 @@
-# Project Name
+# ConnectHub.us
 
-The project description
+ConnectHub.us is a social networking website in which users can share pictures, videos, and text with their followers.  Users can also view and like news from that day.
 
 ## Team
 
-- teamMember
-- teamMember
-- teamMember
-- teamMember
+- Pablo Boserman
+- Jake Gober
+- Taras Ignashchenko
+- Saikal Kalmanbetova
 
 ## Roadmap
 
-View the project roadmap [here](LINK_TO_DOC)
+View the project roadmap [here](https://docs.google.com/document/d/1j4W-cdtjkargVpzr2DUWVT1dR6Nj349fIxXf1xJlb0Y/edit?usp=drive_webs)
 
 ## Contributing
 
@@ -102,5 +102,9 @@ To run server: `yarn run start`
 To run tests: `yarn run test`
 
 To run your redis server for the session store `redis-server`
+
+
+###
+
 
 

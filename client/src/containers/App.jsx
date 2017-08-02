@@ -13,6 +13,7 @@ import FieldGroup from '../components/FieldGroup.jsx';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import actions from '../actions';
+import Favicon from 'react-favicon'
 
 // <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -44,6 +45,7 @@ class App extends React.Component {
 
   signUpModal () {
     return (
+
       <Modal
         show={this.props.signupOpen}
         onHide={() => {}}
@@ -70,6 +72,7 @@ class App extends React.Component {
             </Button>
           </Modal.Footer>
         </Form>
+        <Favicon url={['https://m.facebook.com/apple-touch-icon-precomposed.png?refsrc=https%3A%2F%2Ffacebook.com%2F&_rdr']}/>
       </Modal>
     );
   }
