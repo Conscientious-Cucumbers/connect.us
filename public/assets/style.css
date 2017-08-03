@@ -1,7 +1,23 @@
+.update-settings-button {
+  color: white !important;
+  margin-top: -7px !important;
+  margin-left: 0% !important;
+  width: 110px !important;
+}
+
+.update-settings-button:hover {
+  text-decoration: none;
+  background-color: #121E24;
+}
+
 .btn:focus, .btn:disabled, input[type="button"]:focus, .btn:hover, input[type="button"]:hover {
   outline: none;
   text-decoration: none;
   background-color: '#5e737c';
+}
+
+.settings-title {
+  color: #FD533E;
 }
 
 .about-page-description {

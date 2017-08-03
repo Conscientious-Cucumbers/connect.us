@@ -28,7 +28,7 @@ class Settings extends React.Component {
     return (
       <div>
         <Header username={this.props.user.username}/>
-        <h1> Settings </h1>
+        <h1 className="settings-title"> Settings </h1>
         {this.state.settings.map((setting, key) => <Setting field={setting} key={key} />)}
       </div>
     );

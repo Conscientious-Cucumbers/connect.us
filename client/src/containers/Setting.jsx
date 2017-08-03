@@ -43,7 +43,7 @@ class Setting extends React.Component {
             name={this.props.field.split(' ')[0]}
             placeholder={'New ' + this.props.field}
             onChange={(e) => this.handleFormChange(e.target.name, e.target.value)}/>
-          <Button type="submit">Update</Button>
+          <Button type="submit" className="update-settings-button">Update</Button>
         </form>
       </div>
     );
