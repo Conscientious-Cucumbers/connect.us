@@ -4976,6 +4976,10 @@ react-event-listener@^0.4.5:
     prop-types "^15.5.4"
     warning "^3.0.0"
 
+react-favicon@0.0.9:
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/react-favicon/-/react-favicon-0.0.9.tgz#1765a902f68277d0b7ed6ddc8588d5164b53f43a"
+
 react-overlay@^0.1.7:
   version "0.1.7"
   resolved "https://registry.yarnpkg.com/react-overlay/-/react-overlay-0.1.7.tgz#fe9855895fdde2e7e77ab2d1f8fb87bf64945083"
@@ -5243,6 +5247,12 @@ redis@^2.1.0, redis@^2.7.1, redis@~2.7.1:
     double-ended-queue "^2.1.0-0"
     redis-commands "^1.2.0"
     redis-parser "^2.5.0"
+
+redux-favicon@^0.1.4:
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/redux-favicon/-/redux-favicon-0.1.4.tgz#d92268853482309605be4be5ecc899a6442aae6b"
+  dependencies:
+    favico.js "^0.3.10"
 
 redux-logger@^3.0.6:
   version "3.0.6"
