@@ -31,6 +31,13 @@ const requireSignup = () => {
   };
 };
 
+const setErrorSignUp = (error) => {
+  return {
+    type: 'ERROR_SIGNUP',
+    payload: error
+  };
+};
+
 const isSignUpRequired = (user) => (dispatch, getState) => {
   if (!user.username) {
     dispatch(requireSignup());
@@ -56,7 +63,7 @@ const checkIfUserExists = (username) => (dispatch, getState) => {
       dispatch(setCurrentUser(newInfo));
       dispatch(updateUserInfo(newInfo));
     } else {
-      alert('Username already exists!');
+      dispatch(setErrorSignUp({errorType: 'Username already exists'}));
     }
   });
 };

@@ -21,6 +21,9 @@ export const signupOpen = (state = false, action) => {
   case 'FINISH_SIGNUP':
     return false;
 
+  case 'ERROR_SIGNUP':
+    return action.payload;
+
   default:
     return state;
 

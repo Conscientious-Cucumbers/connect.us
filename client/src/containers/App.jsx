@@ -13,22 +13,22 @@ import FieldGroup from '../components/FieldGroup.jsx';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import actions from '../actions';
+import TextField from 'material-ui/TextField';
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
 
-// <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 class App extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      formValues: {}
+      formValue: ''
     };
   }
 
-  handleFormChange(key, value) {
-    this.setState((prevState) => {
-      return {
-        formValues: Object.assign({}, prevState.formValues, {[key]: value})
-      };
+  handleFormChange(event, newValue) {
+    this.setState({
+      formValue: newValue
     });
   }
 
@@ -37,41 +37,65 @@ class App extends React.Component {
     this.props.getNotifications();
   }
 
-  submitSignUp(e) {
-    e.preventDefault();
-    this.props.finishSignup(this.state.formValues);
+  submitSignUp() {
+    this.props.finishSignup({ username: this.state.formValue });
   }
 
   signUpModal () {
+    const actions = [
+      <FlatButton
+        label="Submit"
+        disabled={!this.state.formValue}
+        className="submit-signup-btn"
+        onTouchTap={this.submitSignUp.bind(this)}
+      />
+    ];
+
     return (
-      <Modal
-        show={this.props.signupOpen}
-        onHide={() => {}}
-        bsSize="large">
-        <Modal.Header>
-          <h3 style={{color: '#EF6C00'}}>Sign Up</h3>
-        </Modal.Header>
-        <Form id="signupNewUserForm" onSubmit={this.submitSignUp.bind(this)}>
-          <Modal.Body>
-            <FieldGroup
-              id="username"
-              type="text"
-              label="Username"
-              name="username"
-              placeholder="Enter a username"
-              onChange={(e) => this.handleFormChange(e.target.name, e.target.value)}
-              required/>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button
-              bsStyle="primary"
-              type="submit">
-            Submit
-            </Button>
-          </Modal.Footer>
-        </Form>
-      </Modal>
+      <Dialog
+        title={<h3 style={{color: '#FD533E'}}>Sign Up</h3>}
+        actions={actions}
+        modal={true}
+        open={!!this.props.signupOpen}
+      >
+      <TextField
+        floatingLabelText="Enter a username"
+        onChange={this.handleFormChange.bind(this)}
+        underlineFocusStyle={{borderColor: '#FD533E'}}
+        floatingLabelFocusStyle={{color: '#FD533E'}}
+        errorText={this.props.signupOpen && this.props.signupOpen.errorType ? this.props.signupOpen.errorType : ''}
+        />
+      </Dialog>
     );
+    // return (
+    //   <Modal
+    //     show={this.props.signupOpen}
+    //     onHide={() => {}}
+    //     bsSize="large">
+    //     <Modal.Header>
+    //       <h3 style={{color: '#EF6C00'}}>Sign Up</h3>
+    //     </Modal.Header>
+    //     <Form id="signupNewUserForm" onSubmit={this.submitSignUp.bind(this)}>
+    //       <Modal.Body>
+    //         <FieldGroup
+    //           id="username"
+    //           type="text"
+    //           label="Username"
+    //           name="username"
+    //           placeholder="Enter a username"
+    //           onChange={(e) => this.handleFormChange(e.target.name, e.target.value)}
+    //           required/>
+    //       </Modal.Body>
+    //       <Modal.Footer>
+    //         <Button
+    //           bsStyle="primary"
+    //           type="submit">
+    //         Submit
+    //         </Button>
+    //       </Modal.Footer>
+    //     </Form>
+    //   </Modal>
+    // );
   }
 
   render () {
@@ -82,7 +106,6 @@ class App extends React.Component {
           <NavBar />
 
           <div className='body-container'>
-            {this.signUpModal()}
             <Switch>
               <Route exact path="/" component={() => <Home />}/>
               <Route path="/settings" component={() => <Settings />}/>
@@ -92,6 +115,7 @@ class App extends React.Component {
               }}/>
             </Switch>
           </div>
+          {this.signUpModal()}
         </div>
       </Router>
     );

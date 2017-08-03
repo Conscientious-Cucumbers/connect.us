@@ -2,14 +2,15 @@ const availableSources = require('config')['sources'];
 
 exports.seed = function(knex, Promise) {
   // Deletes ALL existing entries
-  return knex('news_sources').del()
-    .then(function () {
-      // Inserts seed entries
-      return knex('news_sources').insert(availableSources.map(source => {
-        return {
-          name: source.name,
-          source: source.source
-        };
-      }));
+  return knex.select().from('news_sources')
+  .then((results) => {
+    return availableSources.filter((item) => {
+      return !results.reduce((wasFound, currentItem) => {
+        return wasFound || item.name === currentItem.name;
+      }, false);
     });
+  })
+  .then((newSources) => {
+    return knex('news_sources').insert(newSources);
+  });
 };

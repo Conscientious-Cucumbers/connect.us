@@ -36,10 +36,14 @@ class NewsItem extends React.Component {
   }
 
   onPrevImgLoad({target: img}) {
+
     if (img.offsetWidth < 50 || img.offsetHeight < 50) {
       this.setState({
         imgSource: '/assets/no_image_found.jpg'
       });
+    }
+    if (img.width < 500) {
+      img.width = 500;
     }
   }
 
