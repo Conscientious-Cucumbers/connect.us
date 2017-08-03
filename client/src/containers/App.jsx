@@ -44,7 +44,6 @@ class App extends React.Component {
 
   signUpModal () {
     return (
-
       <Modal
         show={this.props.signupOpen}
         onHide={() => {}}
