@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { PanelGroup } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import Loading from '../components/Loading.jsx';
 import FollowEntry from './FollowEntry.jsx';
@@ -11,8 +10,8 @@ const Followers = (props) => (
     {
       props.followers
         ?
-        props.followers.map((follows, index) => {
-          return <FollowEntry key={index} follows={follows}/>;
+        props.followers.map((follows) => {
+          return <FollowEntry key={follows.id} follows={follows}/>;
         })
         :
         <Loading />

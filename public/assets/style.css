@@ -164,7 +164,11 @@
 
 .status-title-inner {
   text-align: center;
+}
 
+.status-likes-container {
+  margin-left: -14%;
+  margin-right: -14%;
 }
 
 .follow-entry:hover {

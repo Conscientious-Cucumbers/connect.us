@@ -1,23 +1,22 @@
 import React from 'react';
-import { PanelGroup } from 'react-bootstrap';
 import Loading from '../components/Loading.jsx';
 import { connect } from 'react-redux';
 import Status from './Status.jsx';
 
 const StatusLikes = (props) => (
-  <PanelGroup>
+  <div className="status-likes-container">
     {
       props.statusLikes
         ?
-        props.statusLikes.map((status, index) => {
+        props.statusLikes.map((status) => {
           return (
-            <Status key={index} status={status}/>
+            <Status key={status.id} status={status}/>
           );
         })
         :
         <Loading />
     }
-  </PanelGroup>
+  </div>
 );
 
 const mapStateToProps = (state) => {
