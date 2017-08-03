@@ -70,35 +70,6 @@ class App extends React.Component {
       </form>
       </Dialog>
     );
-    // return (
-    //   <Modal
-    //     show={this.props.signupOpen}
-    //     onHide={() => {}}
-    //     bsSize="large">
-    //     <Modal.Header>
-    //       <h3 style={{color: '#EF6C00'}}>Sign Up</h3>
-    //     </Modal.Header>
-    //     <Form id="signupNewUserForm" onSubmit={this.submitSignUp.bind(this)}>
-    //       <Modal.Body>
-    //         <FieldGroup
-    //           id="username"
-    //           type="text"
-    //           label="Username"
-    //           name="username"
-    //           placeholder="Enter a username"
-    //           onChange={(e) => this.handleFormChange(e.target.name, e.target.value)}
-    //           required/>
-    //       </Modal.Body>
-    //       <Modal.Footer>
-    //         <Button
-    //           bsStyle="primary"
-    //           type="submit">
-    //         Submit
-    //         </Button>
-    //       </Modal.Footer>
-    //     </Form>
-    //   </Modal>
-    // );
   }
 
   render () {
