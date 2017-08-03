@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import actions from '../actions';
 import Loading from '../components/Loading.jsx';
 import Setting from './Setting.jsx';
+import Header from './Header.jsx';
 
 // Get rid of any of the apove dependencies not neccesary
 
@@ -26,6 +27,7 @@ class Settings extends React.Component {
   loaded () {
     return (
       <div>
+        <Header username={this.props.user.username}/>
         <h1> Settings </h1>
         {this.state.settings.map((setting, key) => <Setting field={setting} key={key} />)}
       </div>

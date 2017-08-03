@@ -141,7 +141,7 @@ class NavBar extends React.Component {
                   <SettingsIcon color={'white'}/>
                 </IconButton>
               }>
-              <LinkContainer to='/settings'><MI primaryText="Settings" /></LinkContainer>
+              <MI href='/settings' primaryText="Settings" />
               <LinkContainer to='/about'><MI primaryText="About" /></LinkContainer>
               <MI primaryText="Log Out" href="/logout" />
             </IconMenu>

@@ -9,6 +9,9 @@ import { bindActionCreators } from 'redux';
 import {fullWhite} from 'material-ui/styles/colors';
 import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
+import ReactFilestack from 'filestack-react';
+import IconButton from 'material-ui/IconButton';
+import CreateIcon from 'material-ui/svg-icons/content/create';
 
 class Header extends React.Component {
 
@@ -20,15 +23,39 @@ class Header extends React.Component {
     this.props.toggleFollow(this.props.active.id);
   }
 
+  uploadProfilePicture (file) {
+    this.props.updateSettings({profile_picture: file.filesUploaded[0].url});
+  }
+
   render() {
     // className="profile-picture"
+    const fileStackOpts = {
+      accept: 'image/*',
+      maxFiles: 1,
+      storeTo: {
+        location: 's3'
+      }
+    };
     return (
       <div>
-        <div>
+        <div className="profile-picture-container">
           <Paper zDepth={5} className="profile-picture" circle>
             <img
               src={this.props.active.profile_picture || 'http://www.bsmc.net.au/wp-content/uploads/No-image-available.jpg'} />
           </Paper>
+          {
+            this.props.active.username === this.props.user.username
+            ?
+              <ReactFilestack
+                apikey={'AnjmM5YhHQ7uoOi019Ncrz'}
+                buttonText=""
+                buttonClass="fa fa-camera upload-pic-btn"
+                options={fileStackOpts}
+                onSuccess={this.uploadProfilePicture.bind(this)}
+                />
+            :
+              null
+          }
         </div>
         <h2 className="profile-name">
           {this.props.active.first && this.props.active.last && `${this.props.active.first} ${this.props.active.last}` || this.props.active.display}
@@ -56,13 +83,14 @@ const mapStateToProps = (state) => {
   return {
     activeFollowed: state.activeFollowed,
     user: state.user,
-    active: state.activeProfile
+    active: state.activeProfile || state.user
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    toggleFollow: actions.toggleFollow
+    toggleFollow: actions.toggleFollow,
+    updateSettings: actions.updateSettings
   }, dispatch);
 };
 
