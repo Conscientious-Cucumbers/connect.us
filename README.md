@@ -28,23 +28,15 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
 
 ## Usage
 
-> Create an account from scratch using the 'sign in' tab. Or, sign in with the Google or Facebook login buttons.  Once logged in, you will be able to set your username,
-which will serve as your username to other users of the application.  
-
-The app has six (6) zones of use: 1. Newsfeed  2. Notifications 3. Your Profile  4. Other User Profiles  5. Settings  6. About.   
+> Create an account from scratch using the 'sign in' tab. Or, sign in with the Google or Facebook login buttons.  Once logged in, you will be able to set your username, which will serve as your username to other users of the application. The app has six (6) zones of use: 1. Newsfeed  2. Notifications 3. Your Profile  4. Other User Profiles  5. Settings  6. About.   
 
 1.  In the Newsfeed, you can veiw the latest news from 20+ news outlets around the world.  Clicking on any of these news snippits will allow you to see the description,
 source, and link of the original news article.  You may click the 'heart' button to indicate that you like a certain news article.
-
 2. Clicking the notifications icon shows the user what other users have recently followed him/her.
-
 3. In the Profile, you will be able to post new statueses that will have a title, description, and an uploaded photo of your choice.  In your profile, you also have access
 to your basic information, a list of your 'liked' statuses and news peices, and a list of your followers/followees.
-
 4. In the Profile of another user, you can see all of the information that you can see on your own profile page, but all of the information will be that of the specific user's page you are on.
-
 5. In the settings page, you can alter any of your personal information.  The updated information is viewable to you and other users of the app via your profile page.
-
 6. The About page contains information about Connect.us 
 
 
@@ -54,7 +46,9 @@ to your basic information, a list of your 'liked' statuses and news peices, and 
 - Node 6.9.x
 - Redis 3.2.x
 - Postgresql 9.6.x
-- etc
+- React-Redux 5.0.x
+- React-Router 4.1.x
+- etc. 
 
 ## Development
 
@@ -79,6 +73,8 @@ yarn global add grunt-cli knex eslint
 Override settings `config/default.json` in any environment by making a copy of `config/ENV.example.json` and naming it `config/ENV.json` and setting the appropriate variable. 
 
 For environments that require use of environment variables, you can supply variables as defined in `config/custom-environment-variables.json`.
+
+This application utilizes Facebook and Google authorization as options for user login/signup. 
 
 See https://www.npmjs.com/package/config
 And https://github.com/lorenwest/node-config/wiki/Environment-Variables#custom-environment-variables
@@ -120,6 +116,8 @@ To run webpack build: `yarn run build`
 To run server: `yarn run start`
 
 To run tests: `yarn run test`
+
+To run the web worker: `yarn run web_worker`
 
 To run your redis server for the session store `redis-server`
 
