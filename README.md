@@ -1,6 +1,7 @@
 # ConnectHub.us
 
-ConnectHub.us is a social networking website in which users can share pictures, videos, and text with their followers.  Users can also view and like news from that day.
+ConnectHub.us is a social networking website in which users can post pictures, news, and statuses for their friends and other users to see.  Users can also scroll through their news feed to view the most up-to-date news from 20+ news outlets around the world. 
+
 
 ## Team
 
@@ -27,7 +28,26 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
 
 ## Usage
 
-> Create an account from scratch using the 'sign in' tab. Or, sign in with the Google or Facebook login buttons.  Once logged in, you can go to you 
+> Create an account from scratch using the 'sign in' tab. Or, sign in with the Google or Facebook login buttons.  Once logged in, you will be able to set your username,
+which will serve as your username to other users of the application.  
+
+The app has six (6) zones of use: 1. Newsfeed  2. Notifications 3. Your Profile  4. Other User Profiles  5. Settings  6. About.   
+
+1.  In the Newsfeed, you can veiw the latest news from 20+ news outlets around the world.  Clicking on any of these news snippits will allow you to see the description,
+source, and link of the original news article.  You may click the 'heart' button to indicate that you like a certain news article.
+
+2. Clicking the notifications icon shows the user what other users have recently followed him/her.
+
+3. In the Profile, you will be able to post new statueses that will have a title, description, and an uploaded photo of your choice.  In your profile, you also have access
+to your basic information, a list of your 'liked' statuses and news peices, and a list of your followers/followees.
+
+4. In the Profile of another user, you can see all of the information that you can see on your own profile page, but all of the information will be that of the specific user's page you are on.
+
+5. In the settings page, you can alter any of your personal information.  The updated information is viewable to you and other users of the app via your profile page.
+
+6. The About page contains information about Connect.us 
+
+
 
 ## Requirements
 
