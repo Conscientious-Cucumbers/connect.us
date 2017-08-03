@@ -4,6 +4,27 @@
   background-color: #121E24;
 }
 
+.about-page-description {
+  padding-left: 3%;
+}
+
+.about-page-content {
+  padding-left: 3%;
+  padding-bottom: 15px;
+}
+
+.about-entry {
+  margin-top: -40px;
+  margin-right: 15%;
+  margin-left: 15%;
+}
+
+.about-this-page {
+  padding-top: 10px;
+  padding-left: 3%;
+  color: #FF5722;
+}
+
 .signup-option {
   float: right;
   color: #FD5F3F;

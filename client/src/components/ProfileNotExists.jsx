@@ -1,5 +1,5 @@
 import React from 'react';
-import { PageHeader, Button } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import Paper from 'material-ui/Paper';
 import FrownyFace from 'material-ui/svg-icons/social/sentiment-very-dissatisfied';
