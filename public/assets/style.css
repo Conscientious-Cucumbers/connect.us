@@ -11,6 +11,12 @@
 .about-page-content {
   padding-left: 3%;
   padding-bottom: 15px;
+  padding-top: 25px;
+}
+
+.about-collaborators {
+  color: black !important;
+  font-weight: bolder;
 }
 
 .about-entry {
