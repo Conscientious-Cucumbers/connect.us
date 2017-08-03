@@ -157,18 +157,40 @@
   font-size: 10px;
   font-style: oblique;
   font-variant: small-caps;
+  text-align: right;
   color: black;
-  float: right;
-  margin-right: 10px;
+  margin-right: 4%;
+  margin-bottom: -10px;
 }
 
 .status-title-inner {
-  text-align: center;
+  text-align: justify;
+  margin-bottom: 6px;
 }
 
 .status-likes-container {
   margin-left: -14%;
   margin-right: -14%;
+}
+
+.status-like-user {
+  font-weight: normal;
+  font-size: 14px;
+}
+
+.status-like-user img {
+  height: 28px !important;
+  width: 28px !important;
+}
+
+.status-like-user-link {
+  color: #121E24;
+  text-decoration: none;
+}
+
+.status-like-user-link:hover{
+  color: #FD583E;
+  text-decoration: none;
 }
 
 .follow-entry:hover {
@@ -253,6 +275,7 @@ h6 {
   padding-top: 10px;
   text-align: left !important;
   margin-left: 3%;
+  margin-right: 3%;
   font-weight: bolder;
 }
 

@@ -10,7 +10,7 @@ const StatusLikes = (props) => (
         ?
         props.statusLikes.map((status) => {
           return (
-            <Status key={status.id} status={status}/>
+            <Status key={status.id} status={status} isStatusLike/>
           );
         })
         :
