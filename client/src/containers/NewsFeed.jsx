@@ -36,8 +36,8 @@ class NewsFeed extends React.Component {
           {
             !!this.props.newsFeed
               ?
-              this.props.newsFeed.map(((newsItem, index) => {
-                return <NewsItem key={index} newsItem={newsItem} />;
+              this.props.newsFeed.map(((newsItem) => {
+                return <NewsItem key={newsItem.url} newsItem={newsItem} />;
               }))
               :
               <Loading />

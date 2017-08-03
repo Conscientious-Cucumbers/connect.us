@@ -24,8 +24,8 @@ class NewsLikes extends React.Component {
           {
             this.props.newsLikes
               ?
-              this.props.newsLikes.map((item, index) => {
-                return <NewsItem isNewsLike={this.state.isNewsLike} key={index} newsItem={item}/>;
+              this.props.newsLikes.map((item) => {
+                return <NewsItem isNewsLike={this.state.isNewsLike} key={item.id} newsItem={item}/>;
               })
               :
               <Loading />

@@ -3,7 +3,7 @@ const models = require('../models');
 
 exports.seed = function (knex, Promise) {
   //deletes data  (can remove if needs)
-  if (false) {
+  if (true) {
     return knex('profiles').del()
     .then(() => knex('auths').del())
     .then(() => models.Profile.forge({

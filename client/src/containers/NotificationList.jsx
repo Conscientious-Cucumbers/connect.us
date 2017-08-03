@@ -33,8 +33,15 @@ class NotificationList extends React.Component {
 
   }
 
-  thereAreNotifications() {
-    return !!(this.props.SeenNotifications && this.props.SeenNotifications.length) || !!(this.props.UnseenNotifications && this.props.UnseenNotifications.length);
+  thereAreNotifications(type = 'or') {
+    switch (type) {
+
+    case 'or':
+      return !!(this.props.SeenNotifications && this.props.SeenNotifications.length) || !!(this.props.UnseenNotifications && this.props.UnseenNotifications.length);
+    case 'and':
+      return !!(this.props.SeenNotifications && this.props.SeenNotifications.length) && !!(this.props.UnseenNotifications && this.props.UnseenNotifications.length);
+
+    }
   }
 
   notifications () {
@@ -67,17 +74,17 @@ class NotificationList extends React.Component {
         iconButtonElement={this.notifications()}
         onTouchTap={this.needsClearNotifications.bind(this)}
         anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
-        maxHeight={150}
+        maxHeight={200}
       >
         {
           this.props.UnseenNotifications &&
           this.props.UnseenNotifications.map((notification, index) => {
-            return <NotificationItem key={(3 + (index * 2 + 1) ) / 10} notification={notification}/>;
+            return <NotificationItem key={notification.id + 'u'} notification={notification}/>;
           })
         }
 
         {
-          this.thereAreNotifications()
+          this.thereAreNotifications('and')
           ?
             <Divider />
           :
@@ -87,7 +94,7 @@ class NotificationList extends React.Component {
         {
           this.props.SeenNotifications &&
           this.props.SeenNotifications.slice(0, 10).map((notification, index) => {
-            return <NotificationItem key={(3 + (index + 2) * 2) / 10} notification={notification} seen/>;
+            return <NotificationItem key={notification.id + 's'} notification={notification} seen/>;
           })
         }
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import { PanelGroup, Row } from 'react-bootstrap';
 import Status from './Status.jsx';
 import { connect } from 'react-redux';
 import StatusTextArea from './StatusTextArea.jsx';
@@ -17,7 +16,7 @@ class Timeline extends React.Component {
     }
 
     return (
-      <PanelGroup>
+      <div>
         {this.props.profileRoute === this.props.user.username
           ?
           <StatusTextArea />
@@ -25,13 +24,13 @@ class Timeline extends React.Component {
           null
         }
         {
-          this.props.statusFeed.map((status, index) => {
+          this.props.statusFeed.map((status) => {
             return (
-              <Status key={index} status={status} isTimeline/>
+              <Status key={status.id} status={status} isTimeline/>
             );
           })
         }
-      </PanelGroup>
+      </div>
     );
 
   }

@@ -10,7 +10,14 @@ const FollowEntry = (props) => {
     <div className="follow-entry">
       <a href={`/${props.follows.username}`}>
         <ListItem
-          primaryText={props.follows.display || props.follows.first + ' ' + props.follows.last}
+          primaryText=
+          {
+            props.follows.first && props.follows.last
+            ?
+            props.follows.first + ' ' + props.follows.last
+            :
+            props.follows.display
+          }
           leftAvatar={<Avatar src={props.follows.profile_picture || 'http://www.bsmc.net.au/wp-content/uploads/No-image-available.jpg'} />}
         />
       </a>
