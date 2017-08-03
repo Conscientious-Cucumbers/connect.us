@@ -146,7 +146,7 @@ class Profile extends React.Component {
                 <Timeline profileRoute={this.props.username} />
               </div>
 
-              <div className="profile-tab">
+              <div className="about-user-tab">
                 <AboutUser />
               </div>
 

@@ -34,11 +34,13 @@
 
 .signup-option {
   float: right;
+  line-height: 35px;
   color: #FD523E;
 }
 
 .login-option {
   float: right;
+  line-height: 35px;
   color: #FD523E;
 }
 
@@ -148,7 +150,7 @@
 }
 
 .unseen-notification {
-  color: #FF4081 !important;
+  color: #FD3F3D !important;
 }
 
 .status-date {
@@ -403,6 +405,12 @@ h6 {
   margin-left: -40px;
   margin-right: -40px;
   margin-top: 20px;
+}
+
+.about-user-tab {
+  margin-left: 2%;
+  margin-right: 2%;
+  margin-top: 20px;
   position: center;
 }
 
@@ -501,6 +509,9 @@ h6 {
 
 .about-user {
   text-align: center;
+  margin-top: 25px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .loading {
@@ -514,7 +525,8 @@ h6 {
 .bottom-loading {
   font-size: 25px !important;
   position: relative; /* or absolute */
-  top: 50%;
+  top: 20%;
+  color: rgb(18,30,36);
   text-align: center;
   height: 0px;
   padding: 0px !important;

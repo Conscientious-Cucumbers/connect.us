@@ -37,7 +37,8 @@ class App extends React.Component {
     this.props.getNotifications();
   }
 
-  submitSignUp() {
+  submitSignUp(e) {
+    e && e.preventDefault && e.preventDefault();
     this.props.finishSignup({ username: this.state.formValue });
   }
 
@@ -58,13 +59,15 @@ class App extends React.Component {
         modal={true}
         open={!!this.props.signupOpen}
       >
-      <TextField
-        floatingLabelText="Enter a username"
-        onChange={this.handleFormChange.bind(this)}
-        underlineFocusStyle={{borderColor: '#FD533E'}}
-        floatingLabelFocusStyle={{color: '#FD533E'}}
-        errorText={this.props.signupOpen && this.props.signupOpen.errorType ? this.props.signupOpen.errorType : ''}
-        />
+      <form onSubmit={this.submitSignUp.bind(this)}>
+        <TextField
+          floatingLabelText="Enter a username"
+          onChange={this.handleFormChange.bind(this)}
+          underlineFocusStyle={{borderColor: '#FD533E'}}
+          floatingLabelFocusStyle={{color: '#FD533E'}}
+          errorText={this.props.signupOpen && this.props.signupOpen.errorType ? this.props.signupOpen.errorType : ''}
+          />
+      </form>
       </Dialog>
     );
     // return (

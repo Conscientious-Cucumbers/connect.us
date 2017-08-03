@@ -64,23 +64,23 @@ class StatusTextArea extends React.Component {
     };
 
     return (
-      <div> 
-        <Paper zDepth={5} 
+      <div>
+        <Paper zDepth={5}
           className="status-post-status-textarea">
           <div className="status-textarea">
-            Post your Status
+            Post a Status
             <Divider className="status-textarea-divider"/>
 
             <form onSubmit={this.submitStatus.bind(this)}>
               <FormGroup controlId="formControlsTextarea">
 
-                <TextField 
+                <TextField
                   onChange={this.handleTitleChange.bind(this)}
                   id="status-title-field"
-                  underlineFocusStyle={{borderColor: '#FD533E'}}                  
+                  underlineFocusStyle={{borderColor: '#FD533E'}}
                   value={this.state.title}
                   type="text"
-                  placeholder="Title" 
+                  placeholder="Title"
                 /> <br />
 
                 <TextField

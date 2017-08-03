@@ -6,6 +6,7 @@ import { GridList } from 'material-ui/GridList';
 import ReactScrollPagination from 'react-scroll-pagination';
 import { getNextNewsPage } from '../actions/newsActions';
 import { bindActionCreators } from 'redux';
+import SadIcon from 'material-ui/svg-icons/social/sentiment-dissatisfied';
 
 class NewsFeed extends React.Component {
   constructor (props) {
@@ -46,7 +47,16 @@ class NewsFeed extends React.Component {
               ?
               <Loading className="bottom-loading" />
               :
-              <div></div>
+                this.props.isFetching === 'finished'
+                ?
+                <div className="bottom-loading">
+                  <div>
+                    No more news to show
+                  </div>
+                  <SadIcon color={'rgb(18,30,36)'}/>
+                </div>
+                :
+                <span></span>
           }
         </GridList>
         <ReactScrollPagination
