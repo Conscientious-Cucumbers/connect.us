@@ -29,7 +29,7 @@ export const getNotifications = () => (dispatch, getState) => {
 export const clearNotifications = () => (dispatch, getState) => {
   axios.post('/user/notifications/clear')
   .then((result) => {
-    console.log(result.data);
+    // console.log(result.data);
     dispatch(getNotifications());
   })
   .catch((err) => {

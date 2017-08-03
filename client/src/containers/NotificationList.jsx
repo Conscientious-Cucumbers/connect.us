@@ -33,15 +33,18 @@ class NotificationList extends React.Component {
 
   }
 
+  thereAreNotifications() {
+    return (this.props.SeenNotifications && this.props.SeenNotifications.length) || (this.props.UnseenNotifications && this.props.UnSeenNotifications.length);
+  }
+
   notifications () {
     if (this.props.UnseenNotifications && this.props.UnseenNotifications.length) {
       return (
           <IconButton tooltip="Notifications" className="navbar-notifications">
             <Badge
               className="notifications-badge"
-              badgeStyle={{top: -7, right: 1, fontSize: 10, width: 18, height: 18}}
-              badgeContent={this.props.UnseenNotifications.length}
-              secondary>
+              badgeStyle={{top: -7, right: 1, fontSize: 10, width: 18, height: 18, backgroundColor: '#FD3F3D', color: 'white'}}
+              badgeContent={this.props.UnseenNotifications.length}>
               <GlobeIcon color={'white'}/>
             </Badge>
           </IconButton>
@@ -60,6 +63,7 @@ class NotificationList extends React.Component {
 
     return (
       <IconMenu
+        open={this.state.dropDownOpen && this.thereAreNotifications()}
         iconButtonElement={this.notifications()}
         onTouchTap={this.needsClearNotifications.bind(this)}
         anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
@@ -72,7 +76,13 @@ class NotificationList extends React.Component {
           })
         }
 
-        <Divider />
+        {
+          this.thereAreNotifications()
+          ?
+            <Divider />
+          :
+            null
+        }
 
         {
           this.props.SeenNotifications &&

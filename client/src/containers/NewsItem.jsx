@@ -104,7 +104,7 @@ class NewsItem extends React.Component {
         isLiked={this.state.isLiked} />,
       <FlatButton
         label="Close"
-        primary={true}
+        style={{color: '#FD4F3E'}}
         keyboardFocused={false}
         onTouchTap={() => this.toggleModal(false)}
       />
