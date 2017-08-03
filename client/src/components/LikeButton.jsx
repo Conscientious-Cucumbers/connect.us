@@ -10,7 +10,7 @@ const LikeButton = (props) => {
       <IconButton
         onTouchTap={props.onTouchTap}
         className={props.className}>
-        <Favorite color="red"/>
+        <Favorite color="#FD4A3E"/>
       </IconButton>
     );
   } else {
@@ -18,7 +18,7 @@ const LikeButton = (props) => {
       <IconButton
         onTouchTap={props.onTouchTap}
         className={props.className}>
-        <FavoriteBorder color="red"/>
+        <FavoriteBorder color="#FD4A3E"/>
       </IconButton>
     );
   }
