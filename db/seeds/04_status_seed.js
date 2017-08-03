@@ -1,7 +1,8 @@
 
 exports.seed = function(knex, Promise) {
   // Deletes ALL existing entries
-  return knex('statuses').del()
+  if (false) {
+    return knex('statuses').del()
     .then(function () {
       // Inserts seed entries
       return knex('statuses').insert([
@@ -41,6 +42,7 @@ exports.seed = function(knex, Promise) {
         {title: 'San Francisco - Car Accident', text: 'Uploading a picture, check out guys, there is a car accident at financial district road, next to the public transportations', image: 'https://cdn.filestackcontent.com/fAUDg2zSQHW9Jwa7GzQl', id_user: 7}
       ]);
     });
+  }
 };
 
 

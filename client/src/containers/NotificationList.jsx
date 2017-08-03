@@ -34,7 +34,7 @@ class NotificationList extends React.Component {
   }
 
   thereAreNotifications() {
-    return (this.props.SeenNotifications && this.props.SeenNotifications.length) || (this.props.UnseenNotifications && this.props.UnSeenNotifications.length);
+    return (this.props.SeenNotifications && this.props.SeenNotifications.length) || (this.props.UnseenNotifications && this.props.UnseenNotifications.length);
   }
 
   notifications () {

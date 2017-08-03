@@ -25,7 +25,11 @@
     {"name": "ABC News AU", "source": "abc-news-au"},
     {"name": "CNN", "source": "cnn"},
     {"name": "IGN", "source": "ign"},
-    {"name": "Google News", "source": "google-news"}
+    {"name": "Google News", "source": "google-news"},
+    {"name": "Hacker News", "source": "hacker-news"},
+    {"name": "Tech Radar", "source": "techradar"},
+    {"name": "New York Times", "source": "the-new-york-times"},
+    {"name": "ESPN", "source": "espn"}
   ],
 
   "passport": {

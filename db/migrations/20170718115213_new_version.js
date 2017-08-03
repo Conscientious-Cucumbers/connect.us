@@ -29,10 +29,10 @@ exports.up = function (knex, Promise) {
       table.increments('id').unsigned().primary();
       table.string('source', 100).notNullable();
       table.string('title', 300).nullable();
-      table.string('thumbnail', 300).nullable();
-      table.string('text', 500).nullable();
-      table.string('media', 300).nullable();
-      table.string('url', 500).nullable();
+      table.string('thumbnail', 500).nullable();
+      table.string('text', 2000).nullable();
+      table.string('media', 500).nullable();
+      table.string('url', 1000).nullable();
       table.string('date', 50).notNullable();
       table.timestamps(true, true);
     }),

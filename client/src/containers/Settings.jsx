@@ -14,7 +14,7 @@ class Settings extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      settings: ['username', 'first name', 'last name', 'phone number']
+      settings: ['username', 'first name', 'last name']
 
     };
     //console.log('this is the user object', this.props.user)
