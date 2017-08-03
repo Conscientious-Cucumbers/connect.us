@@ -5,12 +5,10 @@ import { bindActionCreators } from 'redux';
 import actions from '../actions';
 import ReactFilestack from 'filestack-react';
 import TextField from 'material-ui/TextField';
+import Paper from 'material-ui/Paper';
+import Divider from 'material-ui/Divider';
 
-const header = () => {
-  return (
-    <h3>Post a status</h3>
-  );
-};
+
 
 class StatusTextArea extends React.Component {
   constructor (props) {
@@ -66,45 +64,52 @@ class StatusTextArea extends React.Component {
     };
 
     return (
-      <div>
-        <Panel
-          header={header()}
-          className="status-post status-textarea">
-          <form onSubmit={this.submitStatus.bind(this)}>
-            <FormGroup controlId="formControlsTextarea">
+      <div> 
+        <Paper zDepth={5} 
+          className="status-post-status-textarea">
+          <div className="status-textarea">
+            Post your Status
+            <Divider className="status-textarea-divider"/>
 
-              <TextField
-                onChange={this.handleTitleChange.bind(this)}
-                id="status-title-field"
-                value={this.state.title}
-                type="text"
-                placeholder="Title" /> <br />
+            <form onSubmit={this.submitStatus.bind(this)}>
+              <FormGroup controlId="formControlsTextarea">
 
-              <TextField
-                onChange={this.handleTextChange.bind(this)}
-                id="status-description-field"
-                value={this.state.text}
-                placeholder="Description" /> <br />
+                <TextField 
+                  onChange={this.handleTitleChange.bind(this)}
+                  id="status-title-field"
+                  underlineFocusStyle={{borderColor: '#FD533E'}}                  
+                  value={this.state.title}
+                  type="text"
+                  placeholder="Title" 
+                /> <br />
 
-              <img src={this.state.image} />
+                <TextField
+                  onChange={this.handleTextChange.bind(this)}
+                  id="status-description-field"
+                  underlineFocusStyle={{borderColor: '#FD533E'}}
+                  value={this.state.text}
+                  placeholder="Description" /> <br />
 
-            </FormGroup>
+                <img src={this.state.image} width="100%"/>
 
-            <ReactFilestack
-              apikey={'AnjmM5YhHQ7uoOi019Ncrz'}
-              buttonText="Upload"
-              buttonClass="btn btn-primary"
-              options={fileStackOpts}
-              onSuccess={this.uploadPicture.bind(this)}
-            />
-            <Button type="submit"
-              bsStyle="primary"
-              className="right post-status-btn"
-              disabled={!this.state.text || !this.state.title}>
-              Post
-            </Button>
-          </form>
-        </Panel>
+              </FormGroup>
+
+              <ReactFilestack
+                apikey={'AnjmM5YhHQ7uoOi019Ncrz'}
+                buttonText="Upload"
+                buttonClass="btn btn-primary"
+                options={fileStackOpts}
+                onSuccess={this.uploadPicture.bind(this)}
+              />
+              <Button type="submit"
+                bsStyle="primary"
+                className="right post-status-btn"
+                disabled={!this.state.text || !this.state.title}>
+                Post
+              </Button>
+            </form>
+          </div>
+        </Paper>
         <br />
       </div>
     );

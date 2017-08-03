@@ -1,7 +1,7 @@
 .btn:focus, .btn:disabled, input[type="button"]:focus, .btn:hover, input[type="button"]:hover {
   outline: none;
   text-decoration: none;
-  background-color: #121E24;
+  background-color: '#5e737c';
 }
 
 .about-page-description {
@@ -249,8 +249,23 @@ h6 {
   font-weight: bolder;
 }
 
+
+.status-textarea {
+  padding-top: 10px;
+  text-align: left !important;
+  margin-left: 3%;
+  margin-right: 3%;
+  font-weight: bolder;
+  color: #FD533E;
+  width: 94%;
+}
+
 .status-title-divider {
   margin: 10px 10px 10px 10px !important;
+}
+
+.status-textarea-divider {
+  margin: 0px 0px 30px 0px !important;
 }
 
 .status-description {
@@ -276,8 +291,13 @@ h6 {
   text-align: left;
 }
 
-.status-textarea {
-  background-color: #fff;
+.status-post-status-textarea {
+  font-family: "Times New Roman";
+  font-size: 20px;
+  margin-left: 10%;
+  margin-right: 10%;
+  text-align: left;
+  width: 80%;
 }
 
 .contact-info-hr {
@@ -498,6 +518,20 @@ h6 {
   background-color: white;
 }
 
+.btn-primary {
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+  background-color: rgb(18,30,36) !important;
+
+}
+
+.post-status-btn {
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+  background-color: rgb(18,30,36) !important;
+
+}
+
 .btn btn-border btn-round color-1 material-design {
 
 }
@@ -511,22 +545,22 @@ h6 {
   text-transform: uppercase;
   width: 150px;
   height: 40px;
-  background-color: rgb(58,70,76);
+  background-color: rgb(18,30,36); 
 
   &.color-1 {
-    background-color: #607D8B;
+    background-color: #5e737c;
   }
 
   &.color-2 {
-    background-color: #607D8B;
+    background-color: #5e737c;
   }
 
   &.color-3 {
-    background-color: #607D8B;
+    background-color: #5e737c;
   }
 
   &.color-4 {
-    background-color: #607D8B;
+    background-color: #5e737c;
   }
 }
 
