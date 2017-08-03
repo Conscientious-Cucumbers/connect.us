@@ -172,20 +172,28 @@ module.exports.getStatusesLike = (req, res) => {
       });
     })
     .then(statuses => {
-      // console.log('*********** statuses: ', statuses.toJSON());
+      console.log('*********** statuses after withRelated: ', statuses.toJSON());
 
       return Promise.map(statuses.toJSON(), (status) => {
-        return models.StatusLike.where({id_status: status.status.id, id_user: req.user.id}).fetch()
+        return models.StatusLike.where({id_status: status.status.id, id_user: req.user.id}).fetch({withRelated:['user']})
         .then((result) => {
+          console.log("****** just result: ", result);
           if (result) {
             status.status.liked = true;
           }
           return status.status;
+        })
+        .then((status) => {
+          return models.Profile.where({id: status.id_user}).fetch()
+            .then((result) => {
+              status.user_obj = result.toJSON();
+              return status;
+            });
         });
       });
-
     })
     .then((statuses) => {
+      console.log("********** getStatusesLike send: ", statuses);
       res.status(200).send(statuses);
     })
     .error(err => {
