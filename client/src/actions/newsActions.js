@@ -70,7 +70,9 @@ export const getNewsLikes = (username) => (dispatch, getState) => {
 export const postNewsLike = (newsLike) => (dispatch, getState) => {
   axios.post('/user/news/togglelike', { newsLike })
   .then((success) => {
-    dispatch(getNewsLikes(getState().activeProfile.username));
+    if (getState().activeProfile) {
+      dispatch(getNewsLikes(getState().activeProfile.username));
+    }
   })
   .catch((err) => {
     console.error('Error posting news likes');

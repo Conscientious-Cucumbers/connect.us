@@ -29,7 +29,11 @@
     {"name": "Hacker News", "source": "hacker-news"},
     {"name": "Tech Radar", "source": "techradar"},
     {"name": "New York Times", "source": "the-new-york-times"},
-    {"name": "ESPN", "source": "espn"}
+    {"name": "ESPN", "source": "espn"},
+    {"name": "Buzzfeed", "source": "buzzfeed"},
+    {"name": "MTV News", "source": "mtv-news"},
+    {"name": "Reddit/r/all", "source": "reddit-r-all"},
+    {"name": "National Geographic", "source": "national-geographic"}
   ],
 
   "passport": {

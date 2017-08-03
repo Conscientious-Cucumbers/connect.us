@@ -1,6 +1,7 @@
 const axios = require('axios');
 const io = require('socket.io');
 const models = require('../../db/models');
+var _ = require('lodash');
 
 
 module.exports = (server) => {
@@ -24,6 +25,7 @@ module.exports = (server) => {
         var is_received = false;
         id = payload.id;
         !online_users[id] ? online_users[id] = [socket] : online_users[id].push(socket);
+        online_users[id] = _.uniqBy(online_users[id], 'id');
       }
 
       if (action.type === 'socket/notify') {

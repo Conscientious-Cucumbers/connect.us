@@ -14,7 +14,11 @@ const updateNews = function() {
         delete item.id;
         return item;
       });
-      return _.uniqBy(newsSort(fetchedNews).concat(news_JSON), 'url');
+      return newsSort(fetchedNews)
+      .filter((item) => {
+        return !_.includes(news_JSON.map(dbItem => dbItem.url), item.url);
+      })
+      .concat(news_JSON);
     });
   })
   .tap((result) => {
