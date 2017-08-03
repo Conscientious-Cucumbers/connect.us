@@ -1,26 +1,24 @@
 import React from 'react';
-import { 
-  Jumbotron,
-  Button
-} from 'react-bootstrap';
+import Paper from 'material-ui/Paper';
 
 
 const About = () => (
-  <div className="container">
-    <Jumbotron className="jumbotron">
-      <h1>About this Page</h1>
-      <p>Description for the app goes here</p>
-      <small>
+  <Paper zDepth={5}
+    className="about-entry">
+    <div className="about-entry-content">
+      <h1 className="about-this-page">About</h1>
+      <p className="about-page-description">Description for the app goes here</p>
+      <div className="about-page-content">
         Collaborators:
         <ul>
           <li>Taras Ignashchenko</li>
-          <li>Saikal Emil</li>
+          <li>Saikal Kalmanbetova</li>
           <li>Jake Gober</li>
           <li>Pablo Boserman</li>
         </ul>
-      </small>
-    </Jumbotron>
-  </div>
+      </div>
+    </div>
+  </Paper>
 );
 
 export default About;
