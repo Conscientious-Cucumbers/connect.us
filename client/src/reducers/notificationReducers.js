@@ -17,7 +17,6 @@ export const UnseenNotifications = (state = null, action) => {
   case 'SET_UNSEEN_NOTIFICATIONS':
     return action.payload;
   case 'FOLLOW_NOTIFICATION':
-    console.log('**** unseen notifications on emit: ', [...state, action.payload]);
     return [...state, action.payload];
   default:
     return state;
