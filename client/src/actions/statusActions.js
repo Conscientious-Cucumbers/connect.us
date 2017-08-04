@@ -34,13 +34,27 @@ export const getStatusLikes = (username) => (dispatch, getState) => {
 
 
 export const postStatus = (status) => (dispatch, getState) => {
-  axios.post(`/user/status`, status)
+  axios.post('/user/status', status)
   .then((result) => {
     dispatch(getTimeline(getState().user.username));
   })
   .catch((err) => {
     console.log('Error posting status: ', err);
   });
+};
+
+export const deleteStatus = (id) => (dispatch, getState) => {
+  const state = getState();
+  if (state.activeProfile && state.activeProfile.username === state.user.username) {
+    axios.post('/user/status/delete', { id })
+    .then((res) => {
+      dispatch(getTimeline(state.user.username));
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+  }
+
 };
 
 export const postStatusLike = (id_status) => (dispatch, getState) => {
