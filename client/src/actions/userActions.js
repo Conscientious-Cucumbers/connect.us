@@ -108,3 +108,13 @@ export const getCurrentUser = () => (dispatch, getState) => {
     console.error('Error fetching current user: ', error);
   });
 };
+
+export const deleteCurrentUser = () => (dispatch, getState) => {
+  return axios.post('/user/delete')
+  .then((res) => {
+    window.location.pathname = '/logout';
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+};

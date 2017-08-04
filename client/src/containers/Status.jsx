@@ -78,6 +78,9 @@ class Status extends React.Component {
         <Paper zDepth={5}
           className="status-post-2">
           <div className="status-title">
+            <div className="delete-button">
+              
+            </div>
             <div>
               <div className="status-title-inner">{this.props.status.title}</div>
               {this.statusCreator()}
