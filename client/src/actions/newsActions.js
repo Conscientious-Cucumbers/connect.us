@@ -81,9 +81,7 @@ export const postNewsLike = (newsLike) => (dispatch, getState) => {
 };
 
 export const getNextNewsPage = (pageNum) => (dispatch, getState) => {
-  if (getState().isFetching) {
-    return;
-  }
+  
   dispatch(startNextPageFetch());
   axios.get('/api/news', {
     params: {page: pageNum}

@@ -100,27 +100,6 @@ class NotificationList extends React.Component {
 
       </IconMenu>
     );
-
-    // return (
-    //
-    //   <NavDropdown
-    //     title={this.notifications()}
-    //     id="notifications-nav-dropdown"
-    //     onTouchTap={this.needsClearNotifications.bind(this)}
-    //     noCaret>
-    //     {
-    //       this.props.UnseenNotifications && this.props.UnseenNotifications.map((notification, index) => {
-    //         return <NotificationItem key={(3 + (index * 2 + 1) ) / 10} notification={notification}/>;
-    //       })
-    //     }
-    //     <MenuItem divider />
-    //     {
-    //       this.props.SeenNotifications && this.props.SeenNotifications.slice(0, 5).map((notification, index) => {
-    //         return <NotificationItem key={(3 + (index + 2) * 2) / 10} notification={notification}/>;
-    //       })
-    //     }
-    //   </NavDropdown>
-    // );
   }
 }
 
