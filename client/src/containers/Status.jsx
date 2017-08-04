@@ -62,14 +62,16 @@ class Status extends React.Component {
   }
 
   closeButton () {
-    return (
-      <div className="status-delete-button">
-        <IconButton
-          onTouchTap={() => this.setState({ confirmIsOpen: true })}>
-          <CloseIcon color={'#121E24'}/>
-        </IconButton>
-      </div>
-    );
+    if (this.props.user.username === this.props.activeProfile.username) {
+      return (
+        <div className="status-delete-button">
+          <IconButton
+            onTouchTap={() => this.setState({ confirmIsOpen: true })}>
+            <CloseIcon color={'#121E24'}/>
+          </IconButton>
+        </div>
+      );
+    }
   }
 
   panelFooter () {
