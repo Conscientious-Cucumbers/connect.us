@@ -526,7 +526,7 @@ h6 {
 .upload-pic-btn {
   position: static;
   border: none;
-  background-color: #EEE;
+  background-color: rgba(0, 0, 0, 0);
 }
 
 @media (min-width: 700px) {
