@@ -114,6 +114,7 @@ module.exports.deleteOne = (req, res) => {
       res.status(503).send(err);
     })
     .catch((err) => {
+      console.log("***** err deleteOne:", err)
       res.status(404).send(err);
     });
 };

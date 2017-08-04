@@ -21,9 +21,9 @@ app.use(middleware.flash());
 app.use(express.static(path.join(__dirname, '../public')));
 
 app.use('/', routes.auth);
-app.use('/api', routes.api);
-app.use('/user', routes.users);
-app.use('/api/profiles', routes.profiles);
+app.use('/api', middleware.auth.verify, routes.api);
+app.use('/user', middleware.auth.verify, routes.users);
+app.use('/api/profiles', middleware.auth.verify, routes.profiles);
 
 app.use(middleware.auth.verify, (req, res) => res.render('index'));
 
