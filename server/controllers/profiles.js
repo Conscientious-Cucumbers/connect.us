@@ -106,7 +106,6 @@ module.exports.updateInfo = (req, res) => {
 };
 
 module.exports.deleteOne = (req, res) => {
-  console.log("requested deleteOne!");
   return models.Profile.forge({ id: req.user.id}).destroy()
     .then(() => {
       res.status(200).send('Profile Deleted!');
@@ -115,7 +114,6 @@ module.exports.deleteOne = (req, res) => {
       res.status(503).send(err);
     })
     .catch((err) => {
-      console.log(err);
       res.status(404).send(err);
     });
 };
