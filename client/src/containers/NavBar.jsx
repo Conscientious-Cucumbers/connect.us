@@ -135,6 +135,7 @@ class NavBar extends React.Component {
           </MediaQuery>
           <MediaQuery minWidth={this.state.xsSearchShowing ? 680 : 0}>
             <IconMenu
+              style={{marginRight: '-14px'}}
               anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
               iconButtonElement={
                 <IconButton className="navbar-settings" tooltip="Settings">
