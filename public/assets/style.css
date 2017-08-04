@@ -4,6 +4,10 @@
   margin-left: 0% !important;
 }
 
+.delete-profile-button:hover {
+  color: white;
+}
+
 .update-settings-button {
   color: white !important;
   margin-top: -7px !important;
@@ -188,6 +192,12 @@
 .status-title-inner {
   text-align: justify;
   margin-bottom: 6px;
+  margin-right: 12%;
+}
+
+.status-delete-button {
+  display: block;
+  float: right;
 }
 
 .status-likes-container {

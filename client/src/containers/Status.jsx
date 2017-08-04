@@ -7,6 +7,9 @@ import actions from '../actions';
 import Paper from 'material-ui/Paper';
 import Divider from 'material-ui/Divider';
 import Avatar from 'material-ui/Avatar';
+import CloseIcon from 'material-ui/svg-icons/navigation/close';
+import IconButton from 'material-ui/IconButton';
+import DeleteConfirm from '../components/DeleteConfirm.jsx';
 
 class Status extends React.Component {
 
@@ -14,7 +17,8 @@ class Status extends React.Component {
     super(props);
     this.state = {
       isLiked: false,
-      isSelf: false
+      isSelf: false,
+      confirmIsOpen: false
     };
   }
 
@@ -57,6 +61,17 @@ class Status extends React.Component {
     }
   }
 
+  closeButton () {
+    return (
+      <div className="status-delete-button">
+        <IconButton
+          onTouchTap={() => this.setState({ confirmIsOpen: true })}>
+          <CloseIcon color={'#121E24'}/>
+        </IconButton>
+      </div>
+    );
+  }
+
   panelFooter () {
     if ((this.state.isSelf && this.props.isTimeline) || (this.props.isStatusLike && this.props.status.user_obj.username === this.props.user.username)) {
       return (
@@ -77,10 +92,13 @@ class Status extends React.Component {
       <div>
         <Paper zDepth={5}
           className="status-post-2">
+          <DeleteConfirm
+            open={this.state.confirmIsOpen}
+            onConfirm={() => this.props.deleteStatus(this.props.status.id)}
+            onCancel={() => this.setState({ confirmIsOpen: false })}
+            isStatus/>
+          {this.closeButton()}
           <div className="status-title">
-            <div className="delete-button">
-              
-            </div>
             <div>
               <div className="status-title-inner">{this.props.status.title}</div>
               {this.statusCreator()}
@@ -114,7 +132,8 @@ class Status extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    postStatusLike: actions.postStatusLike
+    postStatusLike: actions.postStatusLike,
+    deleteStatus: actions.deleteStatus
   }, dispatch);
 };
 
