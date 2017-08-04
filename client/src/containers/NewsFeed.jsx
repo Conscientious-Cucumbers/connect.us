@@ -17,12 +17,14 @@ class NewsFeed extends React.Component {
   }
 
   getNextPage () {
-    this.props.getNextNewsPage(this.state.page + 1);
-    this.setState((prevState) => {
-      return {
-        page: prevState.page + 1
-      };
-    });
+    if (!this.props.isFetching && this.props.isFetching !== 'finished') {
+      this.setState((prevState) => {
+        return {
+          page: prevState.page + 1
+        };
+      });
+      this.props.getNextNewsPage(this.state.page);
+    }
   }
 
   render () {
@@ -60,7 +62,6 @@ class NewsFeed extends React.Component {
           }
         </GridList>
         <ReactScrollPagination
-          paginationShowTime={3000}
           fetchFunc={this.getNextPage.bind(this)}
         />
       </div>
