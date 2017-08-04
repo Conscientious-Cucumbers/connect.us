@@ -247,14 +247,13 @@ module.exports.getFollows = (req, res) => {
 
 module.exports.deleteStatus = (req, res) => {
   models.Status.forge({id: req.body.id}).destroy()
-    .then(confirmation => {
-      console.log('profile deleted:', confirmation);
-      res.status(200);
-    })
-    .catch(error => {
-      console.log('could not delete profile based on the following error: ', error)
-    })
-}
+  .then(confirmation => {
+    res.send('Status deleted');
+  })
+  .catch(error => {
+    console.log('could not delete profile based on the following error: ', error);
+  });
+};
 
 
 
@@ -284,12 +283,12 @@ module.exports.getFollowers = (req, res) => {
 module.exports.getUsersPartialQuery = (req, res) => {
   var userMatches = [];
   models.Profile.fetchAll()
-    .then(profiles => {
-      return profiles.toJSON().filter((user) => user.username.includes(req.params.partialQuery))
-     })
-    .then(patialMatches => {
-      res.status(200).send(patialMatches)
-    });
+  .then(profiles => {
+    return profiles.toJSON().filter((user) => user.username.includes(req.params.partialQuery));
+  })
+  .then(patialMatches => {
+    res.status(200).send(patialMatches);
+  });
 };
 
 

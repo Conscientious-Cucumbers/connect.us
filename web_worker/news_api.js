@@ -14,7 +14,7 @@ const updateNews = function() {
         delete item.id;
         return item;
       });
-      return newsSort(fetchedNews)
+      return _.uniqBy(newsSort(fetchedNews), 'url')
       .filter((item) => {
         return !_.includes(news_JSON.map(dbItem => dbItem.url), item.url);
       })
@@ -29,6 +29,12 @@ const updateNews = function() {
       // console.log('news item: ', newsItem);
       return models.ApiNews.forge(newsItem).save();
     });
+  })
+  .then(() => {
+    console.log('Updated news successfully');
+  })
+  .error((err) => {
+    console.log('Error: ', err);
   })
   .catch((err) => {
     console.log('Error inserting news: ', err);
@@ -56,8 +62,6 @@ const fetch = function(source) {
   // axios call
     // map the object to the properties we need
     // store in the database
-  console.log('Fetching ', source.name);
-  console.log('with id ', source.id);
   return axios.get(`https://newsapi.org/v1/articles?source=${source.source}&sortBy=top&apiKey=f97f9989c5f94e93ba130be4b6c2f09a`)
   .then(function(result) {
     const articles = result.data.articles;

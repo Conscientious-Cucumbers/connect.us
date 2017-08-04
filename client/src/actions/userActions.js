@@ -110,7 +110,7 @@ export const getCurrentUser = () => (dispatch, getState) => {
 };
 
 export const deleteCurrentUser = () => (dispatch, getState) => {
-  return axios.post('/user/delete')
+  return axios.post('/user/info/delete')
   .then((res) => {
     window.location.pathname = '/logout';
   })
