@@ -18,16 +18,23 @@ const Profile = db.Model.extend({
   },
 
   followers: function () {
-    return this.hasMany('Follow', 'id_follower')
+    return this.hasMany('Follow', 'id_follower');
   },
 
   following: function () {
-    return this.hasMany('Follow', 'id_followed')
+    return this.hasMany('Follow', 'id_followed');
+  },
+
+  notified: function () {
+    return this.hasMany('Notifications', 'id_notified');
+  },
+
+  notifier: function () {
+    return this.hasMany('Notifications', 'id_notifier');
   }
 
-}, 
-{
-  dependents: ['auths', 'newsLike', 'status', 'statusLike']
+}, {
+  dependents: ['auths', 'newsLike', 'status', 'statusLike', 'notifier', 'notified']
 });
 
 
