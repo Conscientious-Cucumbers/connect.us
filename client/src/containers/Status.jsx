@@ -62,7 +62,7 @@ class Status extends React.Component {
   }
 
   closeButton () {
-    if (this.props.user.username === this.props.activeProfile.username) {
+    if (this.props.isTimeline && this.state.isSelf) {
       return (
         <div className="status-delete-button">
           <IconButton
