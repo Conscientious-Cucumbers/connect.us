@@ -4,9 +4,15 @@ const db = require('../');
 //fix all files!
 const Notifications = db.Model.extend({
   tableName: 'notifications',
-  user: function() {
-    return this.belongsTo('Profile');
+
+  notifier: function() {
+    return this.belongsTo('Profile', 'id_notifier');
+  },
+
+  notified: function() {
+    return this.belongsTo('Profile', 'id_notified');
   }
+
 });
 
 
