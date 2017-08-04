@@ -12,6 +12,8 @@ db.plugin('registry');
 //   db.Model.fetchAll().then((content)=> console.log(content)).catch(err=>{});
 // }
 db.plugin('pagination');
+db.plugin(require('bookshelf-cascade-delete'));
+
 // getUserInfo()
 
 module.exports = db;

@@ -7,16 +7,27 @@ const Profile = db.Model.extend({
     return this.hasMany('Auth');
   },
   newsLike: function () {
-    return this.hasMany('news_likes', 'id_news');
+    return this.hasMany('newsLike', 'id_news');
   },
   status: function () {
-    return this.hasMany('statuses', 'id_user');
+    return this.hasMany('Status', 'id_user');
   },
 
   statusLike: function () {
-    return this.hasMany('status_likes', 'id_user');
+    return this.hasMany('statusLike', 'id_user');
+  },
+
+  followers: function () {
+    return this.hasMany('Follow', 'id_follower')
+  },
+
+  following: function () {
+    return this.hasMany('Follow', 'id_followed')
   }
 
+}, 
+{
+  dependents: ['auths', 'newsLike', 'status', 'statusLike']
 });
 
 
