@@ -231,7 +231,7 @@ module.exports.getStatuses = (req, res) => {
 module.exports.getFollows = (req, res) => {
   var allfollowing = [];
 
-  models.Profile.where({username:req.params.username}).fetch()
+  models.Profile.where({username: req.params.username}).fetch()
     .then(profile => {
       return models.Follow.where({id_follower: profile.attributes.id}).fetchAll()
         .then(follows => {
