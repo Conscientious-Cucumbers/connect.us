@@ -247,6 +247,21 @@ module.exports.getFollows = (req, res) => {
 };
 
 
+module.exports.deleteStatus = (req, res) => {
+  models.Status.forge({id:req.params.id}).destroy()
+    .then(confirmation => {
+      console.log('profile deleted:', confirmation)
+      res.status(200);
+    })
+    .catch(error => {
+      console.log('could not delete profile based on the following error: ', error)
+    })
+}
+
+
+
+
+
 module.exports.getFollowers = (req, res) => {
   var allfollowers = [];
   models.Profile.where({username: req.params.username}).fetch()
