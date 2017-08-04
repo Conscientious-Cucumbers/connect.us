@@ -105,21 +105,16 @@ module.exports.updateInfo = (req, res) => {
     });
 };
 
-// module.exports.deleteOne = (req, res) => {
-//   models.Profile.where({ id: req.params.id }).fetch()
-//     .then(profile => {
-//       if (!profile) {
-//         throw profile;
-//       }
-//       return profile.destroy();
-//     })
-//     .then(() => {
-//       res.sendStatus(200);
-//     })
-//     .error(err => {
-//       res.status(503).send(err);
-//     })
-//     .catch(() => {
-//       res.sendStatus(404);
-//     });
-// };
+module.exports.deleteOne = (req, res) => {
+  console.log("requested deleteOne!");
+  return models.Profile.forge({ id: req.user.id}).destroy()
+    .then(() => {
+      res.status(200).send('Profile Deleted!');
+    })
+    .error(err => {
+      res.status(503).send(err);
+    })
+    .catch((err) => {
+      res.status(404).send(err);
+    });
+};

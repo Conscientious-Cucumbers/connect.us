@@ -8,6 +8,8 @@ const Status = db.Model.extend({
   likes: function() {
     return this.hasMany('statusLike', 'id_status');
   }
+}, {
+  dependents: ['likes']
 });
 
 

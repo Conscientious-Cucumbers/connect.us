@@ -1,6 +1,5 @@
 const models = require('../../db/models');
 const Promise = require('bluebird');
-const regex = require('../utilities/regex')
 
 
 
@@ -164,7 +163,7 @@ module.exports.getNewsLike = (req, res) => {
     });
 };
 
-//fix !
+
 module.exports.getStatusesLike = (req, res) => {
   models.Profile.where({ username: req.params.username }).fetch()
     .then(profile => {
@@ -173,7 +172,6 @@ module.exports.getStatusesLike = (req, res) => {
       });
     })
     .then(statuses => {
-
       return Promise.map(statuses.toJSON(), (status) => {
         return models.StatusLike.where({id_status: status.status.id, id_user: req.user.id}).fetch({withRelated: ['user']})
         .then((result) => {
@@ -250,7 +248,7 @@ module.exports.getFollows = (req, res) => {
 module.exports.deleteStatus = (req, res) => {
   models.Status.forge({id:req.params.id}).destroy()
     .then(confirmation => {
-      console.log('profile deleted:', confirmation)
+      console.log('profile deleted:', confirmation);
       res.status(200);
     })
     .catch(error => {

@@ -51,6 +51,10 @@ router.route('/status')
 router.route('/info')
   .post(ProfileController.updateInfo);
 
+//fix!
+router.route('/info/delete')
+  .get(ProfileController.deleteOne);
+
 
 router.route('/togglefollow')
   .post(Queries.toggleFollow);
