@@ -47,13 +47,15 @@ router.route('/news/togglelike')
 router.route('/status')
   .post(Queries.createStatus);
 
+router.route('/status/delete')
+  .post(Queries.deleteStatus);
+
 
 router.route('/info')
   .post(ProfileController.updateInfo);
 
-//fix!
 router.route('/info/delete')
-  .get(ProfileController.deleteOne);
+  .post(ProfileController.deleteOne);
 
 
 router.route('/togglefollow')

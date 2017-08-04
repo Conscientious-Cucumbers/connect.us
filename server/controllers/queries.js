@@ -246,7 +246,7 @@ module.exports.getFollows = (req, res) => {
 
 
 module.exports.deleteStatus = (req, res) => {
-  models.Status.forge({id:req.params.id}).destroy()
+  models.Status.forge({id: req.body.id}).destroy()
     .then(confirmation => {
       console.log('profile deleted:', confirmation);
       res.status(200);
