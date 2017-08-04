@@ -1,3 +1,9 @@
+.delete-profile-button {
+  background-color: #FC2C3D !important;
+  width: 200px !important;
+  margin-left: 0% !important;
+}
+
 .update-settings-button {
   color: white !important;
   margin-top: -7px !important;

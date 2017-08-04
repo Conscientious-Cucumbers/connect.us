@@ -44,6 +44,7 @@ class Settings extends React.Component {
             :
             this.loading()
         }
+        {/*<Button type="submit" className="delete-profile-button">DELETE ACCOUNT</Button>*/}
       </div>
     );
   }
