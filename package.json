@@ -9,6 +9,9 @@
     "worker": "node web_worker",
     "server-build": "webpack"
   },
+  "engines": {
+    "node": "6.10.2"
+  },
   "author": "Hack Reactor",
   "license": "MIT",
   "dependencies": {
