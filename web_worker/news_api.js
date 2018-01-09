@@ -25,7 +25,7 @@ const updateNews = function() {
     models.ApiNews.where('id', '!=', '0').destroy();
   })
   .then((result) => {
-    Promise.map(result, (newsItem) => {
+    Promise.map(result.slice(0, 2000), (newsItem) => {
       // console.log('news item: ', newsItem);
       return models.ApiNews.forge(newsItem).save();
     });
@@ -66,16 +66,23 @@ const fetch = function(source) {
   .then(function(result) {
     const articles = result.data.articles;
     return articles.map(function(article) {
-      return {
-        title: article.title,
-        thumbnail: article.urlToImage,
-        text: article.description,
-        media: article.urlToImage,
-        url: article.url,
-        date: article.publishedAt || new Date().toString(),
-        id_source: source.id
-      };
-    });
+      if (article) {
+        return {
+          title: article.title,
+          thumbnail: article.urlToImage,
+          text: article.description ? article.description.slice(0, 1900) : '',
+          media: article.urlToImage,
+          url: article.url,
+          date: article.publishedAt || new Date().toString(),
+          id_source: source.id
+        };
+      } else {
+        return {};
+      }
+    })
+      .filter(function(article) {
+        return article.url && article.url.length > 0 && article.media && /http/g.test(article.media);
+      });
   })
   .catch(function(e) {
     console.log('Error fetching ' + source, e);
